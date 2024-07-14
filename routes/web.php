@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admins\ChucVuController;
+use App\Http\Controllers\Admins\TrangThaiDonHangController;
 use App\Http\Controllers\Admins\UserController;
 use App\Models\ChucVu;
+use App\Models\TrangThaiDonHang;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +25,4 @@ Route::get('/', function () {
 });
  Route::resource('users', UserController::class);
  Route::resource('chuc_vus', ChucVuController::class);
+ Route::resource('trang_thai_don_hangs', TrangThaiDonHangController::class);

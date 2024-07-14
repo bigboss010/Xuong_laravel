@@ -7,7 +7,7 @@
             <h1 class="h3 text-gray-800">{{ $title }}</h1>
         </div>
         <br><br>
-        <a href="{{ route('users.create') }}"><button type="button" class="btn btn-info">Thêm</button></a>
+        <a href="{{ route('trang_thai_don_hangs.create') }}"><button type="button" class="btn btn-info">Thêm</button></a>
         {{-- hiển thị thông báo --}}
         @if (session('success'))
             <div class="alert alert-success">
@@ -20,24 +20,17 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Tên</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Xác thực email </th>
-                    <th scope="col">Mật khẩu</th>
-                    <th scope="col">Chức vụ</th>
+                    <th scope="col">Tên Trạng Thái</th>
                     <th scope="col">Hành Động</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($listUsers as $index=>$value)
+                @foreach ($list as $index=>$value)
                 
                     <tr>
                         <td>{{$index +1}}  </td>
-                        <td>{{$value->name}}  </td>
-                        <td>{{$value->email }} </td>
-                        <td>{{ $value->email_verified_at}} </td>
-                        <td>{{bcrypt($value->password)}} </td>
-                        <td>{{$value->ten_chuc_vu}} </td>
+                        <td>{{$value->ten_trang_thai}}  </td>
+                        
                  
                         <td>
                             <a href=""><button type="button"
