@@ -6,6 +6,9 @@ use App\Http\Controllers\Admins\UserController;
 use App\Models\ChucVu;
 use App\Models\TrangThaiDonHang;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Admins\DanhMucController;
+use App\Http\Controllers\Admins\HinhAnhPetController;
+use App\Http\Controllers\Admins\PetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +29,7 @@ Route::get('/', function () {
  Route::resource('users', UserController::class);
  Route::resource('chuc_vus', ChucVuController::class);
  Route::resource('trang_thai_don_hangs', TrangThaiDonHangController::class);
+
+Route::resource('danh-muc', DanhMucController::class);
+Route::resource('pet', PetController::class);
+Route::resource('anh-pet', HinhAnhPetController::class);
