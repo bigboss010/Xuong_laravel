@@ -19,9 +19,7 @@
             <div id="content">
                 @include('layouts.nav')
                 <div class="container-fluid">
-                    <div class="row">
                         @yield('content')
-                    </div>
                 </div>
             </div>
             @include('layouts.footer')

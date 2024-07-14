@@ -23,6 +23,31 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
+        Pets
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pet"
+            aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Pets</span>
+        </a>
+        <div id="pet" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Options:</h6>
+                <a class="collapse-item" href="{{ route('danh-muc.index')}}">Danh mục</a>
+                <a class="collapse-item" href="{{ route('pet.index')}}">Pets</a>
+                <a class="collapse-item" href="{{ route('anh-pet.index')}}">Ảnh</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
         Interface
     </div>
 

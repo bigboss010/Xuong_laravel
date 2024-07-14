@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admins\DanhMucController;
+use App\Http\Controllers\Admins\HinhAnhPetController;
+use App\Http\Controllers\Admins\PetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('master');
 });
+
+Route::resource('danh-muc', DanhMucController::class);
+Route::resource('pet', PetController::class);
+Route::resource('anh-pet', HinhAnhPetController::class);
