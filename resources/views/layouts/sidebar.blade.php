@@ -39,6 +39,9 @@
                 <a class="collapse-item" href="{{ route('danh-muc.index')}}">Danh mục</a>
                 <a class="collapse-item" href="{{ route('pet.index')}}">Pets</a>
                 <a class="collapse-item" href="{{ route('anh-pet.index')}}">Ảnh</a>
+                <a class="collapse-item" href="{{ route('gio-hang.index')}}">Giỏ hàng</a>
+                <a class="collapse-item" href="{{ route('chi-tiet-gio-hang.index')}}">Chi tiết giỏ hàng</a>
+                <a class="collapse-item" href="{{ route('binh-luan.index')}}">Bình luận</a>
             </div>
         </div>
     </li>
@@ -56,13 +59,15 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
-            <span>Components</span>
+            <span>Chức năng</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Components:</h6>
-                <a class="collapse-item" href="buttons.html">Buttons</a>
-                <a class="collapse-item" href="cards.html">Cards</a>
+         
+                <a class="collapse-item" href="{{route('users.index')}}">User</a>
+                <a class="collapse-item" href="{{route('chuc_vus.index')}}">Chức vụ</a>
+                <a class="collapse-item" href="{{route('trang_thai_don_hangs.index')}}">Trạng thái đơn hàng</a>
+                <a class="collapse-item" href="{{route('chuc_vus.index')}}">Bình luận</a>
             </div>
         </div>
     </li>

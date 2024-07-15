@@ -3,30 +3,25 @@
 namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
-use App\Models\ChucVu;
-use App\Models\KhachHang;
+use App\Models\TrangThaiDonHang;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class UserController extends Controller
+class TrangThaiDonHangController extends Controller
 {
-    protected $users;
-    protected $chuc_vu;
+    protected $trang_thai_don_hang;
 
     public function __construct()
     {
-        $this->chuc_vu = new ChucVu();
-        $this->users = new KhachHang();
-       
+        $this->trang_thai_don_hang = new TrangThaiDonHang();
     }
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $listUsers = $this->users->getList();
-        $title ="Danh sách user";
-        return view('admins.khachhang.index',compact('listUsers','title'));
+        $title ="Danh sách trạng thái";
+        $list = $this->trang_thai_don_hang ->getList();
+        return view('admins.trangthaidonhang.index',[
+            'title' => $title,
+            'list' => $list
+        ]);
     }
 
     /**
@@ -34,10 +29,12 @@ class UserController extends Controller
      */
     public function create()
     {
-        $title ="Add user";
-        $list = $this->chuc_vu->getList();
-
-        return view('admins.khachhang.create',compact('title','list'));
+        $title ="Danh sách trạng thái";
+       
+        return view('admins.trangthaidonhang.create',[
+            'title' => $title,
+         
+        ]);
     }
 
     /**
@@ -46,10 +43,10 @@ class UserController extends Controller
     public function store(Request $request)
     {
         if($request->isMethod('POST')){
-            $params = $request ->post();
+            $params = $request->post();
             unset($params['_token']);
-            $this->users ->createUser($params);
-            return redirect()->route('users.index')->with('success','Thêm người dùng thành công');
+            $this->trang_thai_don_hang->createTrangThai($params);
+            return redirect()->route('trang_thai_don_hangs.index')->with('success','Thêm trạng thái mới thành công');
         }
     }
 

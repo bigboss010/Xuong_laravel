@@ -19,7 +19,9 @@
             <div id="content">
                 @include('layouts.nav')
                 <div class="container-fluid">
+                   
                         @yield('content')
+                  
                 </div>
             </div>
             @include('layouts.footer')

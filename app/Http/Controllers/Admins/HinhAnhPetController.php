@@ -21,8 +21,13 @@ class HinhAnhPetController extends Controller
      */
     public function index()
     {
+        $title = 'Ảnh pet';
         $hinhAnhPet = $this->anhPet->getAnhPet();
+<<<<<<< HEAD
         return view('admins.hinh_anh_pets.index', compact('hinhAnhPet'));
+=======
+        return view('admins.hinh_anh_pets.index', compact('hinhAnhPet', 'title'));
+>>>>>>> 5cc87333fcc71ca29c23714c1e148a9626f6730b
     }
 
     /**
@@ -30,8 +35,13 @@ class HinhAnhPetController extends Controller
      */
     public function create(Pet $pets)
     {
+        $title = 'Thêm mới ảnh pet';
         $petName = $pets->getPet();
+<<<<<<< HEAD
         return view('admins.hinh_anh_pets.add', compact('petName'));
+=======
+        return view('admins.hinh_anh_pets.add', compact('petName', 'title'));
+>>>>>>> 5cc87333fcc71ca29c23714c1e148a9626f6730b
     }
 
     /**
@@ -65,12 +75,13 @@ class HinhAnhPetController extends Controller
      */
     public function edit(string $id, Pet $pets)
     {
+        $title = 'Sửa ảnh pet';
         $anhPet = $this->anhPet->find($id);
         $petName = $pets->getPet();
         if (!$anhPet) {
             return redirect()->route('anh-pet.index');
         }
-        return view('admins.hinh_anh_pets.update', compact('anhPet', 'petName'));
+        return view('admins.hinh_anh_pets.update', compact('anhPet', 'petName', 'title'));
     }
 
     /**

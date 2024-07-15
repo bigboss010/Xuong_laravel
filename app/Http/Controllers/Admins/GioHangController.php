@@ -3,41 +3,37 @@
 namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
-use App\Models\ChucVu;
+use App\Models\GioHang;
 use App\Models\KhachHang;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class UserController extends Controller
+class GioHangController extends Controller
 {
-    protected $users;
-    protected $chuc_vu;
+    public $gioHangs;
 
     public function __construct()
     {
-        $this->chuc_vu = new ChucVu();
-        $this->users = new KhachHang();
-       
+        $this->gioHangs = new GioHang();
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $listUsers = $this->users->getList();
-        $title ="Danh sách user";
-        return view('admins.khachhang.index',compact('listUsers','title'));
+        $title = 'Danh sách giỏ hàng';
+        $gioHangs = $this->gioHangs->getGioHang();
+        return view('admins.gio_hangs.index', compact('title', 'gioHangs'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(KhachHang $users)
     {
-        $title ="Add user";
-        $list = $this->chuc_vu->getList();
-
-        return view('admins.khachhang.create',compact('title','list'));
+        $title = 'Thêm mới giỏ hàng';
+        $users = $users->getList();
+        return view('admins.gio_hangs.add', compact('title', 'users'));
     }
 
     /**
@@ -45,11 +41,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->isMethod('POST')){
-            $params = $request ->post();
-            unset($params['_token']);
-            $this->users ->createUser($params);
-            return redirect()->route('users.index')->with('success','Thêm người dùng thành công');
+        if ($request->isMethod('POST')) {
+            $data = [
+                'user_id' => $request->user_id,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ];
+            $this->gioHangs->createGioHang($data);
+            return redirect()->route('gio-hang.index');
         }
     }
 
