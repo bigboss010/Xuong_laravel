@@ -21,7 +21,7 @@ class PetController extends Controller
     public function index()
     {
         $listPets = $this->pets->getPet();
-        return view('pets.index', compact('listPets'));
+        return view('admins.pets.index', compact('listPets'));
     }
 
     /**
@@ -30,7 +30,7 @@ class PetController extends Controller
     public function create(DanhMuc $danhMuc)
     {
         $danhMucs = $danhMuc->getDanhMuc();
-        return view('pets.add', compact('danhMucs'));
+        return view('admins.pets.add', compact('danhMucs'));
     }
 
     /**
@@ -60,7 +60,7 @@ class PetController extends Controller
     {
         $danhMucs = $danhMuc->getDanhMuc();
         $pet = $this->pets->find($id);
-        return view('pets.update', compact('danhMucs', 'pet'));
+        return view('admins.pets.update', compact('danhMucs', 'pet'));
     }
 
     /**
