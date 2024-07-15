@@ -23,11 +23,7 @@ class HinhAnhPetController extends Controller
     {
         $title = 'Ảnh pet';
         $hinhAnhPet = $this->anhPet->getAnhPet();
-<<<<<<< HEAD
-        return view('admins.hinh_anh_pets.index', compact('hinhAnhPet'));
-=======
         return view('admins.hinh_anh_pets.index', compact('hinhAnhPet', 'title'));
->>>>>>> 5cc87333fcc71ca29c23714c1e148a9626f6730b
     }
 
     /**
@@ -37,11 +33,7 @@ class HinhAnhPetController extends Controller
     {
         $title = 'Thêm mới ảnh pet';
         $petName = $pets->getPet();
-<<<<<<< HEAD
-        return view('admins.hinh_anh_pets.add', compact('petName'));
-=======
         return view('admins.hinh_anh_pets.add', compact('petName', 'title'));
->>>>>>> 5cc87333fcc71ca29c23714c1e148a9626f6730b
     }
 
     /**
