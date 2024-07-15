@@ -22,7 +22,7 @@ class HinhAnhPetController extends Controller
     public function index()
     {
         $hinhAnhPet = $this->anhPet->getAnhPet();
-        return view('hinh_anh_pets.index', compact('hinhAnhPet'));
+        return view('admins.hinh_anh_pets.index', compact('hinhAnhPet'));
     }
 
     /**
@@ -31,7 +31,7 @@ class HinhAnhPetController extends Controller
     public function create(Pet $pets)
     {
         $petName = $pets->getPet();
-        return view('hinh_anh_pets.add', compact('petName'));
+        return view('admins.hinh_anh_pets.add', compact('petName'));
     }
 
     /**
@@ -70,7 +70,7 @@ class HinhAnhPetController extends Controller
         if (!$anhPet) {
             return redirect()->route('anh-pet.index');
         }
-        return view('hinh_anh_pets.update', compact('anhPet', 'petName'));
+        return view('admins.hinh_anh_pets.update', compact('anhPet', 'petName'));
     }
 
     /**
