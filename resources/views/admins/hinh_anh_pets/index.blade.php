@@ -3,11 +3,7 @@
 @section('content')
     <div class="d-sm-flex align-items-center justify-content-between mb-3">
         <div>
-            <h1 class="h3 text-gray-800">Danh sách hình ảnh pets</h1>
-            <p class="mb-4">
-                Hình ảnh pets
-                <a target="_blank" href="https://datatables.net">Admin</a>.
-            </p>
+            <h1 class="h3 text-gray-800">{{ $title }}</h1>
         </div>
 
         <a href="{{ route('anh-pet.create') }}" class="btn btn-primary btn-icon-split">

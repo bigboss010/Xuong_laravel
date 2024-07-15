@@ -7,7 +7,7 @@
     </div>
   
 
-    <form action="{{route('trang_thai_don_hangs.store')}}" class="mt-5" method="POST">
+    <form action="{{route('chi_tiet_don_hangs.store')}}" class="mt-5" method="POST">
         {{-- Làm việc với form trong laravel --}}
 
         {{-- 
@@ -15,17 +15,39 @@
         --}}
         {{-- cái này đặt ở đâu cũng được miễn là trong thẻ form --}}
         @csrf
-        
-        
-
         <div class="form-group" >
-            <label for="ten_trang_thai">Tên Trạng thái:</label>
-            <input type="text" class="form-control" id="ten_trang_thai" name="ten_trang_thai">
+            <label for="gio_hang_id">Giỏ hàng:</label>
+            <select name="gio_hang_id" class="form-control" id="">
+                <option value="">Mời chọn</option>
+                @foreach ($listGH as $index=>$value)  
+                    <option value="{{ $value->id }}" >{{ $value->id }} - {{ $value->name }} </option>
+                @endforeach
+            </select>
+        </div>
+        <br>
+        <div class="form-group" >
+            <label for="pet_id ">Cún:</label>
+            <select name="pet_id" class="form-control" id="">
+                <option value="">Mời chọn</option>
+                @foreach ($listP as $index=>$value)  
+                    <option value="{{ $value->id }}" >{{ $value->ten_pet }}</option>
+                @endforeach
+            </select>
+        </div>
+        <br>
+        <div class="form-group" >
+            <label for="gia">Giá:</label>
+            <input type="number" class="form-control" id="gia" name="gia">
+        </div>
+        <br>
+        <div class="form-group" >
+            <label for="so_luong">Số lượng:</label>
+            <input type="number" class="form-control" id="so_luong" name="so_luong">
         </div>
         <br>
 
         <input class="btn btn-outline-warning mr-2" type="submit" value="Add">
 
-        <a href="{{ route('trang_thai_don_hangs.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
+        <a href="{{ route('chi_tiet_don_hangs.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
     </form>
 @endsection

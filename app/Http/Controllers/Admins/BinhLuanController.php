@@ -1,0 +1,93 @@
+<?php
+
+namespace App\Http\Controllers\Admins;
+
+use App\Http\Controllers\Controller;
+use App\Models\BinhLuan;
+use App\Models\KhachHang;
+use App\Models\Pet;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+
+class BinhLuanController extends Controller
+{
+    public $binhLuans;
+
+    public function __construct()
+    {
+        $this->binhLuans = new BinhLuan();
+    }
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $title = 'Danh sách bình luận';
+        $binhLuans = $this->binhLuans->getBinhluan();
+        return view('admins.binh_luans.index', compact('title', 'binhLuans'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create(KhachHang $users, Pet $pets)
+    {
+        $title = 'Thêm mới bình luận';
+        $users = $users->getList();
+        $pets = $pets->getPet();
+        return view('admins.binh_luans.add', compact('title', 'users', 'pets'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        if ($request->isMethod('POST')) {
+            $data = [
+                'user_id' => $request->user_id,
+                'pet_id' => $request->pet_id,
+                'noi_dung' => $request->noi_dung,
+                'thoi_gian' => $request->thoi_gian,
+                'trang_thai' => $request->trang_thai,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+
+            ];
+            $this->binhLuans->createBL($data);
+            return redirect()->route('binh-luan.index');
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
+}

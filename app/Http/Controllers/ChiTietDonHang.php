@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ChiTietDonHang as ModelsChiTietDonHang;
+use App\Models\GioHang;
 use App\Models\Pet;
 use Illuminate\Http\Request;
 
@@ -10,11 +11,13 @@ class ChiTietDonHang extends Controller
 {
     protected $ct_don_hang;
     public $pets;
+    public $gioHangs;
 
     public function __construct()
     {
         $this->ct_don_hang = new ModelsChiTietDonHang();
         $this->pets = new Pet();
+        $this->gioHangs = new GioHang();
     }
     /**
      * Display a listing of the resource.
@@ -35,8 +38,12 @@ class ChiTietDonHang extends Controller
     public function create()
     {
         $title = "Add chi tiết đơn hàng";
+        $listP = $this->pets->getPet();
+        $listGH = $this->gioHangs->getGioHang();
         return view('admins.chitietdonhang.create',[
             'title'=>$title,
+            'listP'=>$listP,
+            'listGH'=>$listGH,
         ]);
     }
 

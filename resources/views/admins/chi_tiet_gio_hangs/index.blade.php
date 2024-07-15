@@ -6,7 +6,7 @@
             <h1 class="h3 text-gray-800">{{ $title }}</h1>
         </div>
 
-        <a href="{{ route('danh-muc.create') }}" class="btn btn-primary btn-icon-split">
+        <a href="{{ route('chi-tiet-gio-hang.create') }}" class="btn btn-primary btn-icon-split">
             <span class="icon text-white-50">
                 <i class="fas fa-arrow-right"></i>
             </span>
@@ -26,39 +26,36 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">
-                @if (count($listDanhMucs) > 0)
+                @if (count($gioHangCT) > 0)
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Hình ảnh</th>
-                                <th>Tên danh mục</th>
-                                <th>Mô tả</th>
+                                <th>Họ và tên</th>
+                                <th>Tên pet</th>
+                                <th>Số lượng</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>#</th>
-                                <th>Hình ảnh</th>
-                                <th>Tên danh mục</th>
-                                <th>Mô tả</th>
+                                <th>Họ và tên</th>
+                                <th>Tên pet</th>
+                                <th>Số lượng</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
                         <tbody>
-                            @foreach ($listDanhMucs as $index => $danhMuc)
+                            @foreach ($gioHangCT as $index => $gioHang)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td class="text-center">
-                                        <img src="{{ Storage::url($danhMuc->hinh_anh) }}" width="120" height="125"
-                                            alt="{{ $danhMuc->hinh_anh }}">
-                                    </td>
-                                    <td>{{ $danhMuc->ten_danh_muc }}</td>
-                                    <td>{{ $danhMuc->mo_ta }}</td>
+                                    <td>{{ $gioHang->name }}</td>
+                                    <td>{{ $gioHang->ten_pet }}</td>
+                                    <td>{{ $gioHang->so_luong }}</td>
 
                                     <td>
-                                        <a href="{{ route('danh-muc.edit', $danhMuc->id) }}"
+                                        <a href="{{ route('chi-tiet-gio-hang.edit', $gioHang->id) }}"
                                             class="btn btn-warning btn-icon-split">
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-exclamation-triangle"></i>
@@ -66,7 +63,7 @@
                                             <span class="text">Sửa</span>
                                         </a>
 
-                                        <form action="{{ route('danh-muc.destroy', $danhMuc->id) }}" method="POST"
+                                        <form action="{{ route('chi-tiet-gio-hang.destroy', $gioHang->id) }}" method="POST"
                                             style="display: inline;">
                                             @csrf
                                             @method('DELETE')
@@ -85,7 +82,7 @@
                     </table>
                 @else
                     <div class="d-flex justify-content-center align-items-center">
-                        <p>Không có danh mục nào được tìm thấy.</p>
+                        <p>Không có chi tiết giỏ hàng nào được tìm thấy.</p>
                     </div>
                 @endif
             </div>

@@ -21,7 +21,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">ID giỏ</th>
-                    <th scope="col">Chó</th>
+                    <th scope="col">Cún</th>
                     <th scope="col">Số lượng</th>
                     <th scope="col">Giá</th>
                     <th scope="col">Thành tiền</th>
@@ -36,7 +36,7 @@
                     <tr>
                         <td>{{$index +1}}  </td>
                         <td>{{$value->user_id}}  </td>
-                        <td>{{$value->user_id}}  </td>
+                        <td>{{$value->ten_pet}}  </td>
                         <td>{{$value->so_luong}}  </td>
                         <td>{{$value->gia}}  </td>
                         <td>{{$value->thanh_tien}}  </td>

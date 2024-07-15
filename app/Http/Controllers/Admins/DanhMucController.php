@@ -20,8 +20,9 @@ class DanhMucController extends Controller
      */
     public function index()
     {
+        $title = 'Danh sách danh mục';
         $listDanhMucs = $this->danhMucs->getDanhMuc();
-        return view('danh_mucs.index', compact('listDanhMucs'));
+        return view('admins.danh_mucs.index', compact('listDanhMucs', 'title'));
     }
 
     /**
@@ -29,7 +30,8 @@ class DanhMucController extends Controller
      */
     public function create()
     {
-        return view('danh_mucs.add');
+        $title = 'Thêm mới danh mục';
+        return view('admins.danh_mucs.add', compact('title'));
     }
 
     /**
@@ -66,11 +68,12 @@ class DanhMucController extends Controller
      */
     public function edit(string $id)
     {
+        $title = 'Sửa danh mục';
         $danhMuc = $this->danhMucs->find($id);
         if (!$danhMuc) {
             return redirect()->route('danh-muc.index');
         }
-        return view('danh_mucs.update', compact('danhMuc'));
+        return view('admins.danh_mucs.update', compact('danhMuc', 'title'));
     }
 
     /**
