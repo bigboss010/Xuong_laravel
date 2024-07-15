@@ -3,14 +3,10 @@
 @section('content')
     <div class="d-sm-flex align-items-center justify-content-between mb-3">
         <div>
-            <h1 class="h3 text-gray-800">Danh sách Pets</h1>
-            <p class="mb-4">
-                Pets
-                <a target="_blank" href="https://datatables.net">Admin</a>.
-            </p>
+            <h1 class="h3 text-gray-800">{{ $title }}</h1>
         </div>
 
-        <a href="{{ route('pet.create') }}" class="btn btn-primary btn-icon-split">
+        <a href="{{ route('danh-muc.create') }}" class="btn btn-primary btn-icon-split">
             <span class="icon text-white-50">
                 <i class="fas fa-arrow-right"></i>
             </span>
@@ -30,58 +26,47 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">
-                @if (count($listPets) > 0)
+                @if (count($listDanhMucs) > 0)
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Tên Pet</th>
-                                <th>Số lượng</th>
-                                <th>Giá gốc</th>
-                                <th>Giá khuyến mại</th>
-                                <th>Ngày nhập</th>
+                                <th>Hình ảnh</th>
+                                <th>Tên danh mục</th>
                                 <th>Mô tả</th>
-                                <th>Danh mục Pet</th>
-                                <th>Trạng thái</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>#</th>
-                                <th>Tên Pet</th>
-                                <th>Số lượng</th>
-                                <th>Giá gốc</th>
-                                <th>Giá khuyến mại</th>
-                                <th>Ngày nhập</th>
+                                <th>Hình ảnh</th>
+                                <th>Tên danh mục</th>
                                 <th>Mô tả</th>
-                                <th>Danh mục Pet</th>
-                                <th>Trạng thái</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
                         <tbody>
-                            @foreach ($listPets as $index => $pet)
+                            @foreach ($listDanhMucs as $index => $danhMuc)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $pet->ten_pet }}</td>
-                                    <td>{{ $pet->so_luong }}</td>
-                                    <td>{{ $pet->gia_pet }}</td>
-                                    <td>{{ $pet->gia_khuyen_mai }}</td>
-                                    <td>{{ (new DateTime($pet->ngay_nhap))->format('d/m/Y') }}</td>
-                                    <td>{{ $pet->mota }}</td>
-                                    <td>{{ $pet->ten_danh_muc }}</td>
-                                    <td>{{ $pet->trang_thai }}</td>
+                                    <td class="text-center">
+                                        <img src="{{ Storage::url($danhMuc->hinh_anh) }}" width="120" height="125"
+                                            alt="{{ $danhMuc->hinh_anh }}">
+                                    </td>
+                                    <td>{{ $danhMuc->ten_danh_muc }}</td>
+                                    <td>{{ $danhMuc->mo_ta }}</td>
 
                                     <td>
-                                        <a href="{{ route('pet.edit', $pet->id) }}" class="btn btn-warning btn-icon-split">
+                                        <a href="{{ route('danh-muc.edit', $danhMuc->id) }}"
+                                            class="btn btn-warning btn-icon-split">
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-exclamation-triangle"></i>
                                             </span>
                                             <span class="text">Sửa</span>
                                         </a>
 
-                                        <form action="{{ route('pet.destroy', $pet->id) }}" method="POST"
+                                        <form action="{{ route('danh-muc.destroy', $danhMuc->id) }}" method="POST"
                                             style="display: inline;">
                                             @csrf
                                             @method('DELETE')
@@ -100,7 +85,7 @@
                     </table>
                 @else
                     <div class="d-flex justify-content-center align-items-center">
-                        <p>Không có pet nào được tìm thấy.</p>
+                        <p>Không có danh mục nào được tìm thấy.</p>
                     </div>
                 @endif
             </div>

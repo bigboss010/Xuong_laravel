@@ -20,8 +20,9 @@ class PetController extends Controller
      */
     public function index()
     {
+        $title = 'Danh sách pet';
         $listPets = $this->pets->getPet();
-        return view('pets.index', compact('listPets'));
+        return view('admins.pets.index', compact('listPets', 'title'));
     }
 
     /**
@@ -29,8 +30,9 @@ class PetController extends Controller
      */
     public function create(DanhMuc $danhMuc)
     {
+        $title = 'Thêm mới pet';
         $danhMucs = $danhMuc->getDanhMuc();
-        return view('pets.add', compact('danhMucs'));
+        return view('admins.pets.add', compact('danhMucs', 'title'));
     }
 
     /**
@@ -58,9 +60,10 @@ class PetController extends Controller
      */
     public function edit(string $id, DanhMuc $danhMuc)
     {
+        $title = 'Sửa pet';
         $danhMucs = $danhMuc->getDanhMuc();
         $pet = $this->pets->find($id);
-        return view('pets.update', compact('danhMucs', 'pet'));
+        return view('admins.pets.update', compact('danhMucs', 'pet', 'title'));
     }
 
     /**

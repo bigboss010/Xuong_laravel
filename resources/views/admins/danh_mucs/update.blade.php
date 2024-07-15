@@ -3,11 +3,7 @@
 @section('content')
     <div class="d-sm-flex align-items-center justify-content-between mb-3">
         <div>
-            <h1 class="h3 text-gray-800">Danh sách danh mục</h1>
-            <p class="mb-4">
-                Danh mục
-                <a target="_blank" href="https://datatables.net">Admin</a>.
-            </p>
+            <h1 class="h3 text-gray-800">{{ $title }}</h1>
         </div>
     </div>
 
@@ -22,7 +18,7 @@
                     <input type="file" class="form-control-file" id="hinh_anh" name="hinh_anh"
                         value="{{ $danhMuc->hinh_anh }}">
                     <div class="text-center">
-                        <img src="{{ Storage::url($danhMuc->hinh_anh) }}" alt="{{ $danhMuc->hinh_anh }}" class="w-20">
+                        <img src="{{ Storage::url($danhMuc->hinh_anh) }}" alt="{{ $danhMuc->hinh_anh }}" class="w-25">
                     </div>
                 </div>
                 <div class="form-group">

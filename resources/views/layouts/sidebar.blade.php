@@ -39,6 +39,9 @@
                 <a class="collapse-item" href="{{ route('danh-muc.index')}}">Danh mục</a>
                 <a class="collapse-item" href="{{ route('pet.index')}}">Pets</a>
                 <a class="collapse-item" href="{{ route('anh-pet.index')}}">Ảnh</a>
+                <a class="collapse-item" href="{{ route('gio-hang.index')}}">Giỏ hàng</a>
+                <a class="collapse-item" href="{{ route('chi-tiet-gio-hang.index')}}">Chi tiết giỏ hàng</a>
+                <a class="collapse-item" href="{{ route('binh-luan.index')}}">Bình luận</a>
             </div>
         </div>
     </li>
