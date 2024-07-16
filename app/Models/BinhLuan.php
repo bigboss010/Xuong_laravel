@@ -34,4 +34,9 @@ class BinhLuan extends Model
     {
         DB::table('binh_luans')->insert($data);
     }
+
+    public function updateBL($data, $id)
+    {
+        DB::table('binh_luans')->where("id", $id)->update($data);
+    }
 }

@@ -30,4 +30,9 @@ class GioHang extends Model
     {
         DB::table('gio_hangs')->insert($data);
     }
+
+    public function updateGioHang($data, $id)
+    {
+        DB::table('gio_hangs')->where('id', $id)->update($data);
+    }
 }

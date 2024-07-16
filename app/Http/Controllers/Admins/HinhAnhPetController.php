@@ -51,7 +51,7 @@ class HinhAnhPetController extends Controller
             'pet_id' => $request->pet_id
         ];
         $this->anhPet->createAnhPet($data);
-        return redirect()->route('anh-pet.index');
+        return redirect()->route('anh-pet.index')->with('success', 'Thêm mới thành công!');
     }
 
     /**
@@ -71,7 +71,7 @@ class HinhAnhPetController extends Controller
         $anhPet = $this->anhPet->find($id);
         $petName = $pets->getPet();
         if (!$anhPet) {
-            return redirect()->route('anh-pet.index');
+            return redirect()->route('anh-pet.index')->with('errors', 'Hình ảnh pet này không tồn tại!');
         }
         return view('admins.hinh_anh_pets.update', compact('anhPet', 'petName', 'title'));
     }
@@ -95,7 +95,7 @@ class HinhAnhPetController extends Controller
             'pet_id' => $request->pet_id
         ];
         $this->anhPet->updateAnhPet($data, $id);
-        return redirect()->route('anh-pet.index');
+        return redirect()->route('anh-pet.index')->with('success', 'Sửa thành công!');
     }
 
     /**
@@ -105,9 +105,9 @@ class HinhAnhPetController extends Controller
     {
         $anhPet = $this->anhPet->find($id);
         if (!$anhPet) {
-            return redirect()->route('anh-pet.index');
+            return redirect()->route('anh-pet.index')->with('errors', 'Hình ảnh pet này không tồn tại!');
         }
         $anhPet->delete();
-        return redirect()->route('anh-pet.index');
+        return redirect()->route('anh-pet.index')->with('success', 'Xóa thành công!');
     }
 }

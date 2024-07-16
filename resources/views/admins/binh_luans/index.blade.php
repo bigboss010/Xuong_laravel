@@ -13,14 +13,14 @@
             <span class="text">Thêm mới</span>
         </a>
     </div>
-    @if (isset($_SESSION['errors']))
-        <div class="text-center mb-3">
-            <span style="color: red">{{ $_SESSION['errors'] }}</span>
+    @if (session('errors'))
+        <div class="text-center alert alert-danger mb-3">
+            <span style="color: red">{{ session('errors') }}</span>
         </div>
     @endif
-    @if (isset($_SESSION['success']))
-        <div class="text-center mb-3">
-            <span style="color: green">{{ $_SESSION['success'] }}</span>
+    @if (session('success'))
+        <div class="text-center alert alert-success mb-3">
+            <span style="color: green">{{ session('success') }}</span>
         </div>
     @endif
     <div class="card shadow mb-4">

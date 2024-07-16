@@ -15,10 +15,10 @@
                 @csrf
                 <div class="form-group">
                     <label for="hinh_anh">Hình ảnh:</label>
-                    <input type="file" class="form-control-file" id="hinh_anh" name="hinh_anh"
-                        value="{{ $danhMuc->hinh_anh }}">
+                    <input type="file" class="form-control-file" id="hinh_anh" name="hinh_anh" onchange="showImage(event)">
+                    <br>
                     <div class="text-center">
-                        <img src="{{ Storage::url($danhMuc->hinh_anh) }}" alt="{{ $danhMuc->hinh_anh }}" class="w-25">
+                        <img id="img" src="{{ Storage::url($danhMuc->hinh_anh) }}" alt="Hình ảnh" style="width:150px;">
                     </div>
                 </div>
                 <div class="form-group">
@@ -39,4 +39,22 @@
             </form>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script>
+        function showImage(event){
+            const img = document.getElementById('img');
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function() {
+                img.src = reader.result;
+               
+            }
+            if(file){
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
 @endsection

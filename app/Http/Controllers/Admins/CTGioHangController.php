@@ -50,7 +50,7 @@ class CTGioHangController extends Controller
 
             ];
             $this->gioHangCT->createCTGH($data);
-            return redirect()->route('chi-tiet-gio-hang.index');
+            return redirect()->route('chi-tiet-gio-hang.index')->with('success', 'Thêm mới thành công!');
         }
     }
 
@@ -65,9 +65,16 @@ class CTGioHangController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id, GioHang $gioHangs, Pet $pets)
     {
-        //
+        $title = 'Sửa chi tiết giỏ hàng';
+        $gioHangCT = $this->gioHangCT->find($id);
+        if(!$gioHangCT){
+            return redirect()->route('chi-tiet-gio-hang.index')->with('errors', 'Chi tiết giỏ hàng này không tồn tại!');
+        }
+        $gioHangs = $gioHangs->getGioHang();
+        $pets = $pets->getPet();
+        return view('admins.chi_tiet_gio_hangs.update', compact('title', 'gioHangCT', 'gioHangs', 'pets'));
     }
 
     /**
@@ -75,7 +82,11 @@ class CTGioHangController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        if($request->isMethod("PUT")){
+            $data = $request->except('_method', '_token');
+            $this->gioHangCT->updateCTGH($data, $id);
+            return redirect()->route('chi-tiet-gio-hang.index')->with('success', 'Sửa thành công!');
+        }
     }
 
     /**
@@ -83,6 +94,11 @@ class CTGioHangController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $gioHangCT = $this->gioHangCT->find($id);
+        if(!$gioHangCT){
+            return redirect()->route('chi-tiet-gio-hang.index')->with('errors', 'Chi tiết giỏ hàng này không tồn tại!');
+        }
+        $gioHangCT->delete();
+        return redirect()->route('chi-tiet-gio-hang.index')->with('success', 'Xóa thành công!');
     }
 }
