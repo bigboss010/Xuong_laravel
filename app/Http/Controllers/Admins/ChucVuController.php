@@ -63,7 +63,12 @@ class ChucVuController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $list = $this->chuc_vu ->find($id);
+        $title = "Edit chức vụ";
+        if(!$list){
+            return redirect()->route('chuc_vus.index')->with('errors','Không tồn tại chức vụ này');
+        }
+        return view('admins.chucvu.update',compact('title','list'));
     }
 
     /**
@@ -71,7 +76,15 @@ class ChucVuController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $list= $this->chuc_vu ->find($id);
+        if(!$list){
+            return redirect()->route('chuc_vus.index');
+        }
+        $dataUpdate = [
+            'ten_chuc_vu' => $request->ten_chuc_vu,
+        ];
+        $this->chuc_vu->updateChucVu($dataUpdate,$id);
+        return redirect()->route('chuc_vus.index')->with('success','Thay đổi chức vụ thành công');
     }
 
     /**
@@ -79,6 +92,11 @@ class ChucVuController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $list= $this->chuc_vu ->find($id);
+        if(!$list){
+            return redirect()->route('chuc_vus.index');
+        }
+        $list->delete();
+        return redirect()->route('chuc_vus.index')->with('success','Xóa chức vụ thành công');
     }
 }

@@ -23,4 +23,10 @@ class KhachHang extends Model
     public function createUser($data){
         DB::table('users')->insert($data);
     }
+    public function updateUser($data, $id){
+        DB::table('users')->where('id',$id)->update($data);
+    }
+    public function deleteUser($id) {
+        DB::table('users')->where('id',$id)->delete();
+    }
 }

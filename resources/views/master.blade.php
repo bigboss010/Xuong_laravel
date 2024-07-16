@@ -19,9 +19,13 @@
             <div id="content">
                 @include('layouts.nav')
                 <div class="container-fluid">
-                   
-                        @yield('content')
-                  
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                @yield('content')
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             @include('layouts.footer')
@@ -29,4 +33,5 @@
     </div>
     @include('layouts.script')
 </body>
+
 </html>

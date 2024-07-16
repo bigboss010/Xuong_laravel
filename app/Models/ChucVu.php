@@ -18,4 +18,8 @@ class ChucVu extends Model
     public function createChucVu($data)  {
         DB::table('chuc_vus')->insert($data);
     }
+
+    public function updateChucVu($data, $id) {
+        DB::table('chuc_vus')->where('id',$id)->update($data);
+    }
 }

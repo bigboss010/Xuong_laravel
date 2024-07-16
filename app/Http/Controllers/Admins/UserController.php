@@ -66,7 +66,17 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $title = "Edit Khách hàng";
+        $listCV = $this->chuc_vu->getList();
+        $list= DB::table('users')->find($id);
+        if(!$list){
+            return redirect()->route('users.index');
+        }
+        return view('admins.khachhang.update',[
+            'title'=>$title,
+            'list'=>$list,
+            'listCV'=>$listCV,
+        ]);
     }
 
     /**
@@ -74,7 +84,11 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        if ($request->isMethod('PUT')) {
+            $data = $request->except('_token', '_method');
+            $this->users->updateUser($data, $id);
+            return redirect()->route('users.index')->with('success','Sửa thành công');
+        }
     }
 
     /**
@@ -82,6 +96,12 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $list = DB::table('users')->find($id);
+        if (!$list) {
+            return redirect()->route('users.index');
+        }
+        $this->users->deleteUser($id);
+        return redirect()->route('users.index')->with('success','Xóa thành công');
+        
     }
 }
