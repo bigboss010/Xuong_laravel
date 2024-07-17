@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ChiTietDonHang as ModelsChiTietDonHang;
+use App\Models\ChiTietDonHang;
 use App\Models\GioHang;
 use App\Models\Pet;
 use Illuminate\Http\Request;
 
-class ChiTietDonHang extends Controller
+class ChiTietDonHangController extends Controller
 {
     protected $ct_don_hang;
     public $pets;
@@ -15,7 +15,7 @@ class ChiTietDonHang extends Controller
 
     public function __construct()
     {
-        $this->ct_don_hang = new ModelsChiTietDonHang();
+        $this->ct_don_hang = new ChiTietDonHang();
         $this->pets = new Pet();
         $this->gioHangs = new GioHang();
     }
@@ -71,9 +71,21 @@ class ChiTietDonHang extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id, GioHang $gioHangs, Pet $pets)
     {
-        //
+        $title = "Edit Chi tiết hóa đơn";
+        $list = $this->ct_don_hang->find($id);
+        if(!$list){
+            return redirect()->route('chi_tiet_don_hangs.index')->with('errors','Không tồn tại hóa đơn này');
+        }
+        $gioHangs = $gioHangs->getGioHang();
+        $pets = $pets->getPet(); 
+        return view('admins.chitietdonhang.update', [
+            'title' => $title,
+            'list' => $list,
+            'gioHangs' => $gioHangs,
+            'pets' => $pets,
+        ]);
     }
 
     /**
@@ -81,7 +93,13 @@ class ChiTietDonHang extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $list = $this->ct_don_hang->find($id);
+        $data= $request->except('_token','_method');
+        if(!$list){
+            return redirect()->route('chi_tiet_don_hangs.index')->with('errors','Không tồn tại hóa đơn này');
+        }
+        $list->updateChiTietDonHang($data,$id);
+        return redirect()->route('chi_tiet_don_hangs.index')->with('success','Update thành công');
     }
 
     /**
@@ -89,6 +107,12 @@ class ChiTietDonHang extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $list = $this->ct_don_hang->find($id);
+        if(!$list){
+            return redirect()->route('chi_tiet_don_hangs.index')->with('errors','Không tồn tại hóa đơn này');
+        }
+        $list->delete();
+        return redirect()->route('chi_tiet_don_hangs.index')->with('success','Xóa thành công');
+
     }
 }

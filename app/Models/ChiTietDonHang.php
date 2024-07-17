@@ -22,4 +22,8 @@ class ChiTietDonHang extends Model
     public function createChiTietDonHang($data) {
         DB::table('chi_tiet_don_hangs')->insert($data);
     }
+
+    public function updateChiTietDonHang($data,$id) {
+        DB::table('chi_tiet_don_hangs')->where('id',$id)->update($data);
+    }
 }

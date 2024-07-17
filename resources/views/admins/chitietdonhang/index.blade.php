@@ -28,22 +28,25 @@
                     <th scope="col">Hành Động</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody>      
                 @foreach ($list as $index=>$value)
-                    @php
-                        $value->thanh_tien = $value->so_luong * $value->gia;
-                    @endphp
+                
                     <tr>
                         <td>{{$index +1}}  </td>
-                        <td>{{$value->user_id}}  </td>
-                        <td>{{$value->ten_pet}}  </td>
-                        <td>{{$value->so_luong}}  </td>
+                        <td>{{$value->gio_hang_id}}  </td>
+                        <td>{{$value->ten_pet }}  </td>
                         <td>{{$value->gia}}  </td>
-                        <td>{{$value->thanh_tien}}  </td>
-                 
+                        <td>{{$value->so_luong}}  </td>
+                        <td>{{$value->thanh_tien = $value->so_luong * $value->gia}}  </td>             
                         <td>
-                            <a href=""><button type="button"
+                            <a href="{{ route('chi_tiet_don_hangs.edit', $value->id) }}"><button type="button"
                                     class="btn btn-warning">Sửa</button></a>
+                            <form action="{{route('chi_tiet_don_hangs.destroy', $value->id)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="btn btn-danger" onclick="return confirm('Bạn chắc chắn muốn xóa ?')">Xóa</button></a>
+                            </form>
                         </td>
                     </tr>
                 @endforeach 
