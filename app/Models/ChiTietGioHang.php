@@ -26,4 +26,9 @@ class ChiTietGioHang extends Model
     {
         DB::table('chi_tiet_gio_hangs')->insert($data);
     }
+
+    public function updateCTGH($data, $id)
+    {
+        DB::table('chi_tiet_gio_hangs')->where('id', $id)->update($data);
+    }
 }

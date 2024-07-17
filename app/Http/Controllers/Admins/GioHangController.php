@@ -48,7 +48,7 @@ class GioHangController extends Controller
                 'updated_at' => Carbon::now()
             ];
             $this->gioHangs->createGioHang($data);
-            return redirect()->route('gio-hang.index');
+            return redirect()->route('gio-hang.index')->with('success', 'Thêm mới thành công!');
         }
     }
 
@@ -63,9 +63,15 @@ class GioHangController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id, KhachHang $users)
     {
-        //
+        $title = 'Sửa giỏ hàng';
+        $gioHang = $this->gioHangs->find($id);
+        if(!$gioHang){
+            return redirect()->route('gio-hang.index')->with('errors', 'Giỏ hàng này không tồn tại!');
+        }
+        $users = $users->getList();
+        return view('admins.gio_hangs.update', compact('title', 'gioHang', 'users'));
     }
 
     /**
@@ -73,7 +79,14 @@ class GioHangController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        if($request->isMethod('PUT')){
+            $data = [
+                'user_id' => $request->user_id,
+                'updated_at' => Carbon::now()
+            ];
+            $this->gioHangs->updateGioHang($data, $id);
+            return redirect()->route('gio-hang.index')->with('success', 'Sửa thành công!');
+        }
     }
 
     /**
@@ -81,6 +94,11 @@ class GioHangController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $gioHang = $this->gioHangs->find($id);
+        if(!$gioHang){
+            return redirect()->route('gio-hang.index')->with('errors', 'Giỏ hàng này không tồn tại!');
+        }
+        $gioHang->delete();
+        return redirect()->route('gio-hang.index')->with('success', 'Xóa thành công!');
     }
 }

@@ -13,7 +13,11 @@
                 @csrf
                 <div class="form-group">
                     <label for="link_anh">Hình ảnh:</label>
-                    <input type="file" class="form-control-file" id="link_anh" name="link_anh">
+                    <input type="file" class="form-control-file" id="link_anh" name="link_anh" onchange="showImage(event)">
+                    <br>
+                    <div class="text-center">
+                        <img id="img" src="" alt="Hình ảnh" style="width:150px; display: none;">
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="pet_id">Tên pet:</label>
@@ -33,3 +37,22 @@
         </div>
     </div>
 @endsection
+
+@section('js')
+    <script>
+        function showImage(event){
+            const img = document.getElementById('img');
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function() {
+                img.src = reader.result;
+                img.style.display = 'block';
+            }
+            if(file){
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+@endsection
+

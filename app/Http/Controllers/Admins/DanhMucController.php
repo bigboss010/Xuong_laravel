@@ -52,7 +52,7 @@ class DanhMucController extends Controller
         ];
 
         $this->danhMucs->createDanhMuc($dataInsert);
-        return redirect()->route('danh-muc.index');
+        return redirect()->route('danh-muc.index')->with('success', 'Thêm mới thành công!');
     }
 
     /**
@@ -71,7 +71,7 @@ class DanhMucController extends Controller
         $title = 'Sửa danh mục';
         $danhMuc = $this->danhMucs->find($id);
         if (!$danhMuc) {
-            return redirect()->route('danh-muc.index');
+            return redirect()->route('danh-muc.index')->with('errors', 'Danh mục này không tồn tại!');
         }
         return view('admins.danh_mucs.update', compact('danhMuc', 'title'));
     }
@@ -98,7 +98,7 @@ class DanhMucController extends Controller
         ];
 
         $this->danhMucs->updateDanhMuc($dataUpdate, $id);
-        return redirect()->route('danh-muc.index');
+        return redirect()->route('danh-muc.index')->with('success', 'Sửa thành công!');
     }
 
     /**
@@ -108,12 +108,12 @@ class DanhMucController extends Controller
     {
         $danhMuc = $this->danhMucs->find($id);
         if (!$danhMuc) {
-            return redirect()->route('danh-muc.index');
+            return redirect()->route('danh-muc.index')->with('errors', 'Danh mục này không tồn tại!');
         }
         if ($danhMuc->hinh_anh) {
             Storage::disk('public')->delete($danhMuc->hinh_anh);
         }
         $danhMuc->delete();
-        return redirect()->route('danh-muc.index');
+        return redirect()->route('danh-muc.index')->with('success', 'Xóa thành công!');
     }
 }
