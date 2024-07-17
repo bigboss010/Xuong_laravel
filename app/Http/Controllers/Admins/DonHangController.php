@@ -77,9 +77,24 @@ class DonHangController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id, KhachHang $khachHang, PhuongThucThanhToan $PhuongThucThanhToan, TrangThaiDonHang $trangThaiDonHang) 
     {
-        //
+        $title="edit đơn hàng";
+        $list = $this->don_hang->find($id);
+        $khachHangs = $khachHang->getListHD();
+        $PhuongThucThanhToans = $PhuongThucThanhToan->getList();
+        $TrangThaiDonHangs = $trangThaiDonHang->getList();
+
+        if(!$list){
+            return redirect()->route('don_hangs.index')->with('errors','Không có đơn hàng này');
+        }
+        return view('admins.donhang.update',[
+            'list'=>$list,
+            'title'=>$title,
+            'khachHangs'=>$khachHangs,
+            'PhuongThucThanhToans'=>$PhuongThucThanhToans,
+            'TrangThaiDonHangs'=>$TrangThaiDonHangs
+        ]);
     }
 
     /**
@@ -87,7 +102,11 @@ class DonHangController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        if($request->isMethod('PUT')){
+            $data = $request->except('_token','_method');
+            $this->don_hang->updateDonHang($data,$id);
+            return redirect()->route('don_hangs.index')->with('success','Update thành công');
+        }
     }
 
     /**
@@ -95,6 +114,9 @@ class DonHangController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $list = $this->don_hang->find($id);
+        $list->delete();
+        return redirect()->route('don_hangs.index')->with('success','Xóa thành công');
+
     }
 }

@@ -19,6 +19,11 @@ class KhachHang extends Model
             ->get();
         return $listUsers;
     }
+    public function getListHD()
+    {
+        $listUsers = DB::table('users')->select('users.*')->get();
+        return $listUsers;
+    }
 
     public function createUser($data){
         DB::table('users')->insert($data);

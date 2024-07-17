@@ -23,4 +23,8 @@ class DonHang extends Model
     public function createDonHang($data){
         DB::table('don_hangs')->insert($data);
     }
+
+    public function  updateDonHang($data,$id) {
+        DB::table('don_hangs')->where('id',$id)->update($data);
+    }
 }
