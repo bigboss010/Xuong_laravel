@@ -45,7 +45,7 @@
                         <td>{{$value->email_nguoi_nhan}}  </td>
                         <td>{{$value->so_dien_thoai_nguoi_nhan}}  </td>
                         <td>{{$value->dia_chi_nguoi_nhan}}  </td>
-                        <td>{{$value->ngay_dat}}  </td>
+                        <td>{{(new DateTime($value->ngay_dat))->format('d-m-y')}}  </td>
                         <td>{{$value->tong_tien}}  </td>
                         <td>{{$value->ghi_chu}}  </td>
                         <td>{{$value->ten_phuong_thuc }}  </td>
@@ -53,8 +53,14 @@
                         
                  
                         <td>
-                            <a href=""><button type="button"
+                            <a href="{{route('don_hangs.edit', $value->id)}}"><button type="button"
                                     class="btn btn-warning">Sửa</button></a>
+                            <form action="{{route('don_hangs.destroy', $value->id)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="btn btn-danger" onclick="return confirm('Bạn chắc chắn muốn xóa ?')">Xóa</button></a>
+                            </form>
                         </td>
                     </tr>
                 @endforeach 

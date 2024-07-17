@@ -18,4 +18,8 @@ class PhuongThucThanhToan extends Model
     public function createPhuongThuc($data) {
         DB::table('phuong_thuc_thanh_toans')->insert($data);
     }
+
+    public function updatePhuongThuc($data,$id) {
+        DB::table('phuong_thuc_thanh_toans')->where('id',$id)->update($data);
+    }
 }
