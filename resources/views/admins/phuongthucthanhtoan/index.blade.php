@@ -14,6 +14,11 @@
                 {{ session('success') }}
             </div>
         @endif
+        @if (session('errors'))
+            <div class="alert alert-danger">
+                {{ session('errors') }}
+            </div>
+        @endif
     </div><br>
   
         <table class="table">
@@ -33,8 +38,14 @@
                         
                  
                         <td>
-                            <a href=""><button type="button"
+                            <a href="{{route('phuong_thuc_thanh_toans.edit', $value->id)}}"><button type="button"
                                     class="btn btn-warning">Sửa</button></a>
+                            <form action="{{route('phuong_thuc_thanh_toans.destroy', $value->id)}}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <a href=""><button type="submit"
+                                    class="btn btn-danger" onclick="return confirm('Bạn chắc chắn muốn xóa ?')">Xóa</button></a>
+                            </form>
                         </td>
                     </tr>
                 @endforeach 
