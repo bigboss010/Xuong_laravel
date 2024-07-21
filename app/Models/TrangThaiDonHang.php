@@ -18,4 +18,8 @@ class TrangThaiDonHang extends Model
     public function createTrangThai($data){
         DB::table('trang_thai_don_hangs')->insert($data);
     }
+
+    public function updateTrangThai($data, $id){
+        DB::table('trang_thai_don_hangs')->where('id',$id)->update($data);
+    }
 }

@@ -62,8 +62,16 @@ class TrangThaiDonHangController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
-        //
+    {   
+        $tile ="Edit Trạng thái đơn hàng";
+        $list = $this->trang_thai_don_hang->find($id);
+        if(!$list){
+            return redirect()->route('trang_thai_don_hangs.index')->with('errors','Không có trạng thái này');
+        }
+        return view('admins.trangthaidonhang.update',[
+            'title'=>$tile,
+            'list'=>$list,
+        ]);
     }
 
     /**
@@ -71,7 +79,10 @@ class TrangThaiDonHangController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $list = $this->trang_thai_don_hang->find($id);
+        $data = $request->except('_token','_method');
+        $this->trang_thai_don_hang->updateTrangThai($data,$id);
+        return redirect()->route('trang_thai_don_hangs.index')->with('success','Update thành công');
     }
 
     /**
@@ -79,6 +90,8 @@ class TrangThaiDonHangController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $list = $this->trang_thai_don_hang->find($id);
+        $list->delete();
+        return redirect()->route('trang_thai_don_hangs.index')->with('success','Xóa thành công');
     }
 }

@@ -67,7 +67,9 @@
                 <a class="collapse-item" href="{{route('users.index')}}">User</a>
                 <a class="collapse-item" href="{{route('chuc_vus.index')}}">Chức vụ</a>
                 <a class="collapse-item" href="{{route('trang_thai_don_hangs.index')}}">Trạng thái đơn hàng</a>
-                <a class="collapse-item" href="{{route('chuc_vus.index')}}">Bình luận</a>
+                <a class="collapse-item" href="{{route('phuong_thuc_thanh_toans.index')}}">Phương thức thanh toán</a>
+                <a class="collapse-item" href="{{route('don_hangs.index')}}">Đơn hàng</a>
+                <a class="collapse-item" href="{{route('chi_tiet_don_hangs.index')}}">Chi tiết đơn hàng</a>
             </div>
         </div>
     </li>
