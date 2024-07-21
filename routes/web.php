@@ -33,6 +33,10 @@ Route::get('/', function () {
     return view('client.index');
 
 });
+Route::get('/admin', function () {
+    return view('admins.master');
+
+});
  Route::resource('users', UserController::class);
  Route::resource('chuc_vus', ChucVuController::class);
  Route::resource('trang_thai_don_hangs', TrangThaiDonHangController::class);

@@ -9,15 +9,15 @@
     <meta name="author" content="">
 
     <title>SB Admin 2 - Dashboard</title>
-    @include('layouts.style')
+    @include('admins.layouts.style')
 </head>
 
 <body id="page-top">
     <div id="wrapper">
-        @include('layouts.sidebar')
+        @include('admins.layouts.sidebar')
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
-                @include('layouts.nav')
+                @include('admins.layouts.nav')
                 <div class="container-fluid">
                     <div class="card shadow mb-4">
                         <div class="card-body">
@@ -28,10 +28,10 @@
                     </div>
                 </div>
             </div>
-            @include('layouts.footer')
+            @include('admins.layouts.footer')
         </div>
     </div>
-    @include('layouts.script')
+    @include('admins.layouts.script')
     @yield('js')
 </body>
 
