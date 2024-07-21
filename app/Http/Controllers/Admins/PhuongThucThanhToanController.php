@@ -33,7 +33,7 @@ class PhuongThucThanhToanController extends Controller
      */
     public function create()
     {
-        $title = "Danh sách phương thức thanh toán";
+        $title = "Thêm mới phương thức thanh toán";
      
         return view('admins.phuongthucthanhtoan.create',[
             'title' => $title,
@@ -68,10 +68,10 @@ class PhuongThucThanhToanController extends Controller
      */
     public function edit(string $id)
     {
-        $title = "Edit phương thức thanh toán";
+        $title = "Sửa phương thức thanh toán";
         $list = $this->phuong_thuc_thanh_toan->find($id);
         if(!$list){
-            return redirect()->route('phuong_thuc_thanh_toans.index')->with('errors','Không có phương thức này');
+            return redirect()->route('phuong_thuc_thanh_toans.index')->with('errors','Không có phương thức này!');
         }
         return view('admins.phuongthucthanhtoan.update',[
             'title'=>$title,
@@ -87,7 +87,7 @@ class PhuongThucThanhToanController extends Controller
         $list = $this->phuong_thuc_thanh_toan->find($id);
         $data = $request->except('_token','_method');
         $this->phuong_thuc_thanh_toan->updatePhuongThuc($data,$id);
-        return redirect()->route('phuong_thuc_thanh_toans.index')->with('success','Update thành công');
+        return redirect()->route('phuong_thuc_thanh_toans.index')->with('success','Sửa thành công!');
     }
 
     /**
@@ -97,7 +97,7 @@ class PhuongThucThanhToanController extends Controller
     {
         $list = $this->phuong_thuc_thanh_toan->find($id);
         $list->delete();
-        return redirect()->route('phuong_thuc_thanh_toans.index')->with('success','Xóa thành công');
+        return redirect()->route('phuong_thuc_thanh_toans.index')->with('success','Xóa thành công!');
 
     }
 }

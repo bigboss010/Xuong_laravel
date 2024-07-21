@@ -5,17 +5,14 @@ use App\Http\Controllers\Admins\ChucVuController;
 use App\Http\Controllers\Admins\CTGioHangController;
 use App\Http\Controllers\Admins\TrangThaiDonHangController;
 use App\Http\Controllers\Admins\UserController;
-use App\Models\ChucVu;
-use App\Models\TrangThaiDonHang;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Admins\DanhMucController;
 use App\Http\Controllers\Admins\DonHangController;
 use App\Http\Controllers\Admins\GioHangController;
 use App\Http\Controllers\Admins\HinhAnhPetController;
 use App\Http\Controllers\Admins\PetController;
 use App\Http\Controllers\Admins\PhuongThucThanhToanController;
-use App\Http\Controllers\ChiTietDonHang;
-use App\Http\Controllers\ChiTietDonHangController;
+use App\Http\Controllers\Admins\ChiTietDonHangController;
+use App\Http\Controllers\Admins\DashBoardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,10 +26,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('master');
-
-});
+Route::resource('/', DashBoardController::class);
  Route::resource('users', UserController::class);
  Route::resource('chuc_vus', ChucVuController::class);
  Route::resource('trang_thai_don_hangs', TrangThaiDonHangController::class);

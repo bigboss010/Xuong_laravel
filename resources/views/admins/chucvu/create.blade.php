@@ -1,4 +1,9 @@
-@extends('layouts.master')
+@extends('layouts.admins.master')
+
+@section('title')
+    {{ $title }}
+@endsection
+
 @section('content')
     <div class="d-sm align-items-center justify-content-between mb-5">
         <div>
@@ -22,7 +27,7 @@
             <input type="text" class="form-control" id="ten_chuc_vu" name="ten_chuc_vu">
         </div>
         <br>
-        <input class="btn btn-outline-warning mr-2" type="submit" value="Add">
+        <input class="btn btn-outline-success mr-2" type="submit" value="Thêm mới">
 
         <a href="{{ route('chuc_vus.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
     </form>

@@ -41,7 +41,7 @@ class DonHangController extends Controller
      */
     public function create()
     {
-        $title = "Add đơn hàng";
+        $title = "Thêm mới đơn hàng";
         $list = $this->users->getList();
         $listPTDH = $this->phuong_thuc_thanh_toan->getList();
         $listTT = $this->trang_thai -> getList();
@@ -62,7 +62,7 @@ class DonHangController extends Controller
             $params = $request->post();
             unset($params['_token']);
             $this->don_hang->createDonHang($params);
-            return redirect()->route('don_hangs.index')->with('success','Thêm thành công');
+            return redirect()->route('don_hangs.index')->with('success','Thêm mới thành công!');
         }
     }
 
@@ -79,14 +79,14 @@ class DonHangController extends Controller
      */
     public function edit(string $id, KhachHang $khachHang, PhuongThucThanhToan $PhuongThucThanhToan, TrangThaiDonHang $trangThaiDonHang) 
     {
-        $title="edit đơn hàng";
+        $title="Sửa đơn hàng";
         $list = $this->don_hang->find($id);
         $khachHangs = $khachHang->getListHD();
         $PhuongThucThanhToans = $PhuongThucThanhToan->getList();
         $TrangThaiDonHangs = $trangThaiDonHang->getList();
 
         if(!$list){
-            return redirect()->route('don_hangs.index')->with('errors','Không có đơn hàng này');
+            return redirect()->route('don_hangs.index')->with('errors','Không có đơn hàng này!');
         }
         return view('admins.donhang.update',[
             'list'=>$list,
@@ -105,7 +105,7 @@ class DonHangController extends Controller
         if($request->isMethod('PUT')){
             $data = $request->except('_token','_method');
             $this->don_hang->updateDonHang($data,$id);
-            return redirect()->route('don_hangs.index')->with('success','Update thành công');
+            return redirect()->route('don_hangs.index')->with('success','Sửa thành công!');
         }
     }
 
@@ -116,7 +116,7 @@ class DonHangController extends Controller
     {
         $list = $this->don_hang->find($id);
         $list->delete();
-        return redirect()->route('don_hangs.index')->with('success','Xóa thành công');
+        return redirect()->route('don_hangs.index')->with('success','Xóa thành công!');
 
     }
 }

@@ -29,7 +29,7 @@ class TrangThaiDonHangController extends Controller
      */
     public function create()
     {
-        $title ="Danh sách trạng thái";
+        $title ="Thêm mới trạng thái";
        
         return view('admins.trangthaidonhang.create',[
             'title' => $title,
@@ -46,7 +46,7 @@ class TrangThaiDonHangController extends Controller
             $params = $request->post();
             unset($params['_token']);
             $this->trang_thai_don_hang->createTrangThai($params);
-            return redirect()->route('trang_thai_don_hangs.index')->with('success','Thêm trạng thái mới thành công');
+            return redirect()->route('trang_thai_don_hangs.index')->with('success','Thêm mới thành công!');
         }
     }
 
@@ -63,10 +63,10 @@ class TrangThaiDonHangController extends Controller
      */
     public function edit(string $id)
     {   
-        $tile ="Edit Trạng thái đơn hàng";
+        $tile ="Sửa trạng thái đơn hàng";
         $list = $this->trang_thai_don_hang->find($id);
         if(!$list){
-            return redirect()->route('trang_thai_don_hangs.index')->with('errors','Không có trạng thái này');
+            return redirect()->route('trang_thai_don_hangs.index')->with('errors','Không có trạng thái này!');
         }
         return view('admins.trangthaidonhang.update',[
             'title'=>$tile,
@@ -82,7 +82,7 @@ class TrangThaiDonHangController extends Controller
         $list = $this->trang_thai_don_hang->find($id);
         $data = $request->except('_token','_method');
         $this->trang_thai_don_hang->updateTrangThai($data,$id);
-        return redirect()->route('trang_thai_don_hangs.index')->with('success','Update thành công');
+        return redirect()->route('trang_thai_don_hangs.index')->with('success','Sửa thành công!');
     }
 
     /**
@@ -92,6 +92,6 @@ class TrangThaiDonHangController extends Controller
     {
         $list = $this->trang_thai_don_hang->find($id);
         $list->delete();
-        return redirect()->route('trang_thai_don_hangs.index')->with('success','Xóa thành công');
+        return redirect()->route('trang_thai_don_hangs.index')->with('success','Xóa thành công!');
     }
 }

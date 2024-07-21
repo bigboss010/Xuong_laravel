@@ -1,4 +1,8 @@
-@extends('layouts.master')
+@extends('layouts.admins.master')
+
+@section('title')
+    {{ $title }}
+@endsection
 
 @section('content')
     <div class="d-sm-flex align-items-center justify-content-between mb-3">

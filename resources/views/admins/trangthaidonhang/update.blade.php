@@ -1,4 +1,9 @@
-@extends('master')
+@extends('layouts.admins.master')
+
+@section('title')
+    {{ $title }}
+@endsection
+
 @section('content')
     <div class="d-sm align-items-center justify-content-between mb-5">
         <div>
@@ -24,7 +29,7 @@
         </div>
         <br>
 
-        <input class="btn btn-outline-warning mr-2" type="submit" value="Update">
+        <input class="btn btn-outline-warning mr-2" type="submit" value="Sửa">
 
         <a href="{{ route('trang_thai_don_hangs.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
     </form>

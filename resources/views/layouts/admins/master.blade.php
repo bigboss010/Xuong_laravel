@@ -8,16 +8,17 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
-    @include('layouts.style')
+    <title>{{ $title }}</title>
+    @include('layouts.admins.style')
+    @yield('css')
 </head>
 
 <body id="page-top">
     <div id="wrapper">
-        @include('layouts.sidebar')
+        @include('layouts.admins.sidebar')
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
-                @include('layouts.nav')
+                @include('layouts.admins.nav')
                 <div class="container-fluid">
                     <div class="card shadow mb-4">
                         <div class="card-body">
@@ -28,10 +29,10 @@
                     </div>
                 </div>
             </div>
-            @include('layouts.footer')
+            @include('layouts.admins.footer')
         </div>
     </div>
-    @include('layouts.script')
+    @include('layouts.admins.script')
     @yield('js')
 </body>
 

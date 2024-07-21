@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admins;
 
+use App\Http\Controllers\Controller;
 use App\Models\ChiTietDonHang;
 use App\Models\GioHang;
 use App\Models\Pet;
@@ -37,7 +38,7 @@ class ChiTietDonHangController extends Controller
      */
     public function create()
     {
-        $title = "Add chi tiết đơn hàng";
+        $title = "Thêm mới chi tiết đơn hàng";
         $listP = $this->pets->getPet();
         $listGH = $this->gioHangs->getGioHang();
         return view('admins.chitietdonhang.create',[
@@ -56,7 +57,7 @@ class ChiTietDonHangController extends Controller
             $params = $request->post();
             unset($params['_token']);
             $this->ct_don_hang->createChiTietDonHang($params);
-            return redirect()->route('chi_tiet_don_hangs.index')->with('success','Thêm thành công');
+            return redirect()->route('chi_tiet_don_hangs.index')->with('success','Thêm mới thành công!');
         }
     }
 
@@ -76,7 +77,7 @@ class ChiTietDonHangController extends Controller
         $title = "Edit Chi tiết hóa đơn";
         $list = $this->ct_don_hang->find($id);
         if(!$list){
-            return redirect()->route('chi_tiet_don_hangs.index')->with('errors','Không tồn tại hóa đơn này');
+            return redirect()->route('chi_tiet_don_hangs.index')->with('errors','Không tồn tại hóa đơn này!');
         }
         $gioHangs = $gioHangs->getGioHang();
         $pets = $pets->getPet(); 
@@ -96,10 +97,10 @@ class ChiTietDonHangController extends Controller
         $list = $this->ct_don_hang->find($id);
         $data= $request->except('_token','_method');
         if(!$list){
-            return redirect()->route('chi_tiet_don_hangs.index')->with('errors','Không tồn tại hóa đơn này');
+            return redirect()->route('chi_tiet_don_hangs.index')->with('errors','Không tồn tại hóa đơn này!');
         }
         $list->updateChiTietDonHang($data,$id);
-        return redirect()->route('chi_tiet_don_hangs.index')->with('success','Update thành công');
+        return redirect()->route('chi_tiet_don_hangs.index')->with('success','Sửa thành công!');
     }
 
     /**
@@ -109,10 +110,10 @@ class ChiTietDonHangController extends Controller
     {
         $list = $this->ct_don_hang->find($id);
         if(!$list){
-            return redirect()->route('chi_tiet_don_hangs.index')->with('errors','Không tồn tại hóa đơn này');
+            return redirect()->route('chi_tiet_don_hangs.index')->with('errors','Không tồn tại hóa đơn này!');
         }
         $list->delete();
-        return redirect()->route('chi_tiet_don_hangs.index')->with('success','Xóa thành công');
+        return redirect()->route('chi_tiet_don_hangs.index')->with('success','Xóa thành công!');
 
     }
 }

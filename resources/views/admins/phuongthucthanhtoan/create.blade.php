@@ -1,4 +1,9 @@
-@extends('master')
+@extends('layouts.admins.master')
+
+@section('title')
+    {{ $title }}
+@endsection
+
 @section('content')
     <div class="d-sm align-items-center justify-content-between mb-5">
         <div>
@@ -19,12 +24,12 @@
         
 
         <div class="form-group" >
-            <label for="ten_phuong_thuc">Tên Phương thức thanh toán:</label>
+            <label for="ten_phuong_thuc">Tên phương thức thanh toán:</label>
             <input type="text" class="form-control" id="ten_phuong_thuc" name="ten_phuong_thuc">
         </div>
         <br>
 
-        <input class="btn btn-outline-warning mr-2" type="submit" value="Add">
+        <input class="btn btn-outline-success mr-2" type="submit" value="Thêm mới">
 
         <a href="{{ route('phuong_thuc_thanh_toans.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
     </form>
