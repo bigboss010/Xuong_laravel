@@ -1,4 +1,4 @@
-@extends('master')
+@extends('layouts.master')
 @section('content')
     <div class="d-sm align-items-center justify-content-between mb-5">
         <div>
