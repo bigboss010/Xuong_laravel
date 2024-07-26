@@ -1,4 +1,9 @@
-@extends('admins.master')
+@extends('layouts.admins.master')
+
+@section('title')
+    {{ $title }}
+@endsection
+
 @section('content')
     <div class="d-sm align-items-center justify-content-between mb-5">
         <div>
@@ -8,7 +13,7 @@
     <div class="card shadow mb-4">
         <div class="card-body">
 
-    <form action="{{route('users.update', $list->id)}}" class="mt-5" method="POST">
+    <form action="{{route('admin.users.update', $list->id)}}" class="mt-5" method="POST">
         {{-- Làm việc với form trong laravel --}}
 
         {{-- 
@@ -31,7 +36,7 @@
         <br>
 
         <div class="form-group" >
-            <label for="name">Tên Khách Hàng:</label>
+            <label for="name">Tên tài khoản:</label>
             <input type="text" class="form-control" id="name" name="name" value="{{$list->name}}">
         </div>
         <br>
@@ -49,17 +54,14 @@
         <br>
 
         <div class="form-group">
-            <label for="password">Mật Khẩu:</label>
+            <label for="password">Mật khẩu:</label>
             <input type="password" class="form-control" id="password" name="password" value="{{$list->password}}"> 
         </div>
         <br>
      
-        
-       
+        <input class="btn btn-outline-warning mr-2" type="submit" value="Sửa">
 
-        <input class="btn btn-outline-warning mr-2" type="submit" value="Add">
-
-        <a href="{{ route('users.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
+        <a href="{{ route('admin.users.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
     </form>
         </div>
     </div>

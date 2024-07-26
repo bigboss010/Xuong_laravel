@@ -1,4 +1,8 @@
-@extends('admins.master')
+@extends('layouts.admins.master')
+
+@section('title')
+    {{ $title }}
+@endsection
 
 @section('content')
     <div class="d-sm-flex align-items-center justify-content-between mb-3">
@@ -6,7 +10,7 @@
             <h1 class="h3 text-gray-800">{{ $title }}</h1>
         </div>
 
-        <a href="{{ route('gio-hang.create') }}" class="btn btn-primary btn-icon-split">
+        <a href="{{ route('admin.gio-hang.create') }}" class="btn btn-primary btn-icon-split">
             <span class="icon text-white-50">
                 <i class="fas fa-arrow-right"></i>
             </span>
@@ -59,7 +63,7 @@
 
 
                                     <td>
-                                        <a href="{{ route('gio-hang.edit', $gioHang->id) }}"
+                                        <a href="{{ route('admin.gio-hang.edit', $gioHang->id) }}"
                                             class="btn btn-warning btn-icon-split">
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-exclamation-triangle"></i>
@@ -67,7 +71,7 @@
                                             <span class="text">Sửa</span>
                                         </a>
 
-                                        <form action="{{ route('gio-hang.destroy', $gioHang->id) }}" method="POST"
+                                        <form action="{{ route('admin.gio-hang.destroy', $gioHang->id) }}" method="POST"
                                             style="display: inline;">
                                             @csrf
                                             @method('DELETE')

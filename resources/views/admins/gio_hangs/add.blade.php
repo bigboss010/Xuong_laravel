@@ -1,4 +1,8 @@
-@extends('admins.master')
+@extends('layouts.admins.master')
+
+@section('title')
+    {{ $title }}
+@endsection
 
 @section('content')
     <div class="d-sm-flex align-items-center justify-content-between mb-3">
@@ -9,7 +13,7 @@
 
     <div class="card shadow mb-4">
         <div class="card-body">
-            <form action="{{ route('gio-hang.store') }}" method="POST" class="m-3">
+            <form action="{{ route('admin.gio-hang.store') }}" method="POST" class="m-3">
                 @csrf
                 <div class="form-group">
                     <label for="user_id">Tên tài khoản:</label>
@@ -24,7 +28,7 @@
                 <br>
                 <button type="submit" class="btn btn-outline-success mr-2">Thêm mới</button>
 
-                <a href="{{ route('gio-hang.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
+                <a href="{{ route('admin.gio-hang.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
             </form>
         </div>
     </div>

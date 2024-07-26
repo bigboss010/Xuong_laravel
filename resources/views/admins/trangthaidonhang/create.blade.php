@@ -1,4 +1,9 @@
-@extends('admins.master')
+@extends('layouts.admins.master')
+
+@section('title')
+    {{ $title }}
+@endsection
+
 @section('content')
     <div class="d-sm align-items-center justify-content-between mb-5">
         <div>
@@ -7,7 +12,7 @@
     </div>
   
 
-    <form action="{{route('trang_thai_don_hangs.store')}}" class="mt-5" method="POST">
+    <form action="{{route('admin.trang_thai_don_hangs.store')}}" class="mt-5" method="POST">
         {{-- Làm việc với form trong laravel --}}
 
         {{-- 
@@ -24,8 +29,8 @@
         </div>
         <br>
 
-        <input class="btn btn-outline-warning mr-2" type="submit" value="Add">
+        <input class="btn btn-outline-success mr-2" type="submit" value="Thêm mới">
 
-        <a href="{{ route('trang_thai_don_hangs.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
+        <a href="{{ route('admin.trang_thai_don_hangs.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
     </form>
 @endsection

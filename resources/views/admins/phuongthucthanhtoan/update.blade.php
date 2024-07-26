@@ -1,4 +1,9 @@
-@extends('admins.master')
+@extends('layouts.admins.master')
+
+@section('title')
+    {{ $title }}
+@endsection
+
 @section('content')
     <div class="d-sm align-items-center justify-content-between mb-5">
         <div>
@@ -7,7 +12,7 @@
     </div>
   
 
-    <form action="{{route('phuong_thuc_thanh_toans.update',$list->id )}}" class="mt-5" method="POST">
+    <form action="{{route('admin.phuong_thuc_thanh_toans.update',$list->id )}}" class="mt-5" method="POST">
         {{-- Làm việc với form trong laravel --}}
 
         {{-- 
@@ -19,13 +24,13 @@
         
 
         <div class="form-group" >
-            <label for="ten_phuong_thuc">Tên Phương thức thanh toán:</label>
+            <label for="ten_phuong_thuc">Tên phương thức thanh toán:</label>
             <input type="text" class="form-control" id="ten_phuong_thuc" name="ten_phuong_thuc" value="{{$list->ten_phuong_thuc}}">
         </div>
         <br>
 
-        <input class="btn btn-outline-warning mr-2" type="submit" value="Update">
+        <input class="btn btn-outline-warning mr-2" type="submit" value="Sửa">
 
-        <a href="{{ route('phuong_thuc_thanh_toans.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
+        <a href="{{ route('admin.phuong_thuc_thanh_toans.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
     </form>
 @endsection
