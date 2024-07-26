@@ -1,4 +1,9 @@
-@extends('admins.master')
+@extends('layouts.admins.master')
+
+@section('title')
+    {{ $title }}
+@endsection
+
 @section('content')
     <div class="d-sm align-items-center justify-content-between mb-5">
         <div>
@@ -7,7 +12,7 @@
     </div>
   
 
-    <form action="{{route('don_hangs.store')}}" class="mt-5" method="POST">
+    <form action="{{route('admin.don_hangs.store')}}" class="mt-5" method="POST">
         {{-- Làm việc với form trong laravel --}}
 
         {{-- 
@@ -25,11 +30,11 @@
         <br>
        
         <div class="form-group" >
-            <label for="name">ID tài khoản::</label>
-            <select name="tai_khoan_id" class="form-control" id="">
+            <label for="user_id">Tài khoản::</label>
+            <select name="user_id" class="form-control" id="user_id">
                 <option value="">Mời chọn</option>
                 @foreach ($list as $index=>$value)  
-                    <option value="{{ $value->id }}" >{{ $value->id }} - {{ $value->name }}</option>
+                    <option value="{{ $value->id }}" >{{ $value->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -47,7 +52,7 @@
         <br>
         <div class="form-group" >
             <label for="so_dien_thoai_nguoi_nhan">Số điện thoại:</label>
-            <input type="number" class="form-control" id="so_dien_thoai_nguoi_nhan" name="so_dien_thoai_nguoi_nhan">
+            <input type="text" class="form-control" id="so_dien_thoai_nguoi_nhan" name="so_dien_thoai_nguoi_nhan">
         </div>
         <br>
         <div class="form-group" >
@@ -94,8 +99,8 @@
         </div>
         <br>
 
-        <input class="btn btn-outline-warning mr-2" type="submit" value="Add">
+        <input class="btn btn-outline-success mr-2" type="submit" value="Thêm mới">
 
-        <a href="{{ route('don_hangs.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
+        <a href="{{ route('admin.don_hangs.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
     </form>
 @endsection

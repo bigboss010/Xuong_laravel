@@ -1,4 +1,8 @@
-@extends('admins.master')
+@extends('layouts.admins.master')
+
+@section('title')
+    {{ $title }}
+@endsection
 
 @section('content')
     <div class="d-sm-flex align-items-center justify-content-between mb-3">
@@ -9,7 +13,7 @@
 
     <div class="card shadow mb-4">
         <div class="card-body">
-            <form action="{{ route('danh-muc.update', $danhMuc->id) }}" method="POST" class="m-3"
+            <form action="{{ route('admin.danh-muc.update', $danhMuc->id) }}" method="POST" class="m-3"
                 enctype="multipart/form-data">
                 @method('put')
                 @csrf
@@ -35,7 +39,7 @@
                 <br>
                 <button type="submit" class="btn btn-outline-success mr-2">Sửa</button>
 
-                <a href="{{ route('danh-muc.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
+                <a href="{{ route('admin.danh-muc.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
             </form>
         </div>
     </div>

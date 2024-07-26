@@ -25,7 +25,7 @@ class UserController extends Controller
     public function index()
     {
         $listUsers = $this->users->getList();
-        $title ="Danh sách user";
+        $title ="Danh sách tài khoản";
         return view('admins.khachhang.index',compact('listUsers','title'));
     }
 
@@ -34,7 +34,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $title ="Add user";
+        $title ="Thêm mới tài khoản";
         $list = $this->chuc_vu->getList();
 
         return view('admins.khachhang.create',compact('title','list'));
@@ -69,7 +69,7 @@ class UserController extends Controller
         $listCV = $this->chuc_vu->getList();
         $list= DB::table('users')->find($id);
         if(!$list){
-            return redirect()->route('users.index');
+            return redirect()->route('admin.users.index');
         }
         return view('admins.khachhang.update',[
             'title'=>$title,
@@ -86,7 +86,7 @@ class UserController extends Controller
         if ($request->isMethod('PUT')) {
             $data = $request->except('_token', '_method');
             $this->users->updateUser($data, $id);
-            return redirect()->route('users.index')->with('success','Sửa thành công');
+            return redirect()->route('admin.users.index')->with('success','Sửa thành công!');
         }
     }
 
@@ -100,7 +100,7 @@ class UserController extends Controller
             return redirect()->route('users.index');
         }
         $this->users->deleteUser($id);
-        return redirect()->route('users.index')->with('success','Xóa thành công');
+        return redirect()->route('admin.users.index')->with('success','Xóa thành công!');
         
     }
 }
