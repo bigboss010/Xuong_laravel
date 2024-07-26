@@ -46,6 +46,7 @@
                                         <button type="submit"
                                             class="btn btn-danger" onclick="return confirm('Bạn chắc chắn muốn xóa ?')">Xóa</button></a>
                                     </form>
+                                    <a href="" class="eye">chi tiet</a>
                                 </td>
                             </tr>
                         @endforeach
