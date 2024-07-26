@@ -56,7 +56,7 @@ class BinhLuanController extends Controller
 
             ];
             $this->binhLuans->createBL($data);
-            return redirect()->route('binh-luan.index')->with('success', 'Thêm mới thành công!');
+            return redirect()->route('admin.binh-luan.index')->with('success', 'Thêm mới thành công!');
         }
     }
 
@@ -98,7 +98,7 @@ class BinhLuanController extends Controller
                 'updated_at' => Carbon::now()
             ];
             $this->binhLuans->updateBL($data, $id);
-            return redirect()->route('binh-luan.index')->with('success', 'Sửa thành công!');
+            return redirect()->route('admin.binh-luan.index')->with('success', 'Sửa thành công!');
         }
         
     }
@@ -113,6 +113,6 @@ class BinhLuanController extends Controller
             return redirect()->route('binh-luan.index')->with('errors', 'Bình luận này không tồn tại!');
         }
         $binhLuan->delete();
-        return redirect()->route('binh-luan.index')->with('success', 'Xóa thành công!');
+        return redirect()->route('admin.binh-luan.index')->with('success', 'Xóa thành công!');
     }
 }

@@ -13,7 +13,7 @@
 
     <div class="card shadow mb-4">
         <div class="card-body">
-            <form action="{{ route('gio-hang.update', $gioHang->id) }}" method="POST" class="m-3">
+            <form action="{{ route('admin.gio-hang.update', $gioHang->id) }}" method="POST" class="m-3">
                 @method('put')
                 @csrf
                 <div class="form-group">
@@ -30,7 +30,7 @@
                 <br>
                 <button type="submit" class="btn btn-outline-success mr-2">Sửa</button>
 
-                <a href="{{ route('gio-hang.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
+                <a href="{{ route('admin.gio-hang.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
             </form>
         </div>
     </div>

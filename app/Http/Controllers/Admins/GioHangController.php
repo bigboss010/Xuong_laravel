@@ -48,7 +48,7 @@ class GioHangController extends Controller
                 'updated_at' => Carbon::now()
             ];
             $this->gioHangs->createGioHang($data);
-            return redirect()->route('gio-hang.index')->with('success', 'Thêm mới thành công!');
+            return redirect()->route('admin.gio-hang.index')->with('success', 'Thêm mới thành công!');
         }
     }
 
@@ -68,7 +68,7 @@ class GioHangController extends Controller
         $title = 'Sửa giỏ hàng';
         $gioHang = $this->gioHangs->find($id);
         if(!$gioHang){
-            return redirect()->route('gio-hang.index')->with('errors', 'Giỏ hàng này không tồn tại!');
+            return redirect()->route('admin.gio-hang.index')->with('errors', 'Giỏ hàng này không tồn tại!');
         }
         $users = $users->getList();
         return view('admins.gio_hangs.update', compact('title', 'gioHang', 'users'));
@@ -85,7 +85,7 @@ class GioHangController extends Controller
                 'updated_at' => Carbon::now()
             ];
             $this->gioHangs->updateGioHang($data, $id);
-            return redirect()->route('gio-hang.index')->with('success', 'Sửa thành công!');
+            return redirect()->route('admin.gio-hang.index')->with('success', 'Sửa thành công!');
         }
     }
 
@@ -96,9 +96,9 @@ class GioHangController extends Controller
     {
         $gioHang = $this->gioHangs->find($id);
         if(!$gioHang){
-            return redirect()->route('gio-hang.index')->with('errors', 'Giỏ hàng này không tồn tại!');
+            return redirect()->route('admin.gio-hang.index')->with('errors', 'Giỏ hàng này không tồn tại!');
         }
         $gioHang->delete();
-        return redirect()->route('gio-hang.index')->with('success', 'Xóa thành công!');
+        return redirect()->route('admin.gio-hang.index')->with('success', 'Xóa thành công!');
     }
 }

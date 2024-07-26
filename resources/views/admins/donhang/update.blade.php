@@ -12,7 +12,7 @@
     </div>
   
 
-    <form action="{{route('don_hangs.update', $list->id)}}" class="mt-5" method="POST">
+    <form action="{{route('admin.don_hangs.update', $list->id)}}" class="mt-5" method="POST">
         {{-- Làm việc với form trong laravel --}}
 
         {{-- 
@@ -105,6 +105,6 @@
 
         <input class="btn btn-outline-warning mr-2" type="submit" value="Sửa">
 
-        <a href="{{ route('don_hangs.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
+        <a href="{{ route('admin.don_hangs.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
     </form>
 @endsection

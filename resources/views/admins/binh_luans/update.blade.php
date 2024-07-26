@@ -13,7 +13,7 @@
 
     <div class="card shadow mb-4">
         <div class="card-body">
-            <form action="{{ route('binh-luan.update', $binhLuan ->id) }}" method="POST" class="m-3">
+            <form action="{{ route('admin.binh-luan.update', $binhLuan ->id) }}" method="POST" class="m-3">
                 @method('put')
                 @csrf
                 <div class="form-group">
@@ -53,7 +53,7 @@
                 <br>
                 <button type="submit" class="btn btn-outline-success mr-2">Sửa</button>
 
-                <a href="{{ route('binh-luan.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
+                <a href="{{ route('admin.binh-luan.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
             </form>
         </div>
     </div>

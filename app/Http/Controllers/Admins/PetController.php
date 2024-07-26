@@ -43,7 +43,7 @@ class PetController extends Controller
         if ($request->isMethod('POST')) {
             $data = $request->except('_token');
             $this->pets->createPet($data);
-            return redirect()->route('pet.index')->with('success', 'Thêm mới thành công!');
+            return redirect()->route('admin.pet.index')->with('success', 'Thêm mới thành công!');
         }
     }
 
@@ -64,7 +64,7 @@ class PetController extends Controller
         $danhMucs = $danhMuc->getDanhMuc();
         $pet = $this->pets->find($id);
         if (!$pet) {
-            return redirect()->route('pet.index')->with('errors', 'Pet này không tồn tại!');
+            return redirect()->route('admin.pet.index')->with('errors', 'Pet này không tồn tại!');
         }
         return view('admins.pets.update', compact('danhMucs', 'pet', 'title'));
     }
@@ -77,7 +77,7 @@ class PetController extends Controller
         if ($request->isMethod('PUT')) {
             $data = $request->except('_token', '_method');
             $this->pets->updatePet($data, $id);
-            return redirect()->route('pet.index')->with('success', 'Sửa thành công!');
+            return redirect()->route('admin.pet.index')->with('success', 'Sửa thành công!');
         }
     }
 
@@ -88,9 +88,9 @@ class PetController extends Controller
     {
         $pets = $this->pets->find($id);
         if (!$pets) {
-            return redirect()->route('pet.index')->with('errors', 'Pet này không tồn tại!');
+            return redirect()->route('admin.pet.index')->with('errors', 'Pet này không tồn tại!');
         }
         $pets->delete();
-        return redirect()->route('pet.index')->with('success', 'Xóa thành công!');
+        return redirect()->route('admin.pet.index')->with('success', 'Xóa thành công!');
     }
 }

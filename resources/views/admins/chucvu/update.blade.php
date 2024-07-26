@@ -12,7 +12,7 @@
    
   
 
-    <form action="{{route('chuc_vus.update', $list->id)}}"  method="POST">
+    <form action="{{route('admin.chuc_vus.update', $list->id)}}"  method="POST">
         {{-- Làm việc với form trong laravel --}}
 
         {{-- 
@@ -29,7 +29,7 @@
         <br>
         <input class="btn btn-outline-warning mr-2" type="submit" value="Sửa">
 
-        <a href="{{ route('chuc_vus.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
+        <a href="{{ route('admin.chuc_vus.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
     </form>
 </div>
 @endsection

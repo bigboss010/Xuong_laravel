@@ -10,7 +10,7 @@
             <h1 class="h3 text-gray-800">{{ $title }}</h1>
         </div>
 
-        <a href="{{ route('pet.create') }}" class="btn btn-primary btn-icon-split">
+        <a href="{{ route('admin.pet.create') }}" class="btn btn-primary btn-icon-split">
             <span class="icon text-white-50">
                 <i class="fas fa-arrow-right"></i>
             </span>
@@ -74,14 +74,14 @@
                                     <td>{{ $pet->trang_thai }}</td>
 
                                     <td>
-                                        <a href="{{ route('pet.edit', $pet->id) }}" class="btn btn-warning btn-icon-split">
+                                        <a href="{{ route('admin.pet.edit', $pet->id) }}" class="btn btn-warning btn-icon-split">
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-exclamation-triangle"></i>
                                             </span>
                                             <span class="text">Sửa</span>
                                         </a>
 
-                                        <form action="{{ route('pet.destroy', $pet->id) }}" method="POST"
+                                        <form action="{{ route('admin.pet.destroy', $pet->id) }}" method="POST"
                                             style="display: inline;">
                                             @csrf
                                             @method('DELETE')

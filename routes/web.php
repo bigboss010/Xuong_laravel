@@ -13,6 +13,7 @@ use App\Http\Controllers\Admins\PetController;
 use App\Http\Controllers\Admins\PhuongThucThanhToanController;
 use App\Http\Controllers\Admins\ChiTietDonHangController;
 use App\Http\Controllers\Admins\DashBoardController;
+use App\Http\Controllers\AuthenController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,17 +26,34 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/login', [AuthenController::class, 'login'])->name('login');
+Route::post('/login', [AuthenController::class, 'postLogin'])->name('postLogin');
 
-Route::resource('/', DashBoardController::class);
- Route::resource('users', UserController::class);
- Route::resource('chuc_vus', ChucVuController::class);
- Route::resource('trang_thai_don_hangs', TrangThaiDonHangController::class);
- Route::resource('phuong_thuc_thanh_toans', PhuongThucThanhToanController::class);
- Route::resource('don_hangs', DonHangController::class);
- Route::resource('chi_tiet_don_hangs', ChiTietDonHangController::class);
-Route::resource('danh-muc', DanhMucController::class);
-Route::resource('pet', PetController::class);
-Route::resource('anh-pet', HinhAnhPetController::class);
-Route::resource('gio-hang', GioHangController::class);
-Route::resource('chi-tiet-gio-hang', CTGioHangController::class);
-Route::resource('binh-luan', BinhLuanController::class);
+Route::group([
+    'prefix' => 'admin',
+    'as' => 'admin.'
+], function () {
+    Route::resource('/', DashBoardController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('chuc_vus', ChucVuController::class);
+    Route::resource('trang_thai_don_hangs', TrangThaiDonHangController::class);
+    Route::resource('phuong_thuc_thanh_toans', PhuongThucThanhToanController::class);
+    Route::resource('don_hangs', DonHangController::class);
+    Route::resource('chi_tiet_don_hangs', ChiTietDonHangController::class);
+    Route::resource('danh-muc', DanhMucController::class);
+    Route::resource('pet', PetController::class);
+    Route::resource('anh-pet', HinhAnhPetController::class);
+    Route::resource('gio-hang', GioHangController::class);
+    Route::resource('chi-tiet-gio-hang', CTGioHangController::class);
+    Route::resource('binh-luan', BinhLuanController::class);
+});
+
+Route::group([
+    'prefix' => '/',
+    'as' => '/.'
+], function() {
+    Route::get('/', function () {return view('layouts.clients.index');})->name('index');
+});
+
+
+

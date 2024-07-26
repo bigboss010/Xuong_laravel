@@ -10,7 +10,7 @@
             <h1 class="h3 text-gray-800">{{ $title }}</h1>
         </div>
 
-        <a href="{{ route('binh-luan.create') }}" class="btn btn-primary btn-icon-split">
+        <a href="{{ route('admin.binh-luan.create') }}" class="btn btn-primary btn-icon-split">
             <span class="icon text-white-50">
                 <i class="fas fa-arrow-right"></i>
             </span>
@@ -71,7 +71,7 @@
                                     <td>{{ (new DateTime($binhLuan->updated_at))->format('d/m/Y H:i:s') }}</td>
 
                                     <td>
-                                        <a href="{{ route('binh-luan.edit', $binhLuan->id) }}"
+                                        <a href="{{ route('admin.binh-luan.edit', $binhLuan->id) }}"
                                             class="btn btn-warning btn-icon-split">
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-exclamation-triangle"></i>
@@ -79,7 +79,7 @@
                                             <span class="text">Sửa</span>
                                         </a>
 
-                                        <form action="{{ route('binh-luan.destroy', $binhLuan->id) }}" method="POST"
+                                        <form action="{{ route('admin.binh-luan.destroy', $binhLuan->id) }}" method="POST"
                                             style="display: inline;">
                                             @csrf
                                             @method('DELETE')

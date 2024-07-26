@@ -12,7 +12,7 @@
     </div>
   
 
-    <form action="{{route('phuong_thuc_thanh_toans.store')}}" class="mt-5" method="POST">
+    <form action="{{route('admin.phuong_thuc_thanh_toans.store')}}" class="mt-5" method="POST">
         {{-- Làm việc với form trong laravel --}}
 
         {{-- 
@@ -31,6 +31,6 @@
 
         <input class="btn btn-outline-success mr-2" type="submit" value="Thêm mới">
 
-        <a href="{{ route('phuong_thuc_thanh_toans.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
+        <a href="{{ route('admin.phuong_thuc_thanh_toans.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
     </form>
 @endsection

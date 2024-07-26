@@ -36,12 +36,12 @@
         <div id="pet" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Options:</h6>
-                <a class="collapse-item" href="{{ route('danh-muc.index')}}">Danh mục</a>
-                <a class="collapse-item" href="{{ route('pet.index')}}">Pets</a>
-                <a class="collapse-item" href="{{ route('anh-pet.index')}}">Ảnh</a>
-                <a class="collapse-item" href="{{ route('gio-hang.index')}}">Giỏ hàng</a>
-                <a class="collapse-item" href="{{ route('chi-tiet-gio-hang.index')}}">Chi tiết giỏ hàng</a>
-                <a class="collapse-item" href="{{ route('binh-luan.index')}}">Bình luận</a>
+                <a class="collapse-item" href="{{ route('admin.danh-muc.index')}}">Danh mục</a>
+                <a class="collapse-item" href="{{ route('admin.pet.index')}}">Pets</a>
+                <a class="collapse-item" href="{{ route('admin.anh-pet.index')}}">Ảnh</a>
+                <a class="collapse-item" href="{{ route('admin.gio-hang.index')}}">Giỏ hàng</a>
+                <a class="collapse-item" href="{{ route('admin.chi-tiet-gio-hang.index')}}">Chi tiết giỏ hàng</a>
+                <a class="collapse-item" href="{{ route('admin.binh-luan.index')}}">Bình luận</a>
             </div>
         </div>
     </li>
@@ -64,12 +64,12 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
          
-                <a class="collapse-item" href="{{route('users.index')}}">User</a>
-                <a class="collapse-item" href="{{route('chuc_vus.index')}}">Chức vụ</a>
-                <a class="collapse-item" href="{{route('trang_thai_don_hangs.index')}}">Trạng thái đơn hàng</a>
-                <a class="collapse-item" href="{{route('phuong_thuc_thanh_toans.index')}}">Phương thức thanh toán</a>
-                <a class="collapse-item" href="{{route('don_hangs.index')}}">Đơn hàng</a>
-                <a class="collapse-item" href="{{route('chi_tiet_don_hangs.index')}}">Chi tiết đơn hàng</a>
+                <a class="collapse-item" href="{{route('admin.users.index')}}">User</a>
+                <a class="collapse-item" href="{{route('admin.chuc_vus.index')}}">Chức vụ</a>
+                <a class="collapse-item" href="{{route('admin.trang_thai_don_hangs.index')}}">Trạng thái đơn hàng</a>
+                <a class="collapse-item" href="{{route('admin.phuong_thuc_thanh_toans.index')}}">Phương thức thanh toán</a>
+                <a class="collapse-item" href="{{route('admin.don_hangs.index')}}">Đơn hàng</a>
+                <a class="collapse-item" href="{{route('admin.chi_tiet_don_hangs.index')}}">Chi tiết đơn hàng</a>
             </div>
         </div>
     </li>

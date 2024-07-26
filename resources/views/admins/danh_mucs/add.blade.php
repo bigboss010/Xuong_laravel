@@ -13,7 +13,7 @@
 
     <div class="card shadow mb-4">
         <div class="card-body">
-            <form action="{{ route('danh-muc.store') }}" method="POST" class="m-3" enctype="multipart/form-data">
+            <form action="{{ route('admin.danh-muc.store') }}" method="POST" class="m-3" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="hinh_anh">Hình ảnh:</label>
@@ -36,7 +36,7 @@
                 <br>
                 <button type="submit" class="btn btn-outline-success mr-2">Thêm mới</button>
 
-                <a href="{{ route('danh-muc.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
+                <a href="{{ route('admin.danh-muc.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
             </form>
         </div>
     </div>

@@ -18,7 +18,7 @@
             <h1 class="h3 text-gray-800">{{ $title }}</h1>
         </div>
 
-        <a href="{{ route('users.create') }}" class="btn btn-primary btn-icon-split">
+        <a href="{{ route('admin.users.create') }}" class="btn btn-primary btn-icon-split">
             <span class="icon text-white-50">
                 <i class="fas fa-arrow-right"></i>
             </span>
@@ -73,7 +73,7 @@
                                     <td>{{ $value->ten_chuc_vu }} </td>
 
                                     <td>
-                                        <a href="{{ route('users.edit', $value->id) }}"
+                                        <a href="{{ route('admin.users.edit', $value->id) }}"
                                             class="btn btn-warning btn-icon-split">
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-exclamation-triangle"></i>
@@ -81,7 +81,7 @@
                                             <span class="text">Sửa</span>
                                         </a>
 
-                                        <form action="{{ route('users.destroy', $value->id) }}" method="POST"
+                                        <form action="{{ route('admin.users.destroy', $value->id) }}" method="POST"
                                             style="display: inline;">
                                             @csrf
                                             @method('DELETE')

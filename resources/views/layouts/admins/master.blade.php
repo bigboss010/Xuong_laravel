@@ -9,16 +9,16 @@
     <meta name="author" content="">
 
     <title>{{ $title }}</title>
-    @include('layouts.admins.style')
+    @include('layouts.admins.blocks.style')
     @yield('css')
 </head>
 
 <body id="page-top">
     <div id="wrapper">
-        @include('layouts.admins.sidebar')
+        @include('layouts.admins.blocks.sidebar')
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
-                @include('layouts.admins.nav')
+                @include('layouts.admins.blocks.nav')
                 <div class="container-fluid">
                     <div class="card shadow mb-4">
                         <div class="card-body">
@@ -29,10 +29,10 @@
                     </div>
                 </div>
             </div>
-            @include('layouts.admins.footer')
+            @include('layouts.admins.blocks.footer')
         </div>
     </div>
-    @include('layouts.admins.script')
+    @include('layouts.admins.blocks.script')
     @yield('js')
 </body>
 

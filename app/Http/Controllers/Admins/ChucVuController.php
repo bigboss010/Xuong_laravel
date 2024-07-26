@@ -45,7 +45,7 @@ class ChucVuController extends Controller
             unset($params['_token']);
 
             $this->chuc_vu->createChucVu($params);
-            return redirect()->route('chuc_vus.index')->with('success','Thêm mới thành công!');
+            return redirect()->route('admin.chuc_vus.index')->with('success','Thêm mới thành công!');
         }
     }
 
@@ -65,7 +65,7 @@ class ChucVuController extends Controller
         $list = $this->chuc_vu ->find($id);
         $title = "Edit chức vụ";
         if(!$list){
-            return redirect()->route('chuc_vus.index')->with('errors','Không tồn tại chức vụ này!');
+            return redirect()->route('admin.chuc_vus.index')->with('errors','Không tồn tại chức vụ này!');
         }
         return view('admins.chucvu.update',compact('title','list'));
     }
@@ -77,13 +77,13 @@ class ChucVuController extends Controller
     {
         $list= $this->chuc_vu ->find($id);
         if(!$list){
-            return redirect()->route('chuc_vus.index');
+            return redirect()->route('admin.chuc_vus.index');
         }
         $dataUpdate = [
             'ten_chuc_vu' => $request->ten_chuc_vu,
         ];
         $this->chuc_vu->updateChucVu($dataUpdate,$id);
-        return redirect()->route('chuc_vus.index')->with('success','Sửa chức vụ thành công!');
+        return redirect()->route('admin.chuc_vus.index')->with('success','Sửa chức vụ thành công!');
     }
 
     /**
@@ -93,9 +93,9 @@ class ChucVuController extends Controller
     {
         $list= $this->chuc_vu ->find($id);
         if(!$list){
-            return redirect()->route('chuc_vus.index');
+            return redirect()->route('admin.chuc_vus.index');
         }
         $list->delete();
-        return redirect()->route('chuc_vus.index')->with('success','Xóa thành công!');
+        return redirect()->route('admin.chuc_vus.index')->with('success','Xóa thành công!');
     }
 }

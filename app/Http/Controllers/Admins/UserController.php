@@ -49,7 +49,7 @@ class UserController extends Controller
             $params = $request ->post();
             unset($params['_token']);
             $this->users ->createUser($params);
-            return redirect()->route('users.index')->with('success','Thêm mới thành công!');
+            return redirect()->route('admin.users.index')->with('success','Thêm mới thành công!');
         }
     }
 
@@ -70,7 +70,7 @@ class UserController extends Controller
         $listCV = $this->chuc_vu->getList();
         $list= DB::table('users')->find($id);
         if(!$list){
-            return redirect()->route('users.index');
+            return redirect()->route('admin.users.index');
         }
         return view('admins.khachhang.update',[
             'title'=>$title,
@@ -87,7 +87,7 @@ class UserController extends Controller
         if ($request->isMethod('PUT')) {
             $data = $request->except('_token', '_method');
             $this->users->updateUser($data, $id);
-            return redirect()->route('users.index')->with('success','Sửa thành công!');
+            return redirect()->route('admin.users.index')->with('success','Sửa thành công!');
         }
     }
 
@@ -101,7 +101,7 @@ class UserController extends Controller
             return redirect()->route('users.index');
         }
         $this->users->deleteUser($id);
-        return redirect()->route('users.index')->with('success','Xóa thành công!');
+        return redirect()->route('admin.users.index')->with('success','Xóa thành công!');
         
     }
 }

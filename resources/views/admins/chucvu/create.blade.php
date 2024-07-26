@@ -12,7 +12,7 @@
    
   
 
-    <form action="{{route('chuc_vus.store')}}"  method="POST">
+    <form action="{{route('admin.chuc_vus.store')}}"  method="POST">
         {{-- Làm việc với form trong laravel --}}
 
         {{-- 
@@ -29,7 +29,7 @@
         <br>
         <input class="btn btn-outline-success mr-2" type="submit" value="Thêm mới">
 
-        <a href="{{ route('chuc_vus.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
+        <a href="{{ route('admin.chuc_vus.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
     </form>
 </div>
 @endsection

@@ -10,7 +10,7 @@
             <h1 class="h3 text-gray-800">{{ $title }}</h1>
         </div>
 
-        <a href="{{ route('chi_tiet_don_hangs.create') }}" class="btn btn-primary btn-icon-split">
+        <a href="{{ route('admin.chi_tiet_don_hangs.create') }}" class="btn btn-primary btn-icon-split">
             <span class="icon text-white-50">
                 <i class="fas fa-arrow-right"></i>
             </span>
@@ -65,7 +65,7 @@
                                     <td>{{ $value->thanh_tien = $value->so_luong * $value->gia }} </td>
 
                                     <td>
-                                        <a href="{{ route('chi_tiet_don_hangs.edit', $value->id) }}"
+                                        <a href="{{ route('admin.chi_tiet_don_hangs.edit', $value->id) }}"
                                             class="btn btn-warning btn-icon-split">
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-exclamation-triangle"></i>
@@ -73,7 +73,7 @@
                                             <span class="text">Sửa</span>
                                         </a>
 
-                                        <form action="{{ route('chi_tiet_don_hangs.destroy', $value->id) }}"
+                                        <form action="{{ route('admin.chi_tiet_don_hangs.destroy', $value->id) }}"
                                             method="POST" style="display: inline;">
                                             @csrf
                                             @method('DELETE')

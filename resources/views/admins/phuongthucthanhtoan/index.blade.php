@@ -10,7 +10,7 @@
             <h1 class="h3 text-gray-800">{{ $title }}</h1>
         </div>
 
-        <a href="{{ route('phuong_thuc_thanh_toans.create') }}" class="btn btn-primary btn-icon-split">
+        <a href="{{ route('admin.phuong_thuc_thanh_toans.create') }}" class="btn btn-primary btn-icon-split">
             <span class="icon text-white-50">
                 <i class="fas fa-arrow-right"></i>
             </span>
@@ -54,7 +54,7 @@
 
 
                                     <td>
-                                        <a href="{{ route('phuong_thuc_thanh_toans.edit', $value->id) }}"
+                                        <a href="{{ route('admin.phuong_thuc_thanh_toans.edit', $value->id) }}"
                                             class="btn btn-warning btn-icon-split">
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-exclamation-triangle"></i>
@@ -62,7 +62,7 @@
                                             <span class="text">Sửa</span>
                                         </a>
 
-                                        <form action="{{ route('phuong_thuc_thanh_toans.destroy', $value->id) }}"
+                                        <form action="{{ route('admin.phuong_thuc_thanh_toans.destroy', $value->id) }}"
                                             method="POST" style="display: inline;">
                                             @csrf
                                             @method('DELETE')
