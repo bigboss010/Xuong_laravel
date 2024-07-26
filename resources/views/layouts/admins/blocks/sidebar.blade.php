@@ -39,8 +39,8 @@
                 <a class="collapse-item" href="{{ route('admin.danh-muc.index')}}">Danh mục</a>
                 <a class="collapse-item" href="{{ route('admin.pet.index')}}">Pets</a>
                 <a class="collapse-item" href="{{ route('admin.anh-pet.index')}}">Ảnh</a>
-                <a class="collapse-item" href="{{ route('admin.gio-hang.index')}}">Giỏ hàng</a>
-                <a class="collapse-item" href="{{ route('admin.chi-tiet-gio-hang.index')}}">Chi tiết giỏ hàng</a>
+                {{-- <a class="collapse-item" href="{{ route('admin.gio-hang.index')}}">Giỏ hàng</a>
+                <a class="collapse-item" href="{{ route('admin.chi-tiet-gio-hang.index')}}">Chi tiết giỏ hàng</a> --}}
                 <a class="collapse-item" href="{{ route('admin.binh-luan.index')}}">Bình luận</a>
             </div>
         </div>
@@ -69,7 +69,7 @@
                 <a class="collapse-item" href="{{route('admin.trang_thai_don_hangs.index')}}">Trạng thái đơn hàng</a>
                 <a class="collapse-item" href="{{route('admin.phuong_thuc_thanh_toans.index')}}">Phương thức thanh toán</a>
                 <a class="collapse-item" href="{{route('admin.don_hangs.index')}}">Đơn hàng</a>
-                <a class="collapse-item" href="{{route('admin.chi_tiet_don_hangs.index')}}">Chi tiết đơn hàng</a>
+                {{-- <a class="collapse-item" href="{{route('admin.chi_tiet_don_hangs.index')}}">Chi tiết đơn hàng</a> --}}
             </div>
         </div>
     </li>

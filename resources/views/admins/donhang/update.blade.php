@@ -23,11 +23,11 @@
         @method('put')
         
 
-        <div class="form-group" >
+        {{-- <div class="form-group" >
             <label for="ma_don_hang">Mã Đơn Hàng:</label>
             <input type="text" class="form-control" id="ma_don_hang" name="ma_don_hang" value="{{$list->ma_don_hang}}">
         </div>
-        <br>
+        <br> --}}
        
         {{-- <div class="form-group" >
             <label for="name">ID tài khoản::</label>
@@ -41,7 +41,7 @@
         </div>
         <br> --}}
 
-        <div class="form-group" >
+        {{-- <div class="form-group" >
             <label for="ten_nguoi_nhan">Tên Người nhận:</label>
             <input type="text" class="form-control" id="ten_nguoi_nhan" name="ten_nguoi_nhan" value="{{$list->ten_nguoi_nhan}}">
         </div>
@@ -78,7 +78,7 @@
             <input type="text" class="form-control" id="ghi_chu" name="ghi_chu" value="{{$list->ghi_chu}}">
         </div>
         <br>
-        
+         --}}
         {{-- <div class="form-group" >
             <label for="name">Phương thức thanh toán:</label>
             <select name="phuong_thuc_thanh_toan_id" class="form-control" id="">

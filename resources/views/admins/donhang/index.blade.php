@@ -33,17 +33,17 @@
                 @if (count($list) > 0)
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
-                            <tr>
+                             <tr>
                                 <th>#</th>
                                 <th>Mã đơn hàng</th>
-                                <th>ID tài khoản</th>
+                                {{-- <th>ID tài khoản</th> --}}
                                 <th>Tên người nhận</th>
-                                <th>Email người nhận</th>
-                                <th>Số điện thoại</th>
+                                {{-- <th>Email người nhận</th> --}}
+                                {{-- <th>Số điện thoại</th> --}}
                                 <th>Địa chỉ</th>
                                 <th>Ngày đặt</th>
-                                <th>Tổng tiền</th>
-                                <th>Ghi chú</th>
+                                {{-- <th>Tổng tiền</th>
+                                <th>Ghi chú</th> --}}
                                 <th>Phương thức thanh toán</th>
                                 <th>Trạng thái</th>
                                 <th>Action</th>
@@ -53,14 +53,14 @@
                             <tr>
                                 <th>#</th>
                                 <th>Mã đơn hàng</th>
-                                <th>ID tài khoản</th>
+                                {{-- <th>ID tài khoản</th> --}}
                                 <th>Tên người nhận</th>
-                                <th>Email người nhận</th>
-                                <th>Số điện thoại</th>
+                                {{-- <th>Email người nhận</th> --}}
+                                {{-- <th>Số điện thoại</th> --}}
                                 <th>Địa chỉ</th>
                                 <th>Ngày đặt</th>
-                                <th>Tổng tiền</th>
-                                <th>Ghi chú</th>
+                                {{-- <th>Tổng tiền</th>
+                                <th>Ghi chú</th> --}}
                                 <th>Phương thức thanh toán</th>
                                 <th>Trạng thái</th>
                                 <th>Action</th>
@@ -71,14 +71,14 @@
                                 <tr>
                                     <td>{{ $index + 1 }} </td>
                                     <td>{{ $value->ma_don_hang }} </td>
-                                    <td>{{ $value->user_id }} </td>
+                                    {{-- <td>{{ $value->user_id }} </td> --}}
                                     <td>{{ $value->ten_nguoi_nhan }} </td>
-                                    <td>{{ $value->email_nguoi_nhan }} </td>
-                                    <td>{{ $value->so_dien_thoai_nguoi_nhan }} </td>
+                                    {{-- <td>{{ $value->email_nguoi_nhan }} </td>
+                                    <td>{{ $value->so_dien_thoai_nguoi_nhan }} </td> --}}
                                     <td>{{ $value->dia_chi_nguoi_nhan }} </td>
                                     <td>{{ (new DateTime($value->ngay_dat))->format('d-m-y') }} </td>
-                                    <td>{{ $value->tong_tien }} </td>
-                                    <td>{{ $value->ghi_chu }} </td>
+                                    {{-- <td>{{ $value->tong_tien }} </td>
+                                    <td>{{ $value->ghi_chu }} </td> --}}
                                     <td>{{ $value->ten_phuong_thuc }} </td>
                                     <td>{{ $value->ten_trang_thai }} </td>
 
@@ -93,7 +93,7 @@
                                             <span class="text">Sửa</span>
                                         </a>
 
-                                        <form action="{{ route('admin.don_hangs.destroy', $value->id) }}" method="POST"
+                                        {{-- <form action="{{ route('admin.don_hangs.destroy', $value->id) }}" method="POST"
                                             style="display: inline;">
                                             @csrf
                                             @method('DELETE')
@@ -104,7 +104,7 @@
                                                 </span>
                                                 <span class="text">Xóa</span>
                                             </button>
-                                        </form>
+                                        </form> --}}
                                     </td>
                                 </tr>
                             @endforeach
