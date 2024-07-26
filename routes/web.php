@@ -53,6 +53,10 @@ Route::group([
     'as' => '/.'
 ], function() {
     Route::get('/', function () {return view('layouts.clients.index');})->name('index');
+    Route::get('/shop-single', function () {return view('layouts.clients.shop-single');})->name('shop-single');
+    Route::get('/shop', function () {return view('layouts.clients.shop');})->name('shop');
+    Route::get('/cart', function () {return view('layouts.clients.cart');})->name('cart');
+    Route::get('/checkout', function () {return view('layouts.clients.checkout');})->name('checkout');
 });
 
 
