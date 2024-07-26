@@ -46,9 +46,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         if($request->isMethod('POST')){
-            $params = $request ->post();
-            unset($params['_token']);
-            $this->users ->createUser($params);
+            $data = $request->except('_token');
+            $this->users ->createUser($data);
             return redirect()->route('users.index')->with('success','Thêm người dùng thành công');
         }
     }

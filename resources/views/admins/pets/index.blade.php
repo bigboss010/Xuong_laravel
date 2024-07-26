@@ -67,7 +67,7 @@
                                     <td>{{ (new DateTime($pet->ngay_nhap))->format('d/m/Y') }}</td>
                                     <td>{{ $pet->mota }}</td>
                                     <td>{{ $pet->ten_danh_muc }}</td>
-                                    <td>{{ $pet->trang_thai }}</td>
+                                    <td>{{ $pet->trang_thai == 1 ? "Hiện" : "Ẩn"}}</td>
 
                                     <td>
                                         <a href="{{ route('pet.edit', $pet->id) }}" class="btn btn-warning btn-icon-split">

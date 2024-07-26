@@ -6,12 +6,12 @@
             <h1 class="h3 text-gray-800">{{ $title }}</h1>
         </div>
 
-        <a href="{{ route('binh-luan.create') }}" class="btn btn-primary btn-icon-split">
+        {{-- <a href="{{ route('binh-luan.create') }}" class="btn btn-primary btn-icon-split">
             <span class="icon text-white-50">
                 <i class="fas fa-arrow-right"></i>
             </span>
             <span class="text">Thêm mới</span>
-        </a>
+        </a> --}}
     </div>
     @if (session('errors'))
         <div class="text-center alert alert-danger mb-3">
@@ -34,7 +34,7 @@
                                 <th>Họ và tên</th>
                                 <th>Tên pet</th>
                                 <th>Nội dung</th>
-                                <th>Thời gian</th>
+                                {{-- <th>Thời gian</th> --}}
                                 <th>Trạng thái</th>
                                 <th>Created_at</th>
                                 <th>Updated_at</th>
@@ -47,7 +47,7 @@
                                 <th>Họ và tên</th>
                                 <th>Tên pet</th>
                                 <th>Nội dung</th>
-                                <th>Thời gian</th>
+                                {{-- <th>Thời gian</th> --}}
                                 <th>Trạng thái</th>
                                 <th>Created_at</th>
                                 <th>Updated_at</th>
@@ -61,8 +61,8 @@
                                     <td>{{ $binhLuan->name }}</td>
                                     <td>{{ $binhLuan->ten_pet }}</td>
                                     <td>{{ $binhLuan->noi_dung }}</td>
-                                    <td>{{ (new DateTime($binhLuan->thoi_gian))->format('d/m/Y') }}</td>
-                                    <td>{{ $binhLuan->trang_thai }}</td>
+                                    {{-- <td>{{ (new DateTime($binhLuan->thoi_gian))->format('d/m/Y') }}</td> --}}
+                                    <td>{{ $binhLuan->trang_thai == 1 ? "Hiện" : "Ẩn" }}</td>
                                     <td>{{ (new DateTime($binhLuan->created_at))->format('d/m/Y H:i:s') }}</td>
                                     <td>{{ (new DateTime($binhLuan->updated_at))->format('d/m/Y H:i:s') }}</td>
 
