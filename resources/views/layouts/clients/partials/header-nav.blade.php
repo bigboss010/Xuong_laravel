@@ -2,7 +2,7 @@
     <div class="container">
         <ul class="site-menu js-clone-nav d-none d-md-block">
             <li class="">
-                <a href="index.html">Trang chủ</a>
+                <a href="{{route('/.index')}}">Trang chủ</a>
               
             </li>
             <li class="has-children">
