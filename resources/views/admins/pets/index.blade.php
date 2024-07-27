@@ -71,26 +71,31 @@
                                     <td>{{ (new DateTime($pet->ngay_nhap))->format('d/m/Y') }}</td>
                                     <td>{{ $pet->mota }}</td>
                                     <td>{{ $pet->ten_danh_muc }}</td>
-                                    <td>{{ $pet->trang_thai == 1 ? "Hiện" : "Ẩn"}}</td>
+                                    <td>{{ $pet->trang_thai == 1 ? 'Hiện' : 'Ẩn' }}</td>
 
                                     <td>
-                                        <a href="{{ route('admin.pet.edit', $pet->id) }}" class="btn btn-warning btn-icon-split">
+                                        <a href="" class="btn btn-primary">
+                                            <span class="icon text-white-50">
+                                                <i class="far fa-eye"></i>
+                                            </span>
+                                        </a>
+
+                                        <a href="{{ route('admin.pet.edit', $pet->id) }}"
+                                            class="btn btn-warning">
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-exclamation-triangle"></i>
-                                            </span>
-                                            <span class="text">Sửa</span>
+                                            </span>                                        
                                         </a>
 
                                         <form action="{{ route('admin.pet.destroy', $pet->id) }}" method="POST"
                                             style="display: inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-icon-split"
+                                            <button type="submit" class="btn btn-danger"
                                                 onclick="return confirm('Bạn có chắc chắn muốn xóa không?!??')">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-trash"></i>
                                                 </span>
-                                                <span class="text">Xóa</span>
                                             </button>
                                         </form>
                                     </td>
