@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 class ChucVu extends Model
 {
     use HasFactory;
+    protected $table='chuc_vus';
 
     public function getList() {
         $list = DB::table('chuc_vus')->get();
