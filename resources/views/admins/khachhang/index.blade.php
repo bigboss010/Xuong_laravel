@@ -46,7 +46,7 @@
                                 <th>Họ và tên</th>
                                 <th>Email</th>
                                 <th>Xác thực email </th>
-                                <th>Mật khẩu</th>
+                                {{-- <th>Mật khẩu</th> --}}
                                 <th>Chức vụ</th>
                                 <th>Action</th>
                             </tr>
@@ -57,45 +57,49 @@
                                 <th>Họ và tên</th>
                                 <th>Email</th>
                                 <th>Xác thực email </th>
-                                <th>Mật khẩu</th>
+                                {{-- <th>Mật khẩu</th> --}}
                                 <th>Chức vụ</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
                         <tbody>
+                            
                             @foreach ($listUsers as $index => $value)
-                                <tr>
-                                    <td>{{ $index + 1 }} </td>
-                                    <td>{{ $value->name }} </td>
-                                    <td>{{ $value->email }} </td>
-                                    <td>{{ (new DateTime($value->email_verified_at))->format('d/m/y') }} </td>
-                                    <td>{{ bcrypt($value->password) }} </td>
-                                    <td>{{ $value->ten_chuc_vu }} </td>
+                            @if ($value->ten_chuc_vu == "Customer" )
+                            <tr>
+                                <td>{{ $index + 1 }} </td>
+                                <td>{{ $value->name }} </td>
+                                <td>{{ $value->email }} </td>
+                                <td>{{ (new DateTime($value->email_verified_at))->format('d/m/y') }} </td>
+                                {{-- <td>{{ bcrypt($value->password) }} </td> --}}
+                                <td>{{ $value->ten_chuc_vu }} </td>
 
-                                    <td>
-                                        <a href="{{ route('admin.users.edit', $value->id) }}"
-                                            class="btn btn-warning btn-icon-split">
+                                <td>
+                                    <a href="{{ route('admin.users.edit', $value->id) }}"
+                                        class="btn btn-warning btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                        </span>
+                                        <span class="text">Sửa</span>
+                                    </a>
+
+                                    <form action="{{ route('admin.users.destroy', $value->id) }}" method="POST"
+                                        style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-icon-split"
+                                            onclick="return confirm('Bạn có chắc chắn muốn xóa không?!??')">
                                             <span class="icon text-white-50">
-                                                <i class="fas fa-exclamation-triangle"></i>
+                                                <i class="fas fa-trash"></i>
                                             </span>
-                                            <span class="text">Sửa</span>
-                                        </a>
+                                            <span class="text">Xóa</span>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endif
 
-                                        <form action="{{ route('admin.users.destroy', $value->id) }}" method="POST"
-                                            style="display: inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-icon-split"
-                                                onclick="return confirm('Bạn có chắc chắn muốn xóa không?!??')">
-                                                <span class="icon text-white-50">
-                                                    <i class="fas fa-trash"></i>
-                                                </span>
-                                                <span class="text">Xóa</span>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
+                        @endforeach
                         </tbody>
                     </table>
                 @else

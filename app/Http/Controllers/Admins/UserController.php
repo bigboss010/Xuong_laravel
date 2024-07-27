@@ -25,7 +25,7 @@ class UserController extends Controller
     public function index()
     {
         $listUsers = $this->users->getList();
-        $title ="Danh sách tài khoản";
+        $title ="Quản lý tài khoản";
         return view('admins.khachhang.index',compact('listUsers','title'));
     }
 
