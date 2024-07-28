@@ -14,6 +14,8 @@ use App\Http\Controllers\Admins\PhuongThucThanhToanController;
 use App\Http\Controllers\Admins\ChiTietDonHangController;
 use App\Http\Controllers\Admins\DashBoardController;
 use App\Http\Controllers\AuthenController;
+use App\Http\Controllers\clients\PetControllerView;
+use App\Models\DonHang;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,7 +34,11 @@ Route::get('/logout', [AuthenController::class, 'logout'])->name('logout');
 Route::get('/register', [AuthenController::class, 'register'])->name('register');
 Route::post('/postRegister', [AuthenController::class, 'postRegister'])->name('postRegister');
 
-
+Route::get('admins/khachhang/trash', [UserController::class, 'trash']);
+Route::post('admins/khachhang/delete', [UserController::class, 'delete'])->name('admin.khachhang.delete');
+Route::post('admins/khachhang/restore', [UserController::class, 'restore'])->name('admin.khachhang.restore');
+Route::post('admins/donhang/delete', [DonHangController::class, 'delete'])->name('admin.donhang.delete');
+Route::post('admins/donhang/restore', [DonHangController::class, 'restore'])->name('admin.donhang.restore');
 Route::group([
     'prefix' => 'admin',
     'as' => 'admin.',
@@ -51,15 +57,23 @@ Route::group([
     Route::resource('gio-hang', GioHangController::class);
     Route::resource('chi-tiet-gio-hang', CTGioHangController::class);
     Route::resource('binh-luan', BinhLuanController::class);
+ 
 });
 
 Route::group([
     'prefix' => '/',
     'as' => '/.'
 ], function() {
-    Route::get('/', function () {return view('layouts.clients.index');})->name('index');
-    Route::get('/shop-single', function () {return view('layouts.clients.shop-single');})->name('shop-single');
-    Route::get('/shop', function () {return view('layouts.clients.shop');})->name('shop');
+    Route::get('/', [PetControllerView::class, 'index'])->name('index');
+    Route::get('/shop',[PetControllerView::class, 'shop'])->name('shop');
+    Route::get('/shop-single/{id}', [PetControllerView::class, 'shopSingle'])->name('shop-single');
+
+
+
+
+    // Route::get('/', function ()  {return view('layouts.clients.index');})->name('index');
+    // Route::get('/shop-single', function () {return view('layouts.clients.shop-single');})->name('shop-single');
+    // Route::get('/shop', function () {return view('layouts.clients.shop');})->name('shop');
     Route::get('/cart', function () {return view('layouts.clients.cart');})->name('cart');
     Route::get('/checkout', function () {return view('layouts.clients.checkout');})->name('checkout');
 });

@@ -3,13 +3,32 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class DonHang extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+    // protected $table='don_hangs';
+    // protected $fillable = ['deleted']; // Ensure 'deleted' is fillable
 
+    public function khachHang()
+    {
+        return $this->belongsTo(KhachHang::class, 'user_id');
+    }
+
+    public function phuongThucThanhToan()
+    {
+        return $this->belongsTo(PhuongThucThanhToan::class, 'phuong_thuc_thanh_toan_id');
+    }
+
+    public function trangThai()
+    {
+        return $this->belongsTo(TrangThaiDonHang::class, 'trang_thai_id');
+    }
+
+    
     public function getDH() {
         $list = DB::table('don_hangs')
         ->join('users', 'don_hangs.user_id','=','users.id')

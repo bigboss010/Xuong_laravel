@@ -19,6 +19,7 @@ class HinhAnhPet extends Model
         return $this->belongsTo(Pet::class);
     }
 
+protected $table ='hinh_anh_pets';
     public function getAnhPet()
     {
         $anhPet = DB::table('hinh_anh_pets as ap')

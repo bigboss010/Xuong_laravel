@@ -6,11 +6,11 @@
               
             </li>
             <li class="has-children">
-                <a href="about.html">Cửa hàng</a>
+                <a href="{{route('/.shop')}}">Cửa hàng</a>
                 <ul class="dropdown">
-                    <li><a href="#">Menu One</a></li>
-                    <li><a href="#">Menu Two</a></li>
-                    <li><a href="#">Menu Three</a></li>
+                    <li><a href="#">Chó</a></li>
+                    <li><a href="#">Mèo</a></li>
+                   
                 </ul>
             </li>
             <li><a href="shop.html">Thông tin</a></li>

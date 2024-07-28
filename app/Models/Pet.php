@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 class Pet extends Model
 {
     use HasFactory;
+    protected $table ='pets';
 
     protected $fillable = [
         'ten_pet',
