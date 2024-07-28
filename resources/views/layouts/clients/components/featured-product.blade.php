@@ -8,22 +8,27 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="nonloop-block-3 owl-carousel">
-
-                    @for ($i = 0; $i < $count; $i++)
-                    <div class="item">
-                        <div class="block-4 text-center">
-                            <figure class="block-4-image">
-                                <img src="{{asset('assets/client/images/cloth_1.jpg')}}" alt="Image placeholder" class="img-fluid">
-                            </figure>
-                            <div class="block-4-text p-4">
-                                <h3><a href="#">Tank Top - {{$i}}</a></h3>
-                                <p class="mb-0">Finding perfect t-shirt</p>
-                                <p class="text-primary font-weight-bold">$50</p>
+                    {{-- @for ($i = 0; $i < $count; $i++) --}}
+                    @foreach ($list->take(9) as $item)
+                       
+                            <div class="item">
+                                <div class="block-4 text-center">
+                                    <figure class="block-4-image">
+                                        <img src="{{ asset('assets/client/images/cloth_1.jpg') }}"
+                                            alt="Image placeholder" class="img-fluid">
+                                    </figure>
+                                    <div class="block-4-text p-4">
+                                        <h3><a href="#">{{ $item->ten_pet }}</a></h3>
+                                        <p class="mb-0">{{ $item->mota }}</p>
+                                        <p class="text-primary font-weight-bold">{{ number_format($item->gia_pet, 0, ',' ,'.') }}VNĐ</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    @endfor
-                   
+                      
+                    @endforeach
+         
+                        
+                    {{-- @endfor --}}
                 </div>
             </div>
         </div>

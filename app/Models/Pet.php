@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class Pet extends Model
 {
     use HasFactory;
-
+    protected $table ='pets';
     public function getPet()
     {
         $listPets = DB::table('pets')

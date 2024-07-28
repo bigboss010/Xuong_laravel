@@ -28,11 +28,15 @@
                                         aria-expanded="false">
                                         Latest
                                     </button>
+                                    
+                                    @foreach ($danhMucs->take(2) as $item)
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                                        <a class="dropdown-item" href="#">Men</a>
-                                        <a class="dropdown-item" href="#">Women</a>
-                                        <a class="dropdown-item" href="#">Children</a>
+                                        <a class="dropdown-item" href="#">{{$item->ten_danh_muc}}</a>
+                                        <a class="dropdown-item" href="#">{{$item->ten_danh_muc}}</a>
+                                      
                                     </div>
+                  
+                                   @endforeach
                                 </div>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-secondary btn-sm dropdown-toggle"
@@ -50,20 +54,22 @@
                         </div>
                     </div>
                     <div class="row mb-5">
-                       
-                            <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
-                                <div class="block-4 text-center border">
-                                    <figure class="block-4-image">
-                                        <a href="shop-single.html"><img src="{{asset('assets/client/images/cloth_1.jpg')}}" alt="Image placeholder"
-                                                class="img-fluid"></a>
-                                    </figure>
-                                    <div class="block-4-text p-4">
-                                        <h3><a href="shop-single.html">Tank Top-</a></h3>
-                                        <p class="mb-0">Finding perfect t-shirt</p>
-                                        <p class="text-primary font-weight-bold">$50</p>
-                                    </div>
-                                </div>
+                       @foreach ($list->take(9) as $item)
+                       <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
+                        <div class="block-4 text-center border">
+                            <figure class="block-4-image">
+                                <img src="{{ asset('assets/client/images/cloth_1.jpg') }}"
+                                    alt="Image placeholder" class="img-fluid">
+                            </figure>
+                            <div class="block-4-text p-4">
+                                <h3><a href="{{ route('/.shop-single', $item->id) }}">{{ $item->ten_pet }}</a></h3>
+                                <p class="mb-0">{{ $item->mota }}</p>
+                                <p class="text-primary font-weight-bold">{{ number_format($item->gia_pet, 0, ',' ,'.') }}VNĐ</p>
                             </div>
+                        </div>
+                    </div>
+                       @endforeach
+                            
                      
                     </div>
                     <div class="row" data-aos="fade-up">
@@ -83,18 +89,18 @@
                     </div>
                 </div>
                 <div class="col-md-3 order-1 mb-5 mb-md-0">
+                   
                     <div class="border p-4 rounded mb-4">
                         <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
+                        @foreach ($danhMucs->take(2) as $item)
                         <ul class="list-unstyled mb-0">
-                            <li class="mb-1"><a href="#" class="d-flex"><span>Men</span> <span
+                            <li class="mb-1"><a href="#" class="d-flex"><span>{{$item->ten_danh_muc}}</span> <span
                                         class="text-black ml-auto">(2,220)</span></a></li>
-                            <li class="mb-1"><a href="#" class="d-flex"><span>Women</span> <span
-                                        class="text-black ml-auto">(2,550)</span></a></li>
-                            <li class="mb-1"><a href="#" class="d-flex"><span>Children</span> <span
-                                        class="text-black ml-auto">(2,124)</span></a></li>
+                           
                         </ul>
+                        @endforeach
                     </div>
-
+                    
                     <div class="border p-4 rounded mb-4">
                         <div class="mb-4">
                             <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Price</h3>
@@ -143,5 +149,7 @@
                 </div>
             </div>
 
-            @include('layouts.clients.components.categories')
+            @include('layouts.clients.components.categories',['danhMucs'=>$danhMucs])
+
+
         @endsection
