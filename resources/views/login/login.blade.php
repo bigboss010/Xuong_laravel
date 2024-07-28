@@ -46,18 +46,23 @@
                                         @if (session('msgErrors'))
                                             <p class="alert alert-danger">{{ session('msgErrors') }}</p>
                                         @endif
+                                        @if (session('success'))
+                                            <p class="alert alert-success">{{ session('success') }}</p>
+                                        @endif
                                     </div>
                                     <form action="{{ route('postLogin') }}" method="POST">
                                         @csrf
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user @error('email') is-invalid @enderror" name="email"
-                                                placeholder="Email...">
+                                            <input type="email"
+                                                class="form-control form-control-user @error('email') is-invalid @enderror"
+                                                name="email" placeholder="Email...">
                                             @error('email')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user @error('password') is-invalid @enderror"
+                                            <input type="password"
+                                                class="form-control form-control-user @error('password') is-invalid @enderror"
                                                 name="password" placeholder="Password...">
                                             @error('password')
                                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -65,7 +70,8 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                <input type="checkbox" class="custom-control-input" name="remember"
+                                                    id="customCheck">
                                                 <label class="custom-control-label" for="customCheck">Remember
                                                     Me</label>
                                             </div>
@@ -78,7 +84,7 @@
                                         <a class="small" href="#">Quên mật khẩu?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="#">Tạo tài khoản!</a>
+                                        <a class="small" href="{{ route('register') }}">Đăng ký!</a>
                                     </div>
                                 </div>
                             </div>
