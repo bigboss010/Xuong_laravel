@@ -66,7 +66,6 @@ Route::group([
 ], function() {
     Route::get('/', [PetControllerView::class, 'index'])->name('index');
     Route::get('/shop',[PetControllerView::class, 'shop'])->name('shop');
-    // Route::get('/shop-single/{id}', [PetControllerView::class, 'shopSingle'])->name('shop-single/{id}');
     Route::get('/shop-single/{id}', [PetControllerView::class, 'shopSingle'])->name('shop-single');
 
 

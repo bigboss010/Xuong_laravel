@@ -14,7 +14,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <img src="{{ Storage::url($list->hinh_anh) }}" alt="Image" class="img-fluid">
+                    <img src="{{ Storage::url($listpet->link_anh) }}" alt="Image" class="img-fluid">
                 </div>
                 <div class="col-md-6">
                     <h2 class="text-black">{{$list->ten_pet}}</h2>
@@ -42,5 +42,7 @@
         </div>
     </div>
 
-    @include('layouts.clients.components.featured-product', ['list'=>$list, 'count' => 4])
+    @include('layouts.clients.components.featured-product', ['list'=>$list , 'listpet'=>$listpet])
+
+    {{-- , 'count' => 4 --}}
 @endsection

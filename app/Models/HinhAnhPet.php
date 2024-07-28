@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class HinhAnhPet extends Model
 {
     use HasFactory;
-
+protected $table ='hinh_anh_pets';
     public function getAnhPet()
     {
         $anhPet = DB::table('hinh_anh_pets as ap')

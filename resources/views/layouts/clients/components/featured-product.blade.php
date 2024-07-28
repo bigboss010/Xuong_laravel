@@ -10,11 +10,11 @@
                 <div class="nonloop-block-3 owl-carousel">
                     {{-- @for ($i = 0; $i < $count; $i++) --}}
                     @foreach ($list->take(9) as $item)
-                       
+                    
                             <div class="item">
                                 <div class="block-4 text-center">
                                     <figure class="block-4-image">
-                                        <img src="{{ asset('assets/client/images/cloth_1.jpg') }}"
+                                        <img src="{{  Storage::url($item->listpet->link_anh) }}"
                                             alt="Image placeholder" class="img-fluid">
                                     </figure>
                                     <div class="block-4-text p-4">
@@ -24,11 +24,11 @@
                                     </div>
                                 </div>
                             </div>
-                      
+                           
                     @endforeach
-         
-                        
                     {{-- @endfor --}}
+                        
+                    
                 </div>
             </div>
         </div>
