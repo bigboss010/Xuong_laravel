@@ -10,6 +10,15 @@ class HinhAnhPet extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'pet_id',
+        'link_anh'
+    ];
+
+    public function pet() {
+        return $this->belongsTo(Pet::class);
+    }
+
     public function getAnhPet()
     {
         $anhPet = DB::table('hinh_anh_pets as ap')

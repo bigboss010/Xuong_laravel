@@ -60,23 +60,21 @@
 
                                     <td>
                                         <a href="{{ route('admin.anh-pet.edit', $anhPet->id) }}"
-                                            class="btn btn-warning btn-icon-split">
+                                            class="btn btn-warning">
                                             <span class="icon text-white-50">
-                                                <i class="fas fa-exclamation-triangle"></i>
-                                            </span>
-                                            <span class="text">Sửa</span>
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </span>                                     
                                         </a>
 
                                         <form action="{{ route('admin.anh-pet.destroy', $anhPet->id) }}" method="POST"
                                             style="display: inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-icon-split"
+                                            <button type="submit" class="btn btn-danger"
                                                 onclick="return confirm('Bạn có chắc chắn muốn xóa không?!??')">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-trash"></i>
-                                                </span>
-                                                <span class="text">Xóa</span>
+                                                </span>                                        
                                             </button>
                                         </form>
                                     </td>

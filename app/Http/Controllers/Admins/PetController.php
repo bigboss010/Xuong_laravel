@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
 use App\Models\DanhMuc;
+use App\Models\HinhAnhPet;
 use App\Models\Pet;
 use Illuminate\Http\Request;
 
@@ -42,7 +43,32 @@ class PetController extends Controller
     {
         if ($request->isMethod('POST')) {
             $data = $request->except('_token');
-            $this->pets->createPet($data);
+            
+            $data['is_new'] = $request->has('is_new') ? 1 : 0;
+            $data['is_hot'] = $request->has('is_hot') ? 1 : 0;
+            $data['is_home'] = $request->has('is_home') ? 1 : 0;
+
+            if ($request->hasFile('image')) {
+                $data['image'] = $request->file('image')->store('uploads/anh_pet', 'public');
+            } else {
+                $data['image'] = null;
+            }
+           $pet = Pet::query()->create($data);
+
+            $petID = $pet->id;
+
+            if($request->hasFile('list_hinh_anh')){
+                foreach($request->file('list_hinh_anh') as $image){
+                    if($image){
+                        $path = $image->store('uploads/list_anh_pet/id_' . $petID, 'public');
+                        $pet->hinhAnhPet()->create([
+                            'pet_id' => $petID,
+                            'link_anh' => $path
+                        ]);
+                    }
+                }
+            }
+           
             return redirect()->route('admin.pet.index')->with('success', 'Thêm mới thành công!');
         }
     }
@@ -52,7 +78,16 @@ class PetController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $title = 'Chi tiết pet';
+        $pets = Pet::query()
+        ->join('danh_mucs', 'pets.danh_muc_id', '=', 'danh_mucs.id')
+        ->find($id);
+        $imagePet = HinhAnhPet::query()
+        ->join('pets', 'hinh_anh_pets.pet_id', '=', 'pets.id')
+        ->select('hinh_anh_pets.id', 'hinh_anh_pets.pet_id', 'hinh_anh_pets.link_anh', 'pets.ten_pet')
+        ->where('pet_id', $id)
+        ->get();
+        return view('admins.pets.detail', compact('title', 'pets', 'imagePet'));
     }
 
     /**

@@ -10,6 +10,16 @@ class DanhMuc extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'hinh_anh',
+        'ten_danh_muc',
+        'mo_ta'
+    ];
+    
+    public function pet() {
+        return $this->hasMany(Pet::class);
+    }
+
     public function getDanhMuc()
     {
         $listDanhmucs = DB::table('danh_mucs')->orderBy('id')->get();
