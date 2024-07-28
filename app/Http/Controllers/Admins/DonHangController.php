@@ -70,9 +70,19 @@ class DonHangController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-    {
-        //
+{
+    $title = "Thông tin đơn hàng";
+    $order = $this->don_hang->with(['khachHang', 'phuongThucThanhToan', 'trangThai'])->find($id);
+
+    if (!$order) {
+        return redirect()->route('admin.orders.index')->with('error', 'Đơn hàng không tồn tại.');
     }
+
+    return view('admins.donhang.show', [
+        'title' => $title,
+        'order' => $order
+    ]);
+}
 
     /**
      * Show the form for editing the specified resource.

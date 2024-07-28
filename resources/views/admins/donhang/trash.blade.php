@@ -10,18 +10,12 @@
             <h1 class="h3 text-gray-800">{{ $title }}</h1>
         </div>
 
-        <div class="div">
-            <a href="{{ route('admin.don_hangs.create') }}" class="btn btn-primary btn-icon-split">
-                <span class="icon text-white-50">
-                    <i class="fas fa-arrow-right"></i>
-                </span>
-                <span class="text">Thêm mới</span>
-            </a>
-            <a href="{{ url('admins/donhang/trash') }}" class="btn btn-secondary">
-
-                <span class="text">Thùng rác</span>
-            </a>
-        </div>
+        <a href="{{ route('admin.don_hangs.create') }}" class="btn btn-primary btn-icon-split">
+            <span class="icon text-white-50">
+                <i class="fas fa-arrow-right"></i>
+            </span>
+            <span class="text">Thêm mới</span>
+        </a>
     </div>
     @if (session('errors'))
         <div class="text-center alert alert-danger mb-3">
@@ -39,7 +33,7 @@
                 @if (count($list) > 0)
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
-                            <tr>
+                             <tr>
                                 <th>#</th>
                                 <th>Mã đơn hàng</th>
                                 {{-- <th>ID tài khoản</th> --}}
@@ -91,31 +85,24 @@
 
 
                                     <td>
-                                        <a href="{{route('admin.don_hangs.show', $value->id)}}" class="btn btn-primary">
-                                            <span class="icon text-white-50">
-                                                <i class="far fa-eye"></i>
-                                            </span>
-                                        </a>
                                         <a href="{{ route('admin.don_hangs.edit', $value->id) }}"
                                             class="btn btn-warning btn-icon-split">
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-exclamation-triangle"></i>
                                             </span>
-
+                                            <span class="text">Sửa</span>
                                         </a>
-                                        <form action="{{ route('admin.khachhang.delete') }}" method="POST"
-                                            style="display: inline;">
+                                        {{-- <form action="{{ route('admin.khachhang.delete') }}" method="POST" style="display: inline;">
                                             @csrf
-                                            <input type="hidden" name="id" value="{{ $value->id }}">
-                                            <button type="submit" class="btn btn-danger btn-icon-split"
-                                                onclick="return confirm('Bạn có chắc chắn muốn xóa không?!??')">
+                                            <input type="hidden" name="id" value="{{$value->id }}">
+                                            <button type="submit" class="btn btn-danger btn-icon-split" onclick="return confirm('Bạn có chắc chắn muốn xóa không?!??')">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-trash"></i>
                                                 </span>
                                             </button>
-                                        </form>
+                                        </form> --}}
 
-                                        {{-- <form action="{{ route('admin.don_hangs.destroy', $value->id) }}" method="POST"
+                                        <form action="{{ route('admin.don_hangs.destroy', $value->id) }}" method="POST"
                                             style="display: inline;">
                                             @csrf
                                             @method('DELETE')
@@ -126,7 +113,7 @@
                                                 </span>
                                                 <span class="text">Xóa</span>
                                             </button>
-                                        </form> --}}
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
