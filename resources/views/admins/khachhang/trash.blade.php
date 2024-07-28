@@ -18,18 +18,12 @@
             <h1 class="h3 text-gray-800">{{ $title }}</h1>
         </div>
 
-        <div class="div">
-            <a href="{{ route('admin.users.create') }}" class="btn btn-primary btn-icon-split">
-                <span class="icon text-white-50">
-                    <i class="fas fa-arrow-right"></i>
-                </span>
-                <span class="text">Thêm mới</span>
-            </a>
-            <a href="{{ url('admins/khachhang/trash') }}" class="btn btn-secondary">
-                
-                <span class="text">Thùng rác</span>
-            </a>
-        </div>
+        {{-- <a href="{{ route('admin.users.create') }}" class="btn btn-primary btn-icon-split">
+            <span class="icon text-white-50">
+                <i class="fas fa-arrow-right"></i>
+            </span>
+            <span class="text">Thêm mới</span>
+        </a> --}}
     </div>
     @if (session('errors'))
         <div class="text-center alert alert-danger mb-3">
@@ -51,7 +45,7 @@
                                 <th>#</th>
                                 <th>Họ và tên</th>
                                 <th>Email</th>
-                                <th>Xác thực email </th>
+                                {{-- <th>Xác thực email </th> --}}
                                 {{-- <th>Mật khẩu</th> --}}
                                 <th>Chức vụ</th>
                                 <th>Action</th>
@@ -62,7 +56,7 @@
                                 <th>#</th>
                                 <th>Họ và tên</th>
                                 <th>Email</th>
-                                <th>Xác thực email </th>
+                                {{-- <th>Xác thực email </th> --}}
                                 {{-- <th>Mật khẩu</th> --}}
                                 <th>Chức vụ</th>
                                 <th>Action</th>
@@ -71,59 +65,52 @@
                         <tbody>
                             
                             @foreach ($listUsers as $index => $value)
+                            
                             <tr>
                                 <td>{{ $index + 1 }} </td>
                                 <td>{{ $value->name }} </td>
                                 <td>{{ $value->email }} </td>
-                                <td>{{ (new DateTime($value->email_verified_at))->format('d/m/y') }} </td>
+                                {{-- <td>{{ (new DateTime($value->email_verified_at))->format('d/m/y') }} </td> --}}
                                 {{-- <td>{{ bcrypt($value->password) }} </td> --}}
                                 <td>{{ $value->ten_chuc_vu }} </td>
 
                                 <td>
-                                    <a href="{{route('admin.users.show', $value->id)}}" class="btn btn-primary">
-                                        <span class="icon text-white-50">
-                                            <i class="far fa-eye"></i>
-                                        </span>
-                                    </a>
-                                    <a href="{{ route('admin.users.edit', $value->id) }}"
-                                        class="btn btn-warning btn-icon-split">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-exclamation-triangle"></i>
-                                        </span>
-                                      
-                                    </a>
-
-                                    <form action="{{ route('admin.donhang.delete') }}" method="POST" style="display: inline;">
+                                    <form action="{{ route('admin.khachhang.restore', $value->id) }}" method="POST" style="display: inline;">
                                         @csrf
-                                        <input type="hidden" name="id" value="{{$value->id }}">
-                                        <button type="submit" class="btn btn-danger btn-icon-split" onclick="return confirm('Bạn có chắc chắn muốn xóa không?!??')">
+                                        <input type="hidden" name="id" value="{{ $value->id }}">
+                                        <button type="submit" class="btn btn-success btn-icon-split" onclick="return confirm('Bạn có chắc chắn muốn khôi phục không?!??')">
                                             <span class="icon text-white-50">
-                                                <i class="fas fa-trash"></i>
+                                                <i class="fas fa-undo"></i>
                                             </span>
                                         </button>
                                     </form>
-                                    {{-- <form action="{{ url('admins/khachhang/delete',$value->id) }}" method="POST" style="display: inline;">
+
+                                    <form action="{{ route('admin.users.destroy', $value->id) }}" method="POST"
+                                        style="display: inline;">
                                         @csrf
-                                     
-                                        <button type="submit" class="btn btn-danger btn-icon-split" onclick="return confirm('Bạn có chắc chắn muốn xóa không?!??')">
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-icon-split"
+                                            onclick="return confirm('Bạn có chắc chắn muốn xóa không?!??')">
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-trash"></i>
                                             </span>
+                                          
                                         </button>
-                                    </form> --}}
+                                    </form>
                                 </td>
                             </tr>
+                          
 
                         @endforeach
                         </tbody>
-                    </table>  
+                    </table>
                 @else
                     <div class="d-flex justify-content-center align-items-center">
                         <p>Không có khách hàng nào được tìm thấy.</p>
                     </div>
                 @endif
-                {{$listUsers->links("pagination::bootstrap-5")}}
             </div>
+            <a href="{{ route('admin.users.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
         </div>
     </div>
 

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class PhuongThucThanhToan extends Model
 {
     use HasFactory;
-
+    protected $table = 'phuong_thuc_thanh_toans';
     public function getList(){
         $list = DB::table('phuong_thuc_thanh_toans')->get();
         return $list;

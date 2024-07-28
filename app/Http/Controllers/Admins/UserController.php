@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Models\ChucVu;
 use App\Models\KhachHang;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -24,11 +26,16 @@ class UserController extends Controller
      */
     public function index()
     {
-        $listUsers = $this->users->getList();
+        $listUsers = $this->users->getList()->where('deleted',0)->where('ten_chuc_vu','like',"%User%")->paginate(5);
         $title ="Quản lý tài khoản";
         return view('admins.khachhang.index',compact('listUsers','title'));
     }
-
+    public function trash()
+    {
+        $listUsers = $this->users->getList()->where('deleted',1)->where('ten_chuc_vu','like',"%User%")->paginate(5);
+        $title ="Thùng rác";
+        return view('admins.khachhang.trash',compact('listUsers','title'));
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -48,7 +55,7 @@ class UserController extends Controller
         if($request->isMethod('POST')){
             $data = $request->except('_token');
             $this->users ->createUser($data);
-            return redirect()->route('users.index')->with('success','Thêm người dùng thành công');
+            return redirect()->route('admin.users.index')->with('success','Thêm người dùng thành công');
         }
     }
 
@@ -57,7 +64,9 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $title = "Thông tin Khách hàng";
+        $list = $this->users->find($id);
+        return view('admins.khachhang.show', compact('list','title'));
     }
 
     /**
@@ -89,7 +98,23 @@ class UserController extends Controller
             return redirect()->route('admin.users.index')->with('success','Sửa thành công!');
         }
     }
+    public function delete(UserRequest $request)
+    {
+        $list = KhachHang::findOrFail($request->id);
+        $list->deleted = 1;
+        $list->save();
+        $list->delete();
+        return redirect()->route('admin.users.index')->with('success','Xóa thành công!');
 
+    }
+    public function restore(UserRequest $request)
+    {
+        $list = KhachHang::withTrashed()->findOrFail($request->id);
+        $list->deleted = 0;
+        $list->save();
+        $list->restore();
+        return redirect()->route('admin.users.index')->with('success', 'Khôi phục thành công!');
+    }
     /**
      * Remove the specified resource from storage.
      */
