@@ -85,13 +85,15 @@
 
 
                                     <td>
-                                        <a href="{{ route('admin.don_hangs.edit', $value->id) }}"
-                                            class="btn btn-warning btn-icon-split">
-                                            <span class="icon text-white-50">
-                                                <i class="fas fa-exclamation-triangle"></i>
-                                            </span>
-                                            <span class="text">Sửa</span>
-                                        </a>
+                                        <form action="{{ route('admin.donhang.restore', $value->id) }}" method="POST" style="display: inline;">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $value->id }}">
+                                            <button type="submit" class="btn btn-success btn-icon-split" onclick="return confirm('Bạn có chắc chắn muốn khôi phục không?!??')">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-undo"></i>
+                                                </span>
+                                            </button>
+                                        </form>
                                         {{-- <form action="{{ route('admin.khachhang.delete') }}" method="POST" style="display: inline;">
                                             @csrf
                                             <input type="hidden" name="id" value="{{$value->id }}">
@@ -111,7 +113,7 @@
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-trash"></i>
                                                 </span>
-                                                <span class="text">Xóa</span>
+                                                
                                             </button>
                                         </form>
                                     </td>
