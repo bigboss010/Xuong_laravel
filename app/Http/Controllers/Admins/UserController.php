@@ -66,7 +66,9 @@ class UserController extends Controller
     {
         $title = "Thông tin Khách hàng";
         $list = $this->users->find($id);
-        return view('admins.khachhang.show', compact('list','title'));
+        $listChucvu = $this->chuc_vu->getList();
+
+        return view('admins.khachhang.show', compact('list','listChucvu','title'));
     }
 
     /**

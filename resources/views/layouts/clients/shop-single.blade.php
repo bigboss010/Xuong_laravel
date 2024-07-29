@@ -14,7 +14,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <img src="{{ Storage::url($listpet->link_anh) }}" alt="Image" class="img-fluid">
+                    {{-- <img src="{{ Storage::url($listpet->link_anh) }}" alt="Image" class="img-fluid"> --}}
                 </div>
                 <div class="col-md-6">
                     <h2 class="text-black">{{$list->ten_pet}}</h2>

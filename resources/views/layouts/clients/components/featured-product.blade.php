@@ -14,8 +14,8 @@
                             <div class="item">
                                 <div class="block-4 text-center">
                                     <figure class="block-4-image">
-                                        {{-- <img src="{{  Storage::url($item->listpet->link_anh) }}"
-                                            alt="Image placeholder" class="img-fluid"> --}}
+                                        {{-- <img src="{{  Storage::url($listpet->link_anh) }}" --}}
+                                            {{-- alt="Image placeholder" class="img-fluid"> --}}
                                     </figure>
                                     <div class="block-4-text p-4">
                                         <h3><a href="#">{{ $item->ten_pet }}</a></h3>
