@@ -30,25 +30,33 @@ class DonHangController extends Controller
     public function index()
     {
         $title = "Danh sách đơn hàng";
-        $list=$this->don_hang->getDH();
+        $list=$this->don_hang->getDH()->where('deleted',0);
         return view('admins.donhang.index',[
             'title' => $title,
             'list' => $list
         ]);
     }
-
+    public function trash()
+    {
+        $list=$this->don_hang->getDH()->where('deleted',1);
+        $title ="Thùng rác";
+        return view('admins.donhang.trash',[
+            'title' => $title,
+            'list' => $list
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create( KhachHang $khachHang)
     {
         $title = "Thêm mới đơn hàng";
-        $list = $this->users->getListHD();
+        $list = $this->users->getList();
         $listPTDH = $this->phuong_thuc_thanh_toan->getList();
         $listTT = $this->trang_thai->getList();
         return view('admins.donhang.create',[
             'title' => $title,
-            'list' => $list,
+            'khachHangs' => $khachHangs,
             'listPTDH' => $listPTDH,
             'listTT' => $listTT
         ]);
@@ -120,17 +128,6 @@ class DonHangController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        $list = $this->don_hang->find($id);
-        $list->delete();
-        return redirect()->route('admin.don_hangs.index')->with('success','Xóa thành công!');
-
-    }
-
     public function delete(DonHangRequest $request)
     {
         $list = DonHang::findOrFail($request->id);
@@ -148,13 +145,15 @@ class DonHangController extends Controller
         $list->restore();
         return redirect()->route('admin.don_hangs.index')->with('success', 'Khôi phục thành công!');
     }
-    public function trash()
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
     {
-        $list=$this->don_hang->getDH()->where('deleted',1);
-        $title ="Thùng rác";
-        return view('admins.donhang.trash',[
-            'title' => $title,
-            'list' => $list
-        ]);
+        $list = $this->don_hang->find($id);
+        $list->delete();
+        return redirect()->route('admin.don_hangs.index')->with('success','Xóa thành công!');
+
     }
+    //comment
 }
