@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DonHangRequest;
 use App\Models\DonHang;
 use App\Models\KhachHang;
 use App\Models\PhuongThucThanhToan;
@@ -128,5 +129,32 @@ class DonHangController extends Controller
         $list->delete();
         return redirect()->route('admin.don_hangs.index')->with('success','Xóa thành công!');
 
+    }
+
+    public function delete(DonHangRequest $request)
+    {
+        $list = DonHang::findOrFail($request->id);
+        $list->deleted = 1;
+        $list->save();
+        $list->delete();
+        return redirect()->route('admin.don_hangs.index')->with('success','Xóa thành công!');
+
+    }
+    public function restore(DonHangRequest $request)
+    {
+        $list = DonHang::withTrashed()->findOrFail($request->id);
+        $list->deleted = 0;
+        $list->save();
+        $list->restore();
+        return redirect()->route('admin.don_hangs.index')->with('success', 'Khôi phục thành công!');
+    }
+    public function trash()
+    {
+        $list=$this->don_hang->getDH()->where('deleted',1);
+        $title ="Thùng rác";
+        return view('admins.donhang.trash',[
+            'title' => $title,
+            'list' => $list
+        ]);
     }
 }
