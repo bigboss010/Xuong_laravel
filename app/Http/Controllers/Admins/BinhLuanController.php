@@ -34,7 +34,7 @@ class BinhLuanController extends Controller
     public function create(KhachHang $users, Pet $pets)
     {
         $title = 'Thêm mới bình luận';
-        $users = $users->getList();
+        $users = $users->getListHD();
         $pets = $pets->getPet();
         return view('admins.binh_luans.add', compact('title', 'users', 'pets'));
     }

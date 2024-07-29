@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\DB;
 class HinhAnhPet extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'pet_id',
+        'link_anh'
+    ];
+
+    public function pet() {
+        return $this->belongsTo(Pet::class);
+    }
+
 protected $table ='hinh_anh_pets';
     public function getAnhPet()
     {

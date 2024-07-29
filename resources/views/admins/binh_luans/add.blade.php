@@ -41,9 +41,27 @@
                     <label for="thoi_gian">Thời gian:</label>
                     <input type="date" class="form-control" id="thoi_gian" name="thoi_gian">
                 </div>
-                <div class="form-group">
-                    <label for="trang_thai">Trạng thái:</label>
-                    <input type="text" class="form-control" id="trang_thai" name="trang_thai">
+                <div class="mb-2 ps-3 d-flex justify-content-between">
+                    <label for="trang_thai" class="form-lable">Trạng thái:</label>
+                    <div class="col-sm-10 mb-3 d-flex gap-2">
+                        <div class="form-check mr-3">
+                            <input type="radio" class="form-check-input" id="trang_thai"
+                                value="1" name="trang_thai" checked>
+                            <label for="trang_thai" class="form-check-lable">
+                                Hiển thị
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="trang_thai"
+                                value="0" name="trang_thai">
+                            <label for="trang_thai" class="form-check-lable">
+                                Ẩn
+                            </label>
+                        </div>
+                    </div>
+                    @error('trang_thai')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
 

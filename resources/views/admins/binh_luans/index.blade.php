@@ -10,16 +10,12 @@
             <h1 class="h3 text-gray-800">{{ $title }}</h1>
         </div>
 
-<<<<<<< HEAD
-        {{-- <a href="{{ route('binh-luan.create') }}" class="btn btn-primary btn-icon-split">
-=======
         <a href="{{ route('admin.binh-luan.create') }}" class="btn btn-primary btn-icon-split">
->>>>>>> khanh
             <span class="icon text-white-50">
                 <i class="fas fa-arrow-right"></i>
             </span>
             <span class="text">Thêm mới</span>
-        </a> --}}
+        </a> 
     </div>
     @if (session('errors'))
         <div class="text-center alert alert-danger mb-3">

@@ -35,13 +35,13 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Mã Pet</th>
                                 <th>Tên Pet</th>
-                                <th>Số lượng</th>
+                                <th>Ảnh Pet</th>
+                                <th>Danh mục Pet</th>
                                 <th>Giá gốc</th>
                                 <th>Giá khuyến mại</th>
-                                <th>Ngày nhập</th>
-                                <th>Mô tả</th>
-                                <th>Danh mục Pet</th>
+                                <th>Số lượng</th>
                                 <th>Trạng thái</th>
                                 <th>Action</th>
                             </tr>
@@ -49,13 +49,13 @@
                         <tfoot>
                             <tr>
                                 <th>#</th>
+                                <th>Mã Pet</th>
                                 <th>Tên Pet</th>
-                                <th>Số lượng</th>
+                                <th>Ảnh Pet</th>
+                                <th>Danh mục Pet</th>
                                 <th>Giá gốc</th>
                                 <th>Giá khuyến mại</th>
-                                <th>Ngày nhập</th>
-                                <th>Mô tả</th>
-                                <th>Danh mục Pet</th>
+                                <th>Số lượng</th>
                                 <th>Trạng thái</th>
                                 <th>Action</th>
                             </tr>
@@ -64,40 +64,51 @@
                             @foreach ($listPets as $index => $pet)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
+                                    <td>{{ $pet->ma_pet }}</td>
                                     <td>{{ $pet->ten_pet }}</td>
-                                    <td>{{ $pet->so_luong }}</td>
-                                    <td>{{ $pet->gia_pet }}</td>
-                                    <td>{{ $pet->gia_khuyen_mai }}</td>
-                                    <td>{{ (new DateTime($pet->ngay_nhap))->format('d/m/Y') }}</td>
-                                    <td>{{ $pet->mota }}</td>
+                                    <td class="text-center">
+                                        <img src="{{ Storage::url($pet->image) }}" width="120" height="125"
+                                            alt="{{ $pet->image }}">
+                                    </td>
                                     <td>{{ $pet->ten_danh_muc }}</td>
-                                    <td>{{ $pet->trang_thai == 1 ? 'Hiện' : 'Ẩn' }}</td>
+                                    <td>{{ number_format($pet->gia_pet) }}</td>
+                                    <td>{{ empty($pet->gia_khuyen_mai) ? 0 : number_format($pet->gia_khuyen_mai) }}</td>
+                                    <td>{{ $pet->so_luong }}</td>
+                                    <td class="{{ $pet->trang_thai == 1 ? 'text-success' : 'text-danger' }}">
+                                        {{ $pet->trang_thai == 1 ? 'Hiện' : 'Ẩn' }}
+                                    </td>
+                                    <td class="align-items-center pt-5">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="mr-2">
+                                                <a href="{{ route('admin.pet.show', $pet->id) }}" class="btn btn-primary">
+                                                    <span class="icon text-white-50">
+                                                        <i class="far fa-eye"></i>
+                                                    </span>
+                                                </a>
+                                            </div>
 
-                                    <td>
-                                        <a href="" class="btn btn-primary">
-                                            <span class="icon text-white-50">
-                                                <i class="far fa-eye"></i>
-                                            </span>
-                                        </a>
+                                            <div class="mr-2">
+                                                <a href="{{ route('admin.pet.edit', $pet->id) }}" class="btn btn-warning">
+                                                    <span class="icon text-white-50">
+                                                        <i class="fas fa-pencil-alt"></i>
+                                                    </span>
+                                                </a>
+                                            </div>
 
-                                        <a href="{{ route('admin.pet.edit', $pet->id) }}"
-                                            class="btn btn-warning">
-                                            <span class="icon text-white-50">
-                                                <i class="fas fa-exclamation-triangle"></i>
-                                            </span>                                        
-                                        </a>
-
-                                        <form action="{{ route('admin.pet.destroy', $pet->id) }}" method="POST"
-                                            style="display: inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"
-                                                onclick="return confirm('Bạn có chắc chắn muốn xóa không?!??')">
-                                                <span class="icon text-white-50">
-                                                    <i class="fas fa-trash"></i>
-                                                </span>
-                                            </button>
-                                        </form>
+                                            <div class="mr-2">
+                                                <form action="{{ route('admin.pet.destroy', $pet->id) }}" method="POST"
+                                                    style="display: inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger"
+                                                        onclick="return confirm('Bạn có chắc chắn muốn xóa không?!??')">
+                                                        <span class="icon text-white-50">
+                                                            <i class="fas fa-trash"></i>
+                                                        </span>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
