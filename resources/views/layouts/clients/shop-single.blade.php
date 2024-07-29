@@ -45,7 +45,7 @@
         </div>
     </div>
 
-    @include('layouts.clients.components.featured-product', ['list'=>$list , 'listpet'=>$listpet])
+    @include('layouts.clients.components.featured-product',['list'=>$featuredProducts, ]) 
 
     {{-- , 'count' => 4 --}}
 @endsection

@@ -51,7 +51,7 @@ class DonHangController extends Controller
     public function create( KhachHang $khachHang)
     {
         $title = "Thêm mới đơn hàng";
-        $list = $this->users->getList();
+        $khachHangs = $khachHang->getListHD();
         $listPTDH = $this->phuong_thuc_thanh_toan->getList();
         $listTT = $this->trang_thai->getList();
         return view('admins.donhang.create',[

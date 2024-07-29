@@ -15,11 +15,12 @@ class PetControllerView extends Controller
     public function __construct()
     {
        $this->pet = new Pet(); 
-       $this->pet_hinhanh = new HinhAnhPet(); 
+    //    $this->pet_hinhanh = new HinhAnhPet(); 
     }
     public function index(DanhMuc $danhMuc) {
         $list = $this->pet->getPet();
         $danhMucs = $danhMuc->getDanhMuc();
+        
 
         return view('layouts.clients.index',compact('list','danhMucs'));
     }
@@ -31,8 +32,8 @@ class PetControllerView extends Controller
     }
     public function shopSingle(string $id) {
         $list = $this->pet->find($id);
-        // $listpet =  $this->pet_hinhanh ->getAnhPet();
-        // dd($list);
-        return view('layouts.clients.shop-single', compact('list'));
+        $featuredProducts = $this->pet->take(6)->get(); // Truy xuất danh sách sản phẩm nổi bật
+    
+        return view('layouts.clients.shop-single', compact('list', 'featuredProducts'));
     }
 }
