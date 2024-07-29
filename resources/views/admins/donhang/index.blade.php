@@ -103,7 +103,7 @@
                                             </span>
 
                                         </a>
-                                        <form action="{{ route('admin.khachhang.delete') }}" method="POST"
+                                        <form action="{{ route('admin.donhang.delete') }}" method="POST"
                                             style="display: inline;">
                                             @csrf
                                             <input type="hidden" name="id" value="{{ $value->id }}">

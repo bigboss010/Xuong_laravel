@@ -93,7 +93,7 @@
                                       
                                     </a>
 
-                                    <form action="{{ route('admin.donhang.delete') }}" method="POST" style="display: inline;">
+                                    <form action="{{ route('admin.khachhang.delete') }}" method="POST" style="display: inline;">
                                         @csrf
                                         <input type="hidden" name="id" value="{{$value->id }}">
                                         <button type="submit" class="btn btn-danger btn-icon-split" onclick="return confirm('Bạn có chắc chắn muốn xóa không?!??')">

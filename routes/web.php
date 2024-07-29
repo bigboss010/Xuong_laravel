@@ -37,6 +37,7 @@ Route::post('/postRegister', [AuthenController::class, 'postRegister'])->name('p
 Route::get('admins/khachhang/trash', [UserController::class, 'trash']);
 Route::post('admins/khachhang/delete', [UserController::class, 'delete'])->name('admin.khachhang.delete');
 Route::post('admins/khachhang/restore', [UserController::class, 'restore'])->name('admin.khachhang.restore');
+Route::get('admins/donhang/trash', [DonHangController::class, 'trash']);
 Route::post('admins/donhang/delete', [DonHangController::class, 'delete'])->name('admin.donhang.delete');
 Route::post('admins/donhang/restore', [DonHangController::class, 'restore'])->name('admin.donhang.restore');
 Route::group([

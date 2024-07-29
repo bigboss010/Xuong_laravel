@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DonHangRequest;
 use App\Models\DonHang;
 use App\Models\KhachHang;
 use App\Models\PhuongThucThanhToan;
@@ -29,25 +30,34 @@ class DonHangController extends Controller
     public function index()
     {
         $title = "Danh sách đơn hàng";
-        $list=$this->don_hang->getDH();
+        $list=$this->don_hang->getDH()->where('deleted',0);
         return view('admins.donhang.index',[
             'title' => $title,
             'list' => $list
         ]);
     }
-
+    public function trash()
+    {
+        $list=$this->don_hang->getDH()->where('deleted',1);
+        $title ="Thùng rác";
+        return view('admins.donhang.trash',[
+            'title' => $title,
+            'list' => $list
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create( KhachHang $khachHang)
     {
         $title = "Thêm mới đơn hàng";
-        $list = $this->users->getList();
+        // $list = $this->users->getList();
+        $khachHangs = $khachHang->getListHD();
         $listPTDH = $this->phuong_thuc_thanh_toan->getList();
         $listTT = $this->trang_thai -> getList();
         return view('admins.donhang.create',[
             'title' => $title,
-            'list' => $list,
+            'khachHangs' => $khachHangs,
             'listPTDH' => $listPTDH,
             'listTT' => $listTT
         ]);
@@ -119,6 +129,23 @@ class DonHangController extends Controller
         }
     }
 
+    public function delete(DonHangRequest $request)
+    {
+        $list = DonHang::findOrFail($request->id);
+        $list->deleted = 1;
+        $list->save();
+        $list->delete();
+        return redirect()->route('admin.don_hangs.index')->with('success','Xóa thành công!');
+
+    }
+    public function restore(DonHangRequest $request)
+    {
+        $list = DonHang::withTrashed()->findOrFail($request->id);
+        $list->deleted = 0;
+        $list->save();
+        $list->restore();
+        return redirect()->route('admin.don_hangs.index')->with('success', 'Khôi phục thành công!');
+    }
     /**
      * Remove the specified resource from storage.
      */
