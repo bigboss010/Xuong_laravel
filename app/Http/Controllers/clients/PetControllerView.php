@@ -31,7 +31,8 @@ class PetControllerView extends Controller
     }
     public function shopSingle(string $id) {
         $list = $this->pet->find($id);
-        $listpet =  $this->pet_hinhanh ->getAnhPet();
-        return view('layouts.clients.shop-single', compact('list', 'listpet'));
+        // $listpet =  $this->pet_hinhanh ->getAnhPet();
+        // dd($list);
+        return view('layouts.clients.shop-single', compact('list'));
     }
 }
