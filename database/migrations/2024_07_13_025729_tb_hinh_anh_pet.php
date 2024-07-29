@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('pet_id');
             $table->string('link_anh',255);
-
-        
             $table->foreign('pet_id')->references('id')->on('pets')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

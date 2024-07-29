@@ -42,9 +42,9 @@ class DonHangController extends Controller
     public function create()
     {
         $title = "Thêm mới đơn hàng";
-        $list = $this->users->getList();
+        $list = $this->users->getListHD();
         $listPTDH = $this->phuong_thuc_thanh_toan->getList();
-        $listTT = $this->trang_thai -> getList();
+        $listTT = $this->trang_thai->getList();
         return view('admins.donhang.create',[
             'title' => $title,
             'list' => $list,
@@ -75,7 +75,7 @@ class DonHangController extends Controller
     $order = $this->don_hang->with(['khachHang', 'phuongThucThanhToan', 'trangThai'])->find($id);
 
     if (!$order) {
-        return redirect()->route('admin.orders.index')->with('error', 'Đơn hàng không tồn tại.');
+        return redirect()->route('admin.don_hangs.index')->with('error', 'Đơn hàng không tồn tại.');
     }
 
     return view('admins.donhang.show', [

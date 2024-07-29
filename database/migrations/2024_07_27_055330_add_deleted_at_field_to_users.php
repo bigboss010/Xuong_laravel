@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->softDeletes();
+            $table->foreign('chuc_vu_id')->references('id')->on('chuc_vus')->onDelete('cascade');
         });
     }
 
@@ -23,7 +24,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropSoftDeletes();
-
+            $table->dropForeign(['chuc_vu_id']);
         });
     }
 };

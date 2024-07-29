@@ -11,7 +11,9 @@ class TrangThaiDonHang extends Model
     use HasFactory;
     protected $table = 'trang_thai_don_hangs';
     public function getList()  {
-        $list = DB::table('trang_thai_don_hangs')->get();
+        $list = DB::table('trang_thai_don_hangs')
+        ->orderBy('id')
+        ->get();
         return $list;
     }
 
