@@ -156,4 +156,5 @@ class DonHangController extends Controller
         return redirect()->route('admin.don_hangs.index')->with('success','Xóa thành công!');
 
     }
+    //comment
 }
