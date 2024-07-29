@@ -33,7 +33,11 @@
             <label for="user_id">Tài khoản::</label>
             <select name="user_id" class="form-control" id="user_id">
                 <option value="">Mời chọn</option>
+<<<<<<< HEAD
+                @foreach ($list as $value)  
+=======
                 @foreach ($khachHangs as $index=>$value)  
+>>>>>>> 40296d8385bfd74803203d7709dde4dc3387fb7c
                     <option value="{{ $value->id }}" >{{ $value->name }}</option>
                 @endforeach
             </select>
@@ -81,7 +85,7 @@
             <label for="name">Phương thức thanh toán:</label>
             <select name="phuong_thuc_thanh_toan_id" class="form-control" id="">
                 <option value="">Mời chọn</option>
-                @foreach ($listPTDH as $index=>$value)  
+                @foreach ($listPTDH as $value)  
                     <option value="{{ $value->id }}" >{{ $value->ten_phuong_thuc }}</option>
                 @endforeach
             </select>
@@ -92,7 +96,7 @@
             <label for="name">Trạng thái:</label>
             <select name="trang_thai_id" class="form-control" id="">
                 <option value="">Mời chọn</option>
-                @foreach ($listTT as $index=>$value)  
+                @foreach ($listTT as $value)  
                     <option value="{{ $value->id }}" >{{ $value->ten_trang_thai }}</option>
                 @endforeach
             </select>

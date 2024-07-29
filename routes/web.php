@@ -40,6 +40,8 @@ Route::post('admins/khachhang/restore', [UserController::class, 'restore'])->nam
 Route::get('admins/donhang/trash', [DonHangController::class, 'trash']);
 Route::post('admins/donhang/delete', [DonHangController::class, 'delete'])->name('admin.donhang.delete');
 Route::post('admins/donhang/restore', [DonHangController::class, 'restore'])->name('admin.donhang.restore');
+Route::get('admins/donhang/trash', [DonHangController::class, 'trash']);
+
 Route::group([
     'prefix' => 'admin',
     'as' => 'admin.',
