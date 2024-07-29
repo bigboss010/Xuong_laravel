@@ -33,11 +33,7 @@
             <label for="user_id">Tài khoản::</label>
             <select name="user_id" class="form-control" id="user_id">
                 <option value="">Mời chọn</option>
-<<<<<<< HEAD
-                @foreach ($list as $value)  
-=======
-                @foreach ($khachHangs as $index=>$value)  
->>>>>>> 40296d8385bfd74803203d7709dde4dc3387fb7c
+                @foreach ($khachHangs as $value)  
                     <option value="{{ $value->id }}" >{{ $value->name }}</option>
                 @endforeach
             </select>
