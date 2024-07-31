@@ -36,7 +36,7 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Đăng ký!</h1>
                             </div>
-                            <form action="{{route('postRegister')}}" method="POST" class="user">
+                            <form id="registerForm" action="{{ route('postRegister') }}" method="POST" class="user">
                                 @csrf
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="exampleFirstName"
@@ -48,12 +48,12 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="password" placeholder="Password..." name="password">
+                                        <input type="password" class="form-control form-control-user" id="password"
+                                            placeholder="Password..." name="password">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="rePassword" placeholder="Repeat Password">
+                                        <input type="password" class="form-control form-control-user" id="rePassword"
+                                            placeholder="Repeat Password">
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-user btn-block">
@@ -66,7 +66,7 @@
                                 <a class="small" href="forgot-password.html">Quên mật khẩu?</a>
                             </div>
                             <div class="text-center">
-                                <a class="small" href="{{route('login')}}">Đã có tài khoản? Đăng nhập!</a>
+                                <a class="small" href="{{ route('login') }}">Đã có tài khoản? Đăng nhập!</a>
                             </div>
                         </div>
                     </div>
@@ -77,6 +77,7 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
+    <script src="{{ asset('assets/node_modules/sweetalert2/dist/sweetalert2.all.js') }}"></script>
     <script src="{{ asset('assets/admin/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
@@ -85,7 +86,22 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('assets/admin/js/sb-admin-2.min.js') }}"></script>
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Ngăn chặn hành động submit mặc định
 
+            Swal.fire({
+                title: 'Thông báo',
+                text: 'Đăng ký thành công!',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit(); // Sau khi nhấn "OK", form sẽ được submit thủ công
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

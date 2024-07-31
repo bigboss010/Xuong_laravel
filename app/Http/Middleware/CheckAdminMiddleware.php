@@ -19,7 +19,7 @@ class CheckAdminMiddleware
         if(Auth::check() && Auth::user()->chuc_vu_id == 1){
             return $next($request);
         }else{
-            return redirect()->route('login')->with('errors', 'Bạn phải đăng nhập để vào địa chỉ này!');
+            return redirect()->route('login')->with('msgErrors', 'Bạn phải đăng nhập để vào địa chỉ này!');
         }
     }
 }

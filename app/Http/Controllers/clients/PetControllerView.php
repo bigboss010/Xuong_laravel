@@ -36,40 +36,44 @@ class PetControllerView extends Controller
     {
         $list = $this->pet->find($id);
         $featuredProducts = $this->pet->take(6)->get(); // Truy xuất danh sách sản phẩm nổi bật
-
         return view('layouts.clients.shop-single', compact('list', 'featuredProducts'));
     }
     public function addPetToCart(string $id, int $so_luong = 1)
-{
-    $pet = Pet::findOrFail($id);
-    $cart = session()->get('cart', []);
-    if (isset($cart[$id])) {
-        $cart[$id]['so_luong'] += $so_luong; // Tăng số lượng tùy chỉnh
-    } else {
-        $cart[$id] = [
-            'ten_pet' => $pet->ten_pet,
-            'gia_pet' => $pet->gia_pet,
-            'so_luong' => $so_luong, // Đặt số lượng tùy chỉnh
-            'image' => $pet->image
-        ];
+    {
+        $pet = Pet::findOrFail($id);
+        $cart = session()->get('cart', []);
+        if (isset($cart[$id])) {
+            $cart[$id]['so_luong'] += $so_luong; // Tăng số lượng tùy chỉnh
+        } else {
+            $cart[$id] = [
+                'ten_pet' => $pet->ten_pet,
+                'gia_pet' => $pet->gia_pet,
+                'so_luong' => $so_luong, // Đặt số lượng tùy chỉnh
+                'image' => $pet->image
+            ];
+        }
+        session()->put('cart', $cart);
+        return redirect()->back()->with('success', 'Thêm pet vào giỏ hàng thành công');
     }
-    session()->put('cart', $cart);
-    return redirect()->back()->with('success', 'Thêm pet vào giỏ hàng thành công');
-}
 
 
-    
-        public function showCart()
-{
-    $list = session()->get('cart', []);
-    $total = array_reduce($list, function($sum, $item) {
-        return $sum + ($item['gia_pet'] * $item['so_luong']);
-    }, 0);
 
-    return view('layouts.clients.cart', compact('list','total'));
-}
-      
-    
+    public function showCart()
+    {
+        $list = session()->get('cart', []);
+        $total = array_reduce($list, function ($sum, $item) {
+            return $sum + ($item['gia_pet'] * $item['so_luong']);
+        }, 0);
+
+        return view('layouts.clients.cart', compact('list', 'total'));
+    }
+
+
+    public function showProfile()
+    {
+        return view('layouts.clients.profile');
+    }
+
     public function deletePetCart(Request $request)
     {
         if ($request->id) {
@@ -77,11 +81,8 @@ class PetControllerView extends Controller
             if (isset($cart[$request->id])) {
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
-              
             }
         }
         session()->flash('success', 'Xóa pet khỏi giỏ hàng thành công.');
     }
-    
-   
 }

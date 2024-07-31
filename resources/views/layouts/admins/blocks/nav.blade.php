@@ -176,37 +176,46 @@
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                 aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="">
-                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Profile
+                <a class="dropdown-item" href="{{ route('/.index')}}">
+                    <i class="fas fa-home fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Trang chủ
                 </a>
-                <a class="dropdown-item" href="/">
+                <a class="dropdown-item" href="{{ route('admin.profile.index')}}">
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Thông tin tài khoản
+                </a>
+                <a class="dropdown-item" href="{{ route('logout')}}" onclick="showAlert()" id="logout">
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Logout
+                    Đăng xuất
                 </a>
             </div>
         </li>
-
     </ul>
 
 </nav>
 
- <!-- Logout Modal-->
- <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
- aria-hidden="true">
- <div class="modal-dialog" role="document">
-     <div class="modal-content">
-         <div class="modal-header">
-             <h5 class="modal-title" id="exampleModalLabel">Đăng xuất!</h5>
-             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                 <span aria-hidden="true">×</span>
-             </button>
-         </div>
-         <div class="modal-body">Chọn vào "Đăng xuất" nếu bạn muốn rời đi!</div>
-         <div class="modal-footer">
-             <button class="btn btn-danger" type="button" data-dismiss="modal">Hủy</button>
-             <a class="btn btn-primary" href="{{route('logout')}}">Đăng xuất</a>
-         </div>
-     </div>
- </div>
-</div>
+<script src="{{ asset('assets/node_modules/sweetalert2/dist/sweetalert2.all.js')}}"></script>
+<script>
+    function showAlert() {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Thông báo',
+                text: 'Bạn có chắc chắn muốn đăng xuất không?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Đăng xuất',
+                cancelButtonText: 'Hủy'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Thông báo',
+                        text: 'Đăng xuất thành công!',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        window.location.href = '/logout';
+                    });
+                }
+            });
+        }
+</script>

@@ -121,12 +121,14 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{$list->links("pagination::bootstrap-5")}}
                 @else
                     <div class="d-flex justify-content-center align-items-center">
                         <p>Không có đơn hàng nào được tìm thấy.</p>
                     </div>
                 @endif
             </div>
+            <a href="{{ route('admin.don_hangs.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
         </div>
     </div>
 @endsection

@@ -5,13 +5,8 @@
                 <a href="{{route('/.index')}}">Trang chủ</a>
               
             </li>
-            <li class="has-children">
+            <li>
                 <a href="{{route('/.shop')}}">Cửa hàng</a>
-                <ul class="dropdown">
-                    <li><a href="#">Chó</a></li>
-                    <li><a href="#">Mèo</a></li>
-                   
-                </ul>
             </li>
             <li><a href="shop.html">Thông tin</a></li>
             <li><a href="contact.html">Liên hệ</a></li>

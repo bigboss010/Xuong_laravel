@@ -13,6 +13,7 @@ use App\Http\Controllers\Admins\PetController;
 use App\Http\Controllers\Admins\PhuongThucThanhToanController;
 use App\Http\Controllers\Admins\ChiTietDonHangController;
 use App\Http\Controllers\Admins\DashBoardController;
+use App\Http\Controllers\Admins\ProfileController;
 use App\Http\Controllers\AuthenController;
 use App\Http\Controllers\clients\PetControllerView;
 use App\Models\DonHang;
@@ -33,6 +34,8 @@ Route::post('/login', [AuthenController::class, 'postLogin'])->name('postLogin')
 Route::get('/logout', [AuthenController::class, 'logout'])->name('logout');
 Route::get('/register', [AuthenController::class, 'register'])->name('register');
 Route::post('/postRegister', [AuthenController::class, 'postRegister'])->name('postRegister');
+// Route::get('/auth', [AuthenController::class, 'getAuth'])->name('auth');
+
 
 Route::get('admins/khachhang/trash', [UserController::class, 'trash']);
 Route::post('admins/khachhang/delete', [UserController::class, 'delete'])->name('admin.khachhang.delete');
@@ -41,6 +44,12 @@ Route::get('admins/donhang/trash', [DonHangController::class, 'trash']);
 Route::post('admins/donhang/delete', [DonHangController::class, 'delete'])->name('admin.donhang.delete');
 Route::post('admins/donhang/restore', [DonHangController::class, 'restore'])->name('admin.donhang.restore');
 Route::get('admins/donhang/trash', [DonHangController::class, 'trash']);
+Route::post('admins/danh-mucs/delete', [DanhMucController::class, 'delete'])->name('admin.danh-mucs.delete');
+Route::post('admins/danh-mucs/restore', [DanhMucController::class, 'restore'])->name('admin.danh-mucs.restore');
+Route::get('admins/danh-mucs/trash', [DanhMucController::class, 'trash']);
+Route::post('admins/pets/delete', [PetController::class, 'delete'])->name('admin.pets.delete');
+Route::post('admins/pets/restore', [PetController::class, 'restore'])->name('admin.pets.restore');
+Route::get('admins/pets/trash', [PetController::class, 'trash']);
 
 Route::group([
     'prefix' => 'admin',
@@ -56,10 +65,10 @@ Route::group([
     Route::resource('chi_tiet_don_hangs', ChiTietDonHangController::class);
     Route::resource('danh-muc', DanhMucController::class);
     Route::resource('pet', PetController::class);
-    Route::resource('anh-pet', HinhAnhPetController::class);
     Route::resource('gio-hang', GioHangController::class);
     Route::resource('chi-tiet-gio-hang', CTGioHangController::class);
     Route::resource('binh-luan', BinhLuanController::class);
+    Route::resource('profile', ProfileController::class);
  
 });
 
@@ -73,6 +82,7 @@ Route::group([
     Route::get('/add-to-cart/{id}/{so_luong}', [PetControllerView::class, 'addPetToCart'])->name('addPetToCart');
     Route::get('/shop-cart', [PetControllerView::class, 'showCart'])->name('cart');
     Route::delete('/delete-pet-cart', [PetControllerView::class, 'deletePetCart'])->name('delete.pet.cart');
+    Route::get('/profile', [PetControllerView::class, 'showProfile'])->name('profile');
 
 
     Route::get('/checkout', function () {return view('layouts.clients.checkout');})->name('checkout');

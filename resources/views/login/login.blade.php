@@ -50,34 +50,27 @@
                                             <p class="alert alert-success">{{ session('success') }}</p>
                                         @endif
                                     </div>
-                                    <form action="{{ route('postLogin') }}" method="POST">
+                                    <form id="loginForm" action="{{ route('postLogin') }}" method="POST">
                                         @csrf
                                         <div class="form-group">
-                                            <input type="email"
-                                                class="form-control form-control-user"
-                                                name="email" placeholder="Email...">
+                                            <input type="email" class="form-control form-control-user" name="email" placeholder="Email...">
                                             @error('email')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <input type="password"
-                                                class="form-control form-control-user"
-                                                name="password" placeholder="Password...">
+                                            <input type="password" class="form-control form-control-user" name="password" placeholder="Password...">
                                             @error('password')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" name="remember"
-                                                    id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
+                                                <input type="checkbox" class="custom-control-input" name="remember" id="customCheck">
+                                                <label class="custom-control-label" for="customCheck">Remember Me</label>
                                             </div>
                                         </div>
-                                        <button class="btn btn-primary btn-user btn-block" name="dangnhap">Đăng
-                                            nhập</button>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block" name="dangnhap">Đăng nhập</button>
                                     </form>
                                     <hr>
                                     <div class="text-center">
@@ -97,8 +90,8 @@
         </div>
 
     </div>
-
     <!-- Bootstrap core JavaScript-->
+    <script src="{{ asset('assets/node_modules/sweetalert2/dist/sweetalert2.all.js')}}"></script>
     <script src="{{ asset('assets/admin/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
@@ -107,6 +100,22 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('assets/admin/js/sb-admin-2.min.js') }}"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Ngăn chặn hành động submit mặc định
+    
+            Swal.fire({
+                title: 'Thông báo',
+                text: 'Đăng nhập thành công!',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit(); // Sau khi nhấn "OK", form sẽ được submit thủ công
+                }
+            });
+        });
+    </script>
 
 </body>
 

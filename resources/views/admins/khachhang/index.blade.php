@@ -25,8 +25,10 @@
                 </span>
                 <span class="text">Thêm mới</span>
             </a>
-            <a href="{{ url('admins/khachhang/trash') }}" class="btn btn-secondary">
-                
+            <a href="{{ url('admins/khachhang/trash') }}" class="btn btn-secondary btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-trash"></i>
+                </span>
                 <span class="text">Thùng rác</span>
             </a>
         </div>
@@ -86,7 +88,7 @@
                                         </span>
                                     </a>
                                     <a href="{{ route('admin.users.edit', $value->id) }}"
-                                        class="btn btn-warning btn-icon-split">
+                                        class="btn btn-warning">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-exclamation-triangle"></i>
                                         </span>
@@ -96,7 +98,7 @@
                                     <form action="{{ route('admin.khachhang.delete') }}" method="POST" style="display: inline;">
                                         @csrf
                                         <input type="hidden" name="id" value="{{$value->id }}">
-                                        <button type="submit" class="btn btn-danger btn-icon-split" onclick="return confirm('Bạn có chắc chắn muốn xóa không?!??')">
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa không?!??')">
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-trash"></i>
                                             </span>
@@ -105,7 +107,7 @@
                                     {{-- <form action="{{ url('admins/khachhang/delete',$value->id) }}" method="POST" style="display: inline;">
                                         @csrf
                                      
-                                        <button type="submit" class="btn btn-danger btn-icon-split" onclick="return confirm('Bạn có chắc chắn muốn xóa không?!??')">
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa không?!??')">
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-trash"></i>
                                             </span>
@@ -117,12 +119,12 @@
                         @endforeach
                         </tbody>
                     </table>  
+                    {{$listUsers->links("pagination::bootstrap-5")}}
                 @else
                     <div class="d-flex justify-content-center align-items-center">
                         <p>Không có khách hàng nào được tìm thấy.</p>
                     </div>
                 @endif
-                {{$listUsers->links("pagination::bootstrap-5")}}
             </div>
         </div>
     </div>

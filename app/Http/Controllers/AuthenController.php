@@ -64,4 +64,9 @@ class AuthenController extends Controller
             ->with('success', 'Đăng ký thành công! Hãy đăng nhập nào!');
         }
     }
+
+    // public function getAuth(){
+    //     $auth = Auth::user();
+    //     return view('layouts.clients.partials.header-top', compact('auth'));
+    // }
 }
