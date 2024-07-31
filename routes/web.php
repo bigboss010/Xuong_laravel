@@ -77,14 +77,11 @@ Route::group([
     Route::get('/', [PetControllerView::class, 'index'])->name('index');
     Route::get('/shop',[PetControllerView::class, 'shop'])->name('shop');
     Route::get('/shop-single/{id}', [PetControllerView::class, 'shopSingle'])->name('shop-single');
+    Route::get('/add-to-cart/{id}/{so_luong}', [PetControllerView::class, 'addPetToCart'])->name('addPetToCart');
+    Route::get('/shop-cart', [PetControllerView::class, 'showCart'])->name('cart');
+    Route::delete('/delete-pet-cart', [PetControllerView::class, 'deletePetCart'])->name('delete.pet.cart');
 
 
-
-
-    // Route::get('/', function ()  {return view('layouts.clients.index');})->name('index');
-    // Route::get('/shop-single', function () {return view('layouts.clients.shop-single');})->name('shop-single');
-    // Route::get('/shop', function () {return view('layouts.clients.shop');})->name('shop');
-    Route::get('/cart', function () {return view('layouts.clients.cart');})->name('cart');
     Route::get('/checkout', function () {return view('layouts.clients.checkout');})->name('checkout');
 });
 
