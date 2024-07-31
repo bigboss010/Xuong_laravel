@@ -25,37 +25,51 @@ class PetControllerView extends Controller
         if (!$userId) {
             return 0;
         }
-        
         $cartItems = DB::table('gio_hangs')->where('user_id', $userId)->get();
         $uniquePetIds = [];
-
         foreach ($cartItems as $item) {
             $pet = Pet::find($item->id);
             if ($pet && !in_array($pet->id, $uniquePetIds)) {
                 $uniquePetIds[] = $pet->id;
             }
         }
-
         return count($uniquePetIds);
     }
 
-    public function index(DanhMuc $danhMuc)
+    public function index(Request $request, DanhMuc $danhMuc)
     {
-        $list = $this->pet->getPet();
+        $search = $request->input('search');
         $danhMucs = $danhMuc->getDanhMuc();
         $uniquePetsCount = $this->getUniquePetsCount();
-
-        return view('layouts.clients.index', compact('list', 'danhMucs', 'uniquePetsCount'));
+        $query = $this->pet->getPet();
+        if ($search) {
+            $query->where('ten_pet', 'like', "%{$search}%");
+            $searchResults = $query->get();
+            if ($searchResults->isNotEmpty()) {
+                return redirect()->route('/.shop', ['search' => $search]);
+            } else {
+                return view('layouts.clients.index', compact('danhMucs', 'uniquePetsCount', 'search'));
+            }
+        } else {
+            $list = $query->get();
+            return view('layouts.clients.index', compact('list', 'danhMucs', 'uniquePetsCount'));
+        }
     }
 
-    public function shop(DanhMuc $danhMuc)
+    public function shop(Request $request, DanhMuc $danhMuc)
     {
-        $list = $this->pet->getPet();
+        $search = $request->input('search');
         $danhMucs = $danhMuc->getDanhMuc();
         $uniquePetsCount = $this->getUniquePetsCount();
+        $query = $this->pet->getPet(); 
+        if ($search) {
+            $query->where('ten_pet', 'like', "%{$search}%");
+        }
+        $list = $query->get(); 
 
-        return view('layouts.clients.shop', compact('list', 'danhMucs', 'uniquePetsCount'));
+        return view('layouts.clients.shop', compact('list', 'danhMucs', 'uniquePetsCount', 'search'));
     }
+
 
     public function shopSingle(string $id)
     {
@@ -128,37 +142,64 @@ class PetControllerView extends Controller
         if (!$userId) {
             return redirect()->route('login')->with('error', 'You need to be logged in to view the cart');
         }
-    
+
         $cartItems = DB::table('gio_hangs')->where('user_id', $userId)->get();
         $uniquePetIds = [];
         $list = [];
         $total = 0;
-    
+
         foreach ($cartItems as $item) {
             $pet = Pet::find($item->id);
             if ($pet) {
                 if (!in_array($pet->id, $uniquePetIds)) {
                     $uniquePetIds[] = $pet->id;
                 }
-    
+
                 $list[$item->id] = [
                     'ten_pet' => $pet->ten_pet,
                     'gia_pet' => $pet->gia_pet,
                     'so_luong' => $item->so_luong,
                     'image' => $pet->image
                 ];
-    
+
                 $total += $pet->gia_pet * $item->so_luong;
             }
         }
-    
+
         $uniquePetsCount = count($uniquePetIds);
-    
+
         return view('layouts.clients.cart', compact('list', 'total', 'uniquePetsCount'));
     }
 
     public function showProfile()
     {
         return view('layouts.clients.profile');
+    }
+
+    public function shopDog(Request $request, DanhMuc $danhMuc)
+    {
+        $search = $request->input('search');
+        $danhMucs = $danhMuc->getDanhMuc();
+        $uniquePetsCount = $this->getUniquePetsCount();
+        $query = $this->pet->getPet()->where('ten_danh_muc','like',"%Chó%"); 
+        if ($search) {
+            $query->where('ten_pet', 'like', "%{$search}%");
+        }
+        $list = $query->get(); 
+
+        return view('layouts.clients.shop-dog', compact('list', 'danhMucs', 'uniquePetsCount', 'search'));
+    }
+    public function shopCat(Request $request, DanhMuc $danhMuc)
+    {
+        $search = $request->input('search');
+        $danhMucs = $danhMuc->getDanhMuc();
+        $uniquePetsCount = $this->getUniquePetsCount();
+        $query = $this->pet->getPet()->where('ten_danh_muc','like',"%Mèo%"); 
+        if ($search) {
+            $query->where('ten_pet', 'like', "%{$search}%");
+        }
+        $list = $query->get(); 
+
+        return view('layouts.clients.shop-dog', compact('list', 'danhMucs', 'uniquePetsCount', 'search'));
     }
 }

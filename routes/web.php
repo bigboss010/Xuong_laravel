@@ -87,6 +87,8 @@ Route::group([
     Route::delete('/delete-pet-cart', [PetControllerView::class, 'deletePetCart'])->name('delete.pet.cart');
 
     Route::get('/profile', [PetControllerView::class, 'showProfile'])->name('profile');
+    Route::get('/shop-dog', [PetControllerView::class, 'shopDog'])->name('dog');
+    Route::get('/shop-cat', [PetControllerView::class, 'shopCat'])->name('cat');
 
 
     Route::get('/checkout', function () {
