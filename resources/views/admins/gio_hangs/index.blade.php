@@ -64,7 +64,7 @@
 
                                     <td>
                                         <a href="{{ route('admin.gio-hang.edit', $gioHang->id) }}"
-                                            class="btn btn-warning btn-icon-split">
+                                            class="btn btn-warning">
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-exclamation-triangle"></i>
                                             </span>
@@ -75,7 +75,7 @@
                                             style="display: inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-icon-split"
+                                            <button type="submit" class="btn btn-danger"
                                                 onclick="return confirm('Bạn có chắc chắn muốn xóa không?!??')">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-trash"></i>

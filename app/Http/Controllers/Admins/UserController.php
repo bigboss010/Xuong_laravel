@@ -26,13 +26,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        $listUsers = $this->users->getList()->where('deleted',0)->where('ten_chuc_vu','like',"%User%")->paginate(5);
+        $listUsers = $this->users->getList()->where('deleted', 0)->where('ten_chuc_vu','like',"%User%")->paginate(5);
         $title ="Quản lý tài khoản";
         return view('admins.khachhang.index',compact('listUsers','title'));
     }
     public function trash()
     {
-        $listUsers = $this->users->getList()->where('deleted',1)->where('ten_chuc_vu','like',"%User%")->paginate(5);
+        $listUsers = $this->users->getList()->where('deleted', 1)->where('ten_chuc_vu','like',"%User%")->paginate(5);
         $title ="Thùng rác";
         return view('admins.khachhang.trash',compact('listUsers','title'));
     }

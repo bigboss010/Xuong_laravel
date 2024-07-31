@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin.index')}}">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
@@ -13,8 +13,8 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="index.html">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+        <a class="nav-link" href="{{ route('/.index')}}">
+            <i class="fas fa-home"></i>
             <span>Trang chủ</span></a>
     </li>
 
@@ -38,7 +38,6 @@
                 <h6 class="collapse-header">Options:</h6>
                 <a class="collapse-item" href="{{ route('admin.danh-muc.index')}}">Danh mục</a>
                 <a class="collapse-item" href="{{ route('admin.pet.index')}}">Pets</a>
-                <a class="collapse-item" href="{{ route('admin.anh-pet.index')}}">Ảnh</a>
                 {{-- <a class="collapse-item" href="{{ route('admin.gio-hang.index')}}">Giỏ hàng</a>
                 <a class="collapse-item" href="{{ route('admin.chi-tiet-gio-hang.index')}}">Chi tiết giỏ hàng</a> --}}
                 <a class="collapse-item" href="{{ route('admin.binh-luan.index')}}">Bình luận</a>

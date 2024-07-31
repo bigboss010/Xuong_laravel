@@ -33,6 +33,8 @@ Route::post('/login', [AuthenController::class, 'postLogin'])->name('postLogin')
 Route::get('/logout', [AuthenController::class, 'logout'])->name('logout');
 Route::get('/register', [AuthenController::class, 'register'])->name('register');
 Route::post('/postRegister', [AuthenController::class, 'postRegister'])->name('postRegister');
+// Route::get('/auth', [AuthenController::class, 'getAuth'])->name('auth');
+
 
 Route::get('admins/khachhang/trash', [UserController::class, 'trash']);
 Route::post('admins/khachhang/delete', [UserController::class, 'delete'])->name('admin.khachhang.delete');
@@ -41,6 +43,12 @@ Route::get('admins/donhang/trash', [DonHangController::class, 'trash']);
 Route::post('admins/donhang/delete', [DonHangController::class, 'delete'])->name('admin.donhang.delete');
 Route::post('admins/donhang/restore', [DonHangController::class, 'restore'])->name('admin.donhang.restore');
 Route::get('admins/donhang/trash', [DonHangController::class, 'trash']);
+Route::post('admins/danh-mucs/delete', [DanhMucController::class, 'delete'])->name('admin.danh-mucs.delete');
+Route::post('admins/danh-mucs/restore', [DanhMucController::class, 'restore'])->name('admin.danh-mucs.restore');
+Route::get('admins/danh-mucs/trash', [DanhMucController::class, 'trash']);
+Route::post('admins/pets/delete', [PetController::class, 'delete'])->name('admin.pets.delete');
+Route::post('admins/pets/restore', [PetController::class, 'restore'])->name('admin.pets.restore');
+Route::get('admins/pets/trash', [PetController::class, 'trash']);
 
 Route::group([
     'prefix' => 'admin',
@@ -56,7 +64,6 @@ Route::group([
     Route::resource('chi_tiet_don_hangs', ChiTietDonHangController::class);
     Route::resource('danh-muc', DanhMucController::class);
     Route::resource('pet', PetController::class);
-    Route::resource('anh-pet', HinhAnhPetController::class);
     Route::resource('gio-hang', GioHangController::class);
     Route::resource('chi-tiet-gio-hang', CTGioHangController::class);
     Route::resource('binh-luan', BinhLuanController::class);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DanhMucRequest;
 use App\Models\DanhMuc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -21,8 +22,15 @@ class DanhMucController extends Controller
     public function index()
     {
         $title = 'Danh sách danh mục';
-        $listDanhMucs = $this->danhMucs->getDanhMuc();
+        $listDanhMucs = $this->danhMucs->getListDM()->where('deleted', 0)->paginate(5);
         return view('admins.danh_mucs.index', compact('listDanhMucs', 'title'));
+    }
+
+    public function trash()
+    {
+        $list = $this->danhMucs->getDanhMuc()->where('deleted', 1)->paginate(5);
+        $title ="Thùng rác";
+        return view('admins.danh_mucs.trash',compact('list','title'));
     }
 
     /**
@@ -115,5 +123,23 @@ class DanhMucController extends Controller
         }
         $danhMuc->delete();
         return redirect()->route('admin.danh-muc.index')->with('success', 'Xóa thành công!');
+    }
+
+    public function delete(DanhMucRequest $request)
+    {
+        $list = DanhMuc::findOrFail($request->id);
+        $list->deleted = 1;
+        $list->save();
+        $list->delete();
+        return redirect()->route('admin.danh-muc.index')->with('success','Xóa thành công!');
+
+    }
+    public function restore(DanhMucRequest $request)
+    {
+        $list = DanhMuc::withTrashed()->findOrFail($request->id);
+        $list->deleted = 0;
+        $list->save();
+        $list->restore();
+        return redirect()->route('admin.danh-muc.index')->with('success', 'Khôi phục thành công!');
     }
 }

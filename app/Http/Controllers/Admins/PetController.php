@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PetRequest;
 use App\Models\DanhMuc;
 use App\Models\HinhAnhPet;
 use App\Models\Pet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PetController extends Controller
 {
@@ -22,8 +24,15 @@ class PetController extends Controller
     public function index()
     {
         $title = 'Danh sách pet';
-        $listPets = $this->pets->getPet();
+        $listPets = $this->pets->getPetIndex()->where('pets.deleted', 0)->paginate(5);
         return view('admins.pets.index', compact('listPets', 'title'));
+    }
+
+    public function trash()
+    {
+        $list = $this->pets->getPetIndex()->where('pets.deleted', 1)->paginate(5);
+        $title ="Thùng rác";
+        return view('admins.pets.trash',compact('list','title'));
     }
 
     /**
@@ -111,7 +120,65 @@ class PetController extends Controller
     {
         if ($request->isMethod('PUT')) {
             $data = $request->except('_token', '_method');
-            $this->pets->updatePet($data, $id);
+            
+            $data['is_new'] = $request->has('is_new') ? 1 : 0;
+            $data['is_hot'] = $request->has('is_hot') ? 1 : 0;
+            $data['is_home'] = $request->has('is_home') ? 1 : 0;
+
+            $pet = Pet::query()->findOrFail($id);
+
+            if ($request->hasFile('image')) {
+                if($pet->image && Storage::disk('public')->exists($pet->image)){
+                    Storage::disk('public')->delete($pet->image);
+                }
+                $data['image'] = $request->file('image')->store('uploads/anh_pet', 'public');
+            } else {
+                $data['image'] = $pet->image;
+            }
+            
+            // Xử lí album
+           
+            $currentImages = $pet->hinhAnhPet->pluck('id')->toArray();
+            $arrayCombine = array_combine($currentImages, $currentImages);
+            
+            // Trường hợp xóa
+            foreach($arrayCombine as $key => $value){
+                // Tìm id hình ảnh trong ảnh mới đẩy lên
+                // Nếu không tồn tại tức là đã xóa
+                if(!array_key_exists($key, $request->list_hinh_anh)){
+                    $listAnh = HinhAnhPet::query()->find($key);
+                    // Xóa hình ảnh
+                    if($listAnh->link_anh && Storage::disk('public')->exists($listAnh->link_anh)){
+                        Storage::disk('public')->delete($listAnh->link_anh);
+                        $listAnh->delete();
+                    }
+                }
+            }
+
+            // Trường hợp thêm hoặc sửa
+            foreach($request->list_hinh_anh as $key => $image){
+                if(!array_key_exists($key, $arrayCombine)){
+                    if($request->hasFile("list_hinh_anh.$key")){
+                        $path = $image->store('uploads/list_anh_pet/id_' . $id, 'public');
+                        $pet->hinhAnhPet()->create([
+                            'pet_id' => $id,
+                            'link_anh' => $path
+                        ]);
+                    }
+                }else if (is_file($image) && $request->hasFile("list_hinh_anh.$key")){
+                    // Trường hợp thay đổi hình ảnh
+                    $listAnh = HinhAnhPet::query()->find($key);
+                    if($listAnh && Storage::disk('public')->exists($listAnh->link_anh)){
+                        Storage::disk('public')->delete($listAnh->link_anh);
+                    }
+                    $path = $image->store('uploads/list_anh_pet/id_' . $id, 'public');
+                    $listAnh->update([
+                        'link_anh' => $path
+                    ]);
+                }
+            }
+            
+            $pet->update($data);
             return redirect()->route('admin.pet.index')->with('success', 'Sửa thành công!');
         }
     }
@@ -121,11 +188,39 @@ class PetController extends Controller
      */
     public function destroy(string $id)
     {
-        $pets = $this->pets->find($id);
+        $pets = Pet::query()->findOrFail($id);
         if (!$pets) {
             return redirect()->route('admin.pet.index')->with('errors', 'Pet này không tồn tại!');
         }
+        // Xóa ảnh chính
+        if($pets->image && Storage::disk('public')->exists($pets->image)){
+            Storage::disk('public')->delete($pets->image);
+        }
+
+        // Xóa album
+        $path = 'uploads/list_anh_pet/id_' . $id;
+        if( Storage::disk('public')->exists($path)){
+            Storage::disk('public')->deleteDirectory($path);
+        }
         $pets->delete();
         return redirect()->route('admin.pet.index')->with('success', 'Xóa thành công!');
+    }
+
+    public function delete(PetRequest $request)
+    {
+        $list = Pet::findOrFail($request->id);
+        $list->deleted = 1;
+        $list->save();
+        $list->delete();
+        return redirect()->route('admin.pet.index')->with('success','Xóa thành công!');
+
+    }
+    public function restore(PetRequest $request)
+    {
+        $list = Pet::withTrashed()->findOrFail($request->id);
+        $list->deleted = 0;
+        $list->save();
+        $list->restore();
+        return redirect()->route('admin.pet.index')->with('success', 'Khôi phục thành công!');
     }
 }

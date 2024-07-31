@@ -10,12 +10,20 @@
             <h1 class="h3 text-gray-800">{{ $title }}</h1>
         </div>
 
+       <div class="div">
         <a href="{{ route('admin.pet.create') }}" class="btn btn-primary btn-icon-split">
             <span class="icon text-white-50">
                 <i class="fas fa-arrow-right"></i>
             </span>
             <span class="text">Thêm mới</span>
         </a>
+        <a href="{{ url('admins/pets/trash') }}" class="btn btn-secondary btn-icon-split">
+            <span class="icon text-white-50">
+                <i class="fas fa-trash"></i>
+            </span>
+            <span class="text">Thùng rác</span>
+        </a>
+       </div>
     </div>
     @if (session('errors'))
         <div class="text-center alert alert-danger mb-3">
@@ -96,7 +104,17 @@
                                             </div>
 
                                             <div class="mr-2">
-                                                <form action="{{ route('admin.pet.destroy', $pet->id) }}" method="POST"
+                                                <form action="{{ route('admin.pets.delete') }}" method="POST" style="display: inline;">
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{$pet->id }}">
+                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa không?!??')">
+                                                        <span class="icon text-white-50">
+                                                            <i class="fas fa-trash"></i>
+                                                        </span>
+                                                    </button>
+                                                </form>
+                                                
+                                                {{-- <form action="{{ route('admin.pet.destroy', $pet->id) }}" method="POST"
                                                     style="display: inline;">
                                                     @csrf
                                                     @method('DELETE')
@@ -106,7 +124,7 @@
                                                             <i class="fas fa-trash"></i>
                                                         </span>
                                                     </button>
-                                                </form>
+                                                </form> --}}
                                             </div>
                                         </div>
                                     </td>
@@ -114,6 +132,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{$listPets->links("pagination::bootstrap-5")}}
                 @else
                     <div class="d-flex justify-content-center align-items-center">
                         <p>Không có pet nào được tìm thấy.</p>

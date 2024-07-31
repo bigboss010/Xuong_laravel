@@ -17,8 +17,10 @@
                 </span>
                 <span class="text">Thêm mới</span>
             </a>
-            <a href="{{ url('admins/donhang/trash') }}" class="btn btn-secondary">
-
+            <a href="{{ url('admins/donhang/trash') }}" class="btn btn-secondary btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-trash"></i>
+                </span>
                 <span class="text">Thùng rác</span>
             </a>
         </div>
@@ -97,7 +99,7 @@
                                             </span>
                                         </a>
                                         <a href="{{ route('admin.don_hangs.edit', $value->id) }}"
-                                            class="btn btn-warning btn-icon-split">
+                                            class="btn btn-warning">
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-exclamation-triangle"></i>
                                             </span>
@@ -107,7 +109,7 @@
                                             style="display: inline;">
                                             @csrf
                                             <input type="hidden" name="id" value="{{ $value->id }}">
-                                            <button type="submit" class="btn btn-danger btn-icon-split"
+                                            <button type="submit" class="btn btn-danger"
                                                 onclick="return confirm('Bạn có chắc chắn muốn xóa không?!??')">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-trash"></i>
@@ -119,7 +121,7 @@
                                             style="display: inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-icon-split"
+                                            <button type="submit" class="btn btn-danger"
                                                 onclick="return confirm('Bạn có chắc chắn muốn xóa không?!??')">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-trash"></i>
@@ -132,6 +134,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{$list->links("pagination::bootstrap-5")}}
                 @else
                     <div class="d-flex justify-content-center align-items-center">
                         <p>Không có đơn hàng nào được tìm thấy.</p>

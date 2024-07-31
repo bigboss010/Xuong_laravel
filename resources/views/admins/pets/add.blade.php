@@ -67,7 +67,7 @@
                                         <option selected>-- Vui lòng chọn danh mục --</option>
                                         @foreach ($danhMucs as $item)
                                             <option value="{{ $item->id }}"
-                                                {{ old('ten_pet') == $item->id ? 'select' : '' }}>
+                                                {{ old('ten_pet') == $item->id ? 'selected' : '' }}>
                                                 {{ $item->ten_danh_muc }}
                                             </option>
                                         @endforeach

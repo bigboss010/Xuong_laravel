@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
 class Pet extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $table ='pets';
 
     protected $fillable = [
@@ -44,6 +45,33 @@ class Pet extends Model
         return $this->hasMany(HinhAnhPet::class);
     }
 
+    public function getPetIndex()
+    {
+         return DB::table('pets')
+            ->join('danh_mucs', 'pets.danh_muc_id', '=', 'danh_mucs.id')
+            ->select(
+                'pets.id',
+                'pets.ma_pet',
+                'pets.ten_pet',
+                'pets.image',
+                'pets.so_luong',
+                'pets.gia_pet',
+                'pets.gia_khuyen_mai',
+                'pets.ngay_nhap',
+                'pets.mota',
+                'pets.trang_thai',
+                'pets.is_new',
+                'pets.is_hot',
+                'pets.is_home',
+                'pets.luot_xem',
+                'pets.deleted',
+                'pets.deleted_at',
+                'pets.created_at',
+                'pets.updated_at',
+                'danh_mucs.ten_danh_muc'
+            )
+            ->orderBy('pets.id');
+    }
     public function getPet()
     {
         $listPets = DB::table('pets')
@@ -63,6 +91,8 @@ class Pet extends Model
                 'pets.is_hot',
                 'pets.is_home',
                 'pets.luot_xem',
+                'pets.deleted',
+                'pets.deleted_at',
                 'pets.created_at',
                 'pets.updated_at',
                 'danh_mucs.ten_danh_muc'

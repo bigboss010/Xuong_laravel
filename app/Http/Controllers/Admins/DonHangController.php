@@ -30,7 +30,7 @@ class DonHangController extends Controller
     public function index()
     {
         $title = "Danh sách đơn hàng";
-        $list=$this->don_hang->getDH()->where('deleted',0);
+        $list=$this->don_hang->getDH()->where('don_hangs.deleted', 0)->paginate(5);;
         return view('admins.donhang.index',[
             'title' => $title,
             'list' => $list
@@ -38,7 +38,7 @@ class DonHangController extends Controller
     }
     public function trash()
     {
-        $list=$this->don_hang->getDH()->where('deleted',1);
+        $list=$this->don_hang->getDH()->where('don_hangs.deleted', 1)->paginate(5);;
         $title ="Thùng rác";
         return view('admins.donhang.trash',[
             'title' => $title,

@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
 class DanhMuc extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'hinh_anh',
@@ -18,6 +19,13 @@ class DanhMuc extends Model
     
     public function pet() {
         return $this->hasMany(Pet::class);
+    }
+
+    public function getListDM()
+    {
+        return DB::table('danh_mucs')
+            ->orderBy('id');
+            
     }
 
     public function getDanhMuc()
