@@ -3,7 +3,7 @@
         <div class="row">
             @foreach ($danhMucs->take(2) as $item)
             <div class="col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="">
-                <a class="block-2-item" href="#">
+                <a class="block-2-item" href="{{route('/.shop')}}">
                     <figure class="image">
                         <img src="{{Storage::url($item->hinh_anh)}}" width="250px" height="200px" alt="" class="img-fluid">
                     </figure>

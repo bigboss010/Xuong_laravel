@@ -73,34 +73,32 @@ class Pet extends Model
             ->orderBy('pets.id');
     }
     public function getPet()
-    {
-        $listPets = DB::table('pets')
-            ->join('danh_mucs', 'pets.danh_muc_id', '=', 'danh_mucs.id')
-            ->select(
-                'pets.id',
-                'pets.ma_pet',
-                'pets.ten_pet',
-                'pets.image',
-                'pets.so_luong',
-                'pets.gia_pet',
-                'pets.gia_khuyen_mai',
-                'pets.ngay_nhap',
-                'pets.mota',
-                'pets.trang_thai',
-                'pets.is_new',
-                'pets.is_hot',
-                'pets.is_home',
-                'pets.luot_xem',
-                'pets.deleted',
-                'pets.deleted_at',
-                'pets.created_at',
-                'pets.updated_at',
-                'danh_mucs.ten_danh_muc'
-            )
-            ->orderBy('pets.id')
-            ->get();
-        return $listPets;
-    }
+{
+    return DB::table('pets')
+        ->join('danh_mucs', 'pets.danh_muc_id', '=', 'danh_mucs.id')
+        ->select(
+            'pets.id',
+            'pets.ma_pet',
+            'pets.ten_pet',
+            'pets.image',
+            'pets.so_luong',
+            'pets.gia_pet',
+            'pets.gia_khuyen_mai',
+            'pets.ngay_nhap',
+            'pets.mota',
+            'pets.trang_thai',
+            'pets.is_new',
+            'pets.is_hot',
+            'pets.is_home',
+            'pets.luot_xem',
+            'pets.deleted',
+            'pets.deleted_at',
+            'pets.created_at',
+            'pets.updated_at',
+            'danh_mucs.ten_danh_muc'
+        )
+        ->orderBy('pets.id');
+}
 
     public function createPet($data)
     {
