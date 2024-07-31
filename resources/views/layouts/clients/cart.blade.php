@@ -74,11 +74,9 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="row mb-5">
-                    <div class="col-md-6 mb-3 mb-md-0">
-                        <button class="btn btn-primary btn-sm btn-block">Update Cart</button>
-                    </div>
+                    
                     <div class="col-md-6">
-                        <button class="btn btn-outline-primary btn-sm btn-block">Continue Shopping</button>
+                        <button class="btn btn-outline-primary btn-sm btn-block"><a href="{{route('/.shop')}}">Continue Shopping</a></button>
                     </div>
                 </div>
                 <div class="row">
@@ -107,14 +105,14 @@
                             <div class="col-md-6">
                                 <span class="text-black">Tổng tiền</span>
                             </div>
-                            {{-- <div class="col-md-6 text-right">
-                                <strong class="text-black">{{ number_format(array_sum(array_map(function($item) { return $item['gia_pet'] * $item['so_luong']; }, $pet)), 0, ',', '.') }} VNĐ</strong>
-                            </div> --}}
+                            <div class="col-md-6 text-right">
+                                <strong class="text-black">{{ number_format($total, 0, ',', '.') }} VNĐ</strong>
+                            </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-12">
-                                <button class="btn btn-primary btn-lg py-3 btn-block" onclick="window.location='checkout.html'">Proceed To Checkout</button>
+                                <button class="btn btn-primary btn-lg py-3 btn-block" onclick="window.location='checkout.html'"><a href="{{route('/.checkout')}}">Proceed To Checkout</a></button>
                             </div>
                         </div>
                     </div>

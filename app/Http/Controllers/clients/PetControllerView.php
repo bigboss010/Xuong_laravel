@@ -58,11 +58,17 @@ class PetControllerView extends Controller
 }
 
 
-    public function showCart()
-    {
-        $list = Pet::all();
-        return view('layouts.clients.cart', compact('list'));
-    }
+    
+        public function showCart()
+{
+    $list = session()->get('cart', []);
+    $total = array_reduce($list, function($sum, $item) {
+        return $sum + ($item['gia_pet'] * $item['so_luong']);
+    }, 0);
+
+    return view('layouts.clients.cart', compact('list','total'));
+}
+      
     
     public function deletePetCart(Request $request)
     {
