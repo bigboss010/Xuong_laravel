@@ -36,12 +36,19 @@
                                         </a>
                                     @endif
                                 @endif
-                                <a class="dropdown-item" href="{{ route('/.index') }}">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Thông tin tài khoản
-                                </a>
                                 @if (Auth::user())
-                                    <a class="dropdown-item" href="{{ route('logout') }}">
+                                    <a class="dropdown-item" href="{{ route('/.profile') }}">
+                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Thông tin tài khoản
+                                    </a>
+                                @elseif(!Auth::user())
+                                    <a class="dropdown-item" id="!profile" href="#">
+                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Thông tin tài khoản
+                                    </a>
+                                @endif
+                                @if (Auth::user())
+                                    <a class="dropdown-item" onclick="showAlert()" id="logout" href="#">
                                         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Đăng xuất
                                     </a>
@@ -55,7 +62,7 @@
                         </li>
                         </li>
                         <li>
-                            <a href="cart.html" class="site-cart">
+                            <a href="{{ route('/.cart') }}" class="site-cart">
                                 <span class="icon icon-shopping_cart"></span>
                                 <span class="count">{{ session('cart') ? count(session('cart')) : '0' }}</span>
                             </a>
@@ -70,3 +77,38 @@
         </div>
     </div>
 </div>
+
+<script src="{{ asset('assets/node_modules/sweetalert2/dist/sweetalert2.all.js')}}"></script>
+<script>
+      document.getElementById('!profile').addEventListener('click', function() {
+          Swal.fire({
+              title: 'Thông báo',
+              text: 'Vui lòng đăng nhập để vào mục này!',
+              icon: 'error',
+              confirmButtonText: 'OK'
+          });
+      });
+
+      function showAlert() {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Thông báo',
+                text: 'Bạn có chắc chắn muốn đăng xuất không?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Đăng xuất',
+                cancelButtonText: 'Hủy'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Thông báo',
+                        text: 'Đăng xuất thành công!',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        window.location.href = '/logout';
+                    });
+                }
+            });
+        }
+  </script>

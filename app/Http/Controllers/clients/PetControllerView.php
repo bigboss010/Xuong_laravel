@@ -36,7 +36,6 @@ class PetControllerView extends Controller
     {
         $list = $this->pet->find($id);
         $featuredProducts = $this->pet->take(6)->get(); // Truy xuất danh sách sản phẩm nổi bật
-
         return view('layouts.clients.shop-single', compact('list', 'featuredProducts'));
     }
     public function addPetToCart(string $id, int $so_luong = 1)
@@ -62,6 +61,11 @@ class PetControllerView extends Controller
     {
         $list = Pet::all();
         return view('layouts.clients.cart', compact('list'));
+    }
+
+    public function showProfile()
+    {
+        return view('layouts.clients.profile');
     }
     
     public function deletePetCart(Request $request)

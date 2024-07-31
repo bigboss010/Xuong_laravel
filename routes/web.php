@@ -13,6 +13,7 @@ use App\Http\Controllers\Admins\PetController;
 use App\Http\Controllers\Admins\PhuongThucThanhToanController;
 use App\Http\Controllers\Admins\ChiTietDonHangController;
 use App\Http\Controllers\Admins\DashBoardController;
+use App\Http\Controllers\Admins\ProfileController;
 use App\Http\Controllers\AuthenController;
 use App\Http\Controllers\clients\PetControllerView;
 use App\Models\DonHang;
@@ -67,6 +68,7 @@ Route::group([
     Route::resource('gio-hang', GioHangController::class);
     Route::resource('chi-tiet-gio-hang', CTGioHangController::class);
     Route::resource('binh-luan', BinhLuanController::class);
+    Route::resource('profile', ProfileController::class);
  
 });
 
@@ -80,6 +82,7 @@ Route::group([
     Route::get('/add-to-cart/{id}/{so_luong}', [PetControllerView::class, 'addPetToCart'])->name('addPetToCart');
     Route::get('/shop-cart', [PetControllerView::class, 'showCart'])->name('cart');
     Route::delete('/delete-pet-cart', [PetControllerView::class, 'deletePetCart'])->name('delete.pet.cart');
+    Route::get('/profile', [PetControllerView::class, 'showProfile'])->name('profile');
 
 
     Route::get('/checkout', function () {return view('layouts.clients.checkout');})->name('checkout');
