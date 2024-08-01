@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class DonHang extends Model
 {
     use HasFactory, SoftDeletes;
-    // protected $table='don_hangs';
+    protected $table='don_hangs';
     protected $fillable = [
         'ma_don_hang',
         'user_id',
@@ -24,7 +24,7 @@ class DonHang extends Model
         'phuong_thuc_thanh_toan_id',
         'trang_thai_id',
         'deleted',
-        'deleted'
+        // 'deleted_at'
     ];
 
     public function user(){
@@ -32,7 +32,7 @@ class DonHang extends Model
     }
 
     public function chiTietDonHang(){
-        return $this->hasMany(ChiTietDonHang::class);
+        return $this->hasMany(ChiTietDonHang::class , 'don_hang_id');
     }
 
     public function khachHang()

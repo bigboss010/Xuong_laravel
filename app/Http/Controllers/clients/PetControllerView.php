@@ -8,6 +8,7 @@ use App\Models\KhachHang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\OrderRequest;
 use App\Models\BinhLuan;
 use App\Models\DonHang;
 use App\Models\HinhAnhPet;
@@ -87,41 +88,43 @@ class PetControllerView extends Controller
     }
 
     public function addPetToCart(string $id, int $so_luong = 1)
-    {
-        $userId = auth()->id();
-        if (!$userId) {
-            return redirect()->back()->with('error', 'bạn phải đăng nhập trước khi add');
-        }
-        $pet = Pet::findOrFail($id);
-        $cartKey = 'cart_' . $userId;
-        $cart = session()->get($cartKey, []);
-
-        if (isset($cart[$id])) {
-            $cart[$id]['so_luong'] += $so_luong;
-        } else {
-            $cart[$id] = [
-                'ten_pet' => $pet->ten_pet,
-                'gia_pet' => $pet->gia_pet,
-                'so_luong' => $so_luong,
-                'image' => $pet->image
-            ];
-        }
-
-        $existingCartItem = DB::table('gio_hangs')->where('user_id', $userId)->where('id', $id)->first();
-        if ($existingCartItem) {
-            DB::table('gio_hangs')->where('user_id', $userId)->where('id', $id)
-                ->update(['so_luong' => $existingCartItem->so_luong + $so_luong]);
-        } else {
-            DB::table('gio_hangs')->insert([
-                'id' => $id,
-                'user_id' => $userId,
-                'so_luong' => $so_luong
-            ]);
-        }
-
-        session()->put($cartKey, $cart);
-        return redirect()->back()->with('success', 'Thêm pet vào giỏ hàng thành công');
+{
+    $userId = auth()->id();
+    if (!$userId) {
+        return redirect()->back()->with('error', 'bạn phải đăng nhập trước khi add');
     }
+    $pet = Pet::findOrFail($id);
+    $cartKey = 'cart_' . $userId;
+    $cart = session()->get($cartKey, []);
+    // dd($cart[$id]);
+
+    if (isset($cart[$id])) {
+        $cart[$id]['so_luong'] += $so_luong;
+    } else {
+        $cart[$id] = [
+            'ten_pet' => $pet->ten_pet,
+            'gia_pet' => $pet->gia_pet,
+            'so_luong' => $so_luong,
+            'image' => $pet->image
+        ];
+    }
+
+    $existingCartItem = DB::table('gio_hangs')->where('user_id', $userId)->where('id', $id)->first();
+    if ($existingCartItem) {
+        DB::table('gio_hangs')->where('user_id', $userId)->where('id', $id)
+            ->update(['so_luong' => $existingCartItem->so_luong + $so_luong]);
+    } else {
+        DB::table('gio_hangs')->insert([
+            'user_id' => $userId,
+            'so_luong' => $so_luong
+        ]);
+    }
+
+    session()->put($cartKey, $cart);
+    // dd(session()->get($cartKey)); // Kiểm tra giỏ hàng trong session
+    return redirect()->back()->with('success', 'Thêm pet vào giỏ hàng thành công');
+}
+
 
 
     public function deletePetCart(Request $request)
@@ -164,40 +167,39 @@ class PetControllerView extends Controller
     }
 
 
-    public function checkout()
-    {
-        $userId = auth()->id();
-        if (!$userId) {
-            return redirect()->route('login')->with('error', 'Bạn cần đăng nhập rồi mới được thanh toán');
-        }
+    // public function checkout()
+    // {
+    //     $userId = auth()->id();
+    //     if (!$userId) {
+    //         return redirect()->route('login')->with('error', 'Bạn cần đăng nhập rồi mới được thanh toán');
+    //     }
 
-        $cartKey = 'cart_' . $userId;
-        $cartItems = session()->get($cartKey, []);
+    //     $cartKey = 'cart_' . $userId;
+    //     $cartItems = session()->get($cartKey, []);
      
-        $subtotal = 0;
-        $total = 0;
+    //     $subtotal = 0;
+    //     $total = 0;
 
-        if (!empty($cartItems)) {
-            foreach ($cartItems as $item) {
-                $subtotal += $item['gia_pet'] * $item['so_luong'];
-            }
-            $total = $subtotal;
-        }
+    //     if (!empty($cartItems)) {
+    //         foreach ($cartItems as $item) {
+    //             $subtotal += $item['gia_pet'] * $item['so_luong'];
+    //         }
+    //         $total = $subtotal;
+    //     }
 
-        return view('layouts.clients.checkout', compact('cartItems', 'subtotal', 'total'));
-    }
-
+    //     return view('layouts.clients.checkout', compact('cartItems', 'subtotal', 'total'));
+    // }
 
 
     public function showProfile()
     {
         return view('layouts.clients.profile');
     }
-    public function showDonHang()
-    {
-        $donHangs = Auth::user()->donHang;
-        return view('layouts.clients.donhang', compact('donHangs'));
-    }
+    // public function showDonHang()
+    // {
+    //     $donHangs = Auth::user()->donHang;
+    //     return view('layouts.clients.donhang', compact('donHangs'));
+    // }
 
     public function showDetailDonHang($id){
         $donHangDetail = DonHang::query()->findOrFail($id);
