@@ -133,8 +133,8 @@ class BinhLuanController extends Controller
             )
             ->where('pets.id', $pet_id)
             ->where('binh_luans.trang_thai', 1)
-            ->orderBy('binh_luans.id')
-            ->get();
+            ->orderByDesc('binh_luans.id')
+            ->paginate(5);
 
         $output = '';
         foreach ($comments as $comment) {

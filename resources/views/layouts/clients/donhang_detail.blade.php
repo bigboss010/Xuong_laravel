@@ -39,9 +39,9 @@
             <h4>Thông tin hóa đơn</h4>
             <p>
                 Mã đơn hàng: {{ $donHangDetail->ma_don_hang }}<br>
-                Ngày đặt: {{ $donHangDetail->ngay_dat }}<br>
-                Trạng thái: {{ $donHangDetail->ten_trang_thai }}<br>
-                Phương thức thanh toán: {{ $donHangDetail->ten_phuong_thuc }}<br>
+                Ngày đặt: {{ (New DateTime($donHangDetail->ngay_dat))->format('d/m/Y') }}<br>
+                Trạng thái đơn hàng: {{ $trangThaiDH[$donHangDetail->trang_thai_id] }}<br>
+                Trạng thái thanh toán: {{ $trangThaiTT[$donHangDetail->phuong_thuc_thanh_toan_id] }}<br>
             </p>
         </div>
     </div>
