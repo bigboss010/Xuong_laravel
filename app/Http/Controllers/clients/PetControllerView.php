@@ -88,41 +88,44 @@ class PetControllerView extends Controller
     }
 
     public function addPetToCart(string $id, int $so_luong = 1)
-    {
-        $userId = auth()->id();
-        if (!$userId) {
-            return redirect()->back()->with('error', 'bạn phải đăng nhập trước khi add');
-        }
-        $pet = Pet::findOrFail($id);
-        $cartKey = 'cart_' . $userId;
-        $cart = session()->get($cartKey, []);
-
-        if (isset($cart[$id])) {
-            $cart[$id]['so_luong'] += $so_luong;
-        } else {
-            $cart[$id] = [
-                'ten_pet' => $pet->ten_pet,
-                'gia_pet' => $pet->gia_pet,
-                'so_luong' => $so_luong,
-                'image' => $pet->image
-            ];
-        }
-
-        $existingCartItem = DB::table('gio_hangs')->where('user_id', $userId)->where('id', $id)->first();
-        if ($existingCartItem) {
-            DB::table('gio_hangs')->where('user_id', $userId)->where('id', $id)
-                ->update(['so_luong' => $existingCartItem->so_luong + $so_luong]);
-        } else {
-            DB::table('gio_hangs')->insert([
-                'id' => $id,
-                'user_id' => $userId,
-                'so_luong' => $so_luong
-            ]);
-        }
-
-        session()->put($cartKey, $cart);
-        return redirect()->back()->with('success', 'Thêm pet vào giỏ hàng thành công');
+{
+    $userId = auth()->id();
+    if (!$userId) {
+        return redirect()->back()->with('error', 'bạn phải đăng nhập trước khi add');
     }
+    $pet = Pet::findOrFail($id);
+    $cartKey = 'cart_' . $userId;
+    $cart = session()->get($cartKey, []);
+    dd($cart[$id]);
+
+    if (isset($cart[$id])) {
+        $cart[$id]['so_luong'] += $so_luong;
+    } else {
+        $cart[$id] = [
+            'ten_pet' => $pet->ten_pet,
+            'gia_pet' => $pet->gia_pet,
+            'so_luong' => $so_luong,
+            'image' => $pet->image
+        ];
+    }
+
+    $existingCartItem = DB::table('gio_hangs')->where('user_id', $userId)->where('id', $id)->first();
+    if ($existingCartItem) {
+        DB::table('gio_hangs')->where('user_id', $userId)->where('id', $id)
+            ->update(['so_luong' => $existingCartItem->so_luong + $so_luong]);
+    } else {
+        DB::table('gio_hangs')->insert([
+            'id' => $id,
+            'user_id' => $userId,
+            'so_luong' => $so_luong
+        ]);
+    }
+
+    session()->put($cartKey, $cart);
+    // dd(session()->get($cartKey)); // Kiểm tra giỏ hàng trong session
+    return redirect()->back()->with('success', 'Thêm pet vào giỏ hàng thành công');
+}
+
 
 
     public function deletePetCart(Request $request)

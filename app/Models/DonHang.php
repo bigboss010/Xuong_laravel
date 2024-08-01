@@ -32,7 +32,7 @@ class DonHang extends Model
     }
 
     public function chiTietDonHang(){
-        return $this->hasMany(ChiTietDonHang::class);
+        return $this->hasMany(ChiTietDonHang::class , 'don_hang_id');
     }
 
     public function khachHang()

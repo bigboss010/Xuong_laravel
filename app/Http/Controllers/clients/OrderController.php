@@ -49,38 +49,43 @@ class OrderController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(OrderRequest $request)
-    {
+{
+    if ($request->isMethod('post')) {
+        $userId = auth()->id();
+        $cartKey = 'cart_' . $userId;
+        $carts = session()->get($cartKey, []);
+// dd($carts);
+        if (empty($carts)) {
+            return redirect()->route('/.cart')->with('error', 'Giỏ hàng trống, vui lòng thêm sản phẩm trước khi tạo đơn hàng');
+        }
 
-        if ($request->isMethod('post')) {
-
-            DB::beginTransaction();
-            try {
-                $params = $request->except('_token');
-                $params['ma_don_hang'] = $this->generateUniqueOrderCode();
-                $donHang = DonHang::query()->create($params);
-                $donHangId = $donHang->id;
-                $carts = session()->get('cart', []);
-                foreach ($carts as $key => $item) {
-                    $thanhTien = $item['gia'] * $item['so_luong'];
-                    $donHang->chiTietDonHang()->create([
-                        'don_hang_id' => $donHangId,
-                        'pet_id' => $key,
-                        'thanh_tien' => $thanhTien,
-                        'gia' => $item['gia'],
-                        'so_luong' => $item['so_luong'],
-                    ]);
-                }
-                
-                DB::commit();
-                session()->put('cart', []);
-                return redirect()->route('donhangs.index')->with('success', 'Đơn hàng đã được tạo thành công');
-            } catch (\Exception $e) {
-                DB::rollBack();
-                return redirect()->route('/.cart')->with('error', 'Có lỗi khi tạo đơn hàng, vui lòng thử lại sau');
-            }
+        DB::beginTransaction();
+        try {
+            $params = $request->except('_token');
+            $params['ma_don_hang'] = $this->generateUniqueOrderCode();
+            $donHang = DonHang::create($params);
+            $donHangId = $donHang->id;
           
+            foreach ($carts as $key => $item) {
+                $thanhTien = $item['gia_pet'] * $item['so_luong'];
+                $donHang->chiTietDonHang()->create([
+                    'don_hang_id' => $donHangId,
+                    'pet_id' => $key,
+                    'thanh_tien' => $thanhTien,
+                    'gia' => $item['gia_pet'],
+                    'so_luong' => $item['so_luong'],
+                    
+                ]);
+            }
+            DB::commit();
+            session()->put($cartKey, []);
+            return redirect()->route('donhangs.index')->with('success', 'Đơn hàng đã được tạo thành công');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('/.cart')->with('error', 'Có lỗi khi tạo đơn hàng: ' . $e->getMessage());
         }
     }
+}
 
     /**
      * Display the specified resource.
