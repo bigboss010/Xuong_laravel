@@ -20,6 +20,7 @@
         <div class="container">
             <div class="row mb-5">
                 <form class="col-md-12" method="post">
+                    @csrf
                     <div class="site-blocks-table">
                         <table class="table table-bordered">
                             <thead>
@@ -33,8 +34,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (session('cart'))
-                                    @foreach (session('cart') as $id => $details)
+                                @if (!empty($list))
+                                    @foreach ($list as $id => $details)
                                         <tr rowId="{{ $id }}">
                                             <td class="product-thumbnail">
                                                 <img src="{{ Storage::url($details['image']) }}" alt="Image"
@@ -82,7 +83,6 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="row mb-5">
-
                         <div class="col-md-6">
                             <button class="btn btn-outline-primary btn-sm btn-block"><a
                                     href="{{ route('/.shop') }}">Continue Shopping</a></button>

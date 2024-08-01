@@ -83,11 +83,12 @@
                 </div>
                 <div class="col-md-3 order-1 mb-5 mb-md-0">
                    
-                    <div class="border p-4 rounded mb-1">
-                        
-               
+                    <div class="border p-4 rounded mb-4">
+                  
+                       
+                    
                         <div class="mt-4">
-                            <h3 class="mb-1 h6 text-uppercase text-black d-block">Tìm kiếm theo giá </h3>
+                            <h3 class="mb-3 h6 text-uppercase text-black d-block">Tìm kiếm theo giá </h3>
                             <div id="slider-range" class="border-primary"></div>
                             <input type="text" name="text" id="amount" class="form-control border-0 pl-0 bg-white"
                                 disabled="" />

@@ -29,6 +29,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::get('/login', [AuthenController::class, 'login'])->name('login');
 Route::post('/login', [AuthenController::class, 'postLogin'])->name('postLogin');
 Route::get('/logout', [AuthenController::class, 'logout'])->name('logout');
@@ -69,27 +70,31 @@ Route::group([
     Route::resource('chi-tiet-gio-hang', CTGioHangController::class);
     Route::resource('binh-luan', BinhLuanController::class);
     Route::resource('profile', ProfileController::class);
- 
 });
 
 Route::group([
     'prefix' => '/',
     'as' => '/.'
-], function() {
+], function () {
     Route::get('/', [PetControllerView::class, 'index'])->name('index');
-    Route::get('/shop',[PetControllerView::class, 'shop'])->name('shop');
+    Route::get('/shop', [PetControllerView::class, 'shop'])->name('shop');
     Route::get('/shop-single/{id}', [PetControllerView::class, 'shopSingle'])->name('shop-single');
+    // Route::get('/add-to-cart/{id}/{so_luong}', [PetControllerView::class, 'addPetToCart'])->name('addPetToCart');
+    // Route::get('/shop-cart', [PetControllerView::class, 'showCart'])->name('cart');
+    // Route::delete('/delete-pet-cart', [PetControllerView::class, 'deletePetCart'])->name('delete.pet.cart');
     Route::get('/add-to-cart/{id}/{so_luong}', [PetControllerView::class, 'addPetToCart'])->name('addPetToCart');
     Route::get('/shop-cart', [PetControllerView::class, 'showCart'])->name('cart');
     Route::delete('/delete-pet-cart', [PetControllerView::class, 'deletePetCart'])->name('delete.pet.cart');
+
     Route::get('/profile', [PetControllerView::class, 'showProfile'])->name('profile');
     Route::get('/donhang', [PetControllerView::class, 'showDonHang'])->name('donhang');
     Route::post('/binh-luan', [BinhLuanController::class, 'load_comment'])->name('load_comment');
     Route::post('/send-binh-luan', [PetControllerView::class, 'send_comment'])->name('send_comment');
+    Route::get('/shop-dog', [PetControllerView::class, 'shopDog'])->name('dog');
+    Route::get('/shop-cat', [PetControllerView::class, 'shopCat'])->name('cat');
 
 
-    Route::get('/checkout', function () {return view('layouts.clients.checkout');})->name('checkout');
+    Route::get('/checkout', function () {
+        return view('layouts.clients.checkout');
+    })->name('checkout');
 });
-
-
-

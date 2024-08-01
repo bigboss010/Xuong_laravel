@@ -17,15 +17,23 @@
             var ele = $(this);
             if (confirm("Bạn chắc chắn muốn xóa pet này chứ?")) {
                 $.ajax({
-                    url: '{{ route('/.delete.pet.cart') }}',
+                    url: '{{ route('/.delete.pet.cart') }}', // Use named route
                     method: "DELETE",
                     data: {
                         _token: '{{ csrf_token() }}',
                         id: ele.parents("tr").attr("rowId")
                     },
                     success: function (response) {
-               window.location.reload();
-            }
+                        if (response.success) {
+                            ele.closest("tr").remove(); // Remove the row from the table
+                            alert(response.success); // Show success message
+                        } else {
+                            alert(response.error); // Show error message
+                        }
+                    },
+                    error: function (xhr) {
+                        alert('An error occurred while deleting the item.');
+                    }
                 });
             }
         });
