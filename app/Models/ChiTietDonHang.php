@@ -9,6 +9,22 @@ use Illuminate\Support\Facades\DB;
 class ChiTietDonHang extends Model
 {
     use HasFactory;
+    protected $fillable =[
+        'don_hang_id',
+        'pet_id ',
+        'thanh_tien',
+        'gia',
+        'so_luong',
+    ];
+
+    public function donhang()
+    {
+        return $this->belongsTo(donhang::class);
+    }
+    public function sanpham()
+    {
+        return $this->belongsTo(Pet::class);
+    }
 
     public function getList()  {
         $list = DB::table('chi_tiet_don_hangs')

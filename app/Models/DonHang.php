@@ -10,17 +10,38 @@ use Illuminate\Support\Facades\DB;
 class DonHang extends Model
 {
     use HasFactory, SoftDeletes;
-    // protected $table='don_hangs';
-    // protected $fillable = ['deleted']; // Ensure 'deleted' is fillable
+    protected $table='don_hangs';
+    protected $fillable = [
+        'deleted',
+        'deleted_at',
+        'ma_don_hang ',
+        'user_id ',
+        'ten_nguoi_nhan',
+        'email_nguoi_nhan',
+        'so_dien_thoai_nguoi_nhan',
+        'dia_chi_nguoi_nhan',
+        'ngay_dat',
+        'tong_tien',
+        'ghi_chu',
+        'phuong_thuc_thanh_toan_id ',
+        'trang_thai_id ',
+    ]; // Ensure 'deleted' is fillable
 
     public function khachHang()
     {
         return $this->belongsTo(KhachHang::class, 'user_id');
     }
-
+    public function cartItems()
+    {
+        return $this->hasMany(GioHang::class, 'order_id');
+    }
     public function phuongThucThanhToan()
     {
         return $this->belongsTo(PhuongThucThanhToan::class, 'phuong_thuc_thanh_toan_id');
+    }
+    public function chiTietDonHang()
+    {
+        return $this->hasMany(ChiTietDonHang::class);
     }
 
     public function trangThai()

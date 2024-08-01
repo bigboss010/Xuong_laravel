@@ -15,6 +15,7 @@ use App\Http\Controllers\Admins\ChiTietDonHangController;
 use App\Http\Controllers\Admins\DashBoardController;
 use App\Http\Controllers\Admins\ProfileController;
 use App\Http\Controllers\AuthenController;
+use App\Http\Controllers\clients\OrderController;
 use App\Http\Controllers\clients\PetControllerView;
 use App\Models\DonHang;
 use Illuminate\Support\Facades\Route;
@@ -89,9 +90,11 @@ Route::group([
     Route::get('/profile', [PetControllerView::class, 'showProfile'])->name('profile');
     Route::get('/shop-dog', [PetControllerView::class, 'shopDog'])->name('dog');
     Route::get('/shop-cat', [PetControllerView::class, 'shopCat'])->name('cat');
+    Route::get('/checkout', [PetControllerView::class, 'checkout'])->name('checkout');
 
 
-    Route::get('/checkout', function () {
-        return view('layouts.clients.checkout');
-    })->name('checkout');
+
+    // Route::get('/checkout', function () {
+    //     return view('layouts.clients.checkout');
+    // })->name('checkout');
 });

@@ -4,9 +4,11 @@ namespace App\Http\Controllers\clients;
 
 use App\Models\Pet;
 use App\Models\DanhMuc;
+use App\Models\KhachHang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class PetControllerView extends Controller
 {
@@ -61,11 +63,11 @@ class PetControllerView extends Controller
         $search = $request->input('search');
         $danhMucs = $danhMuc->getDanhMuc();
         $uniquePetsCount = $this->getUniquePetsCount();
-        $query = $this->pet->getPet(); 
+        $query = $this->pet->getPet();
         if ($search) {
             $query->where('ten_pet', 'like', "%{$search}%");
         }
-        $list = $query->get(); 
+        $list = $query->get();
 
         return view('layouts.clients.shop', compact('list', 'danhMucs', 'uniquePetsCount', 'search'));
     }
@@ -84,7 +86,7 @@ class PetControllerView extends Controller
     {
         $userId = auth()->id();
         if (!$userId) {
-            return redirect()->back()->with('error', 'You need to be logged in to add items to the cart');
+            return redirect()->back()->with('error', 'bạn phải đăng nhập trước khi add');
         }
         $pet = Pet::findOrFail($id);
         $cartKey = 'cart_' . $userId;
@@ -100,6 +102,7 @@ class PetControllerView extends Controller
                 'image' => $pet->image
             ];
         }
+
         $existingCartItem = DB::table('gio_hangs')->where('user_id', $userId)->where('id', $id)->first();
         if ($existingCartItem) {
             DB::table('gio_hangs')->where('user_id', $userId)->where('id', $id)
@@ -111,9 +114,11 @@ class PetControllerView extends Controller
                 'so_luong' => $so_luong
             ]);
         }
+
         session()->put($cartKey, $cart);
         return redirect()->back()->with('success', 'Thêm pet vào giỏ hàng thành công');
     }
+
 
     public function deletePetCart(Request $request)
     {
@@ -140,36 +145,45 @@ class PetControllerView extends Controller
     {
         $userId = auth()->id();
         if (!$userId) {
-            return redirect()->route('login')->with('error', 'You need to be logged in to view the cart');
+            return redirect()->route('login')->with('error', 'Bạn cần đăng nhập để xem giỏ hàng');
         }
 
-        $cartItems = DB::table('gio_hangs')->where('user_id', $userId)->get();
-        $uniquePetIds = [];
-        $list = [];
+        $cartKey = 'cart_' . $userId;
+        $cartItems = session()->get($cartKey, []);
         $total = 0;
 
         foreach ($cartItems as $item) {
-            $pet = Pet::find($item->id);
-            if ($pet) {
-                if (!in_array($pet->id, $uniquePetIds)) {
-                    $uniquePetIds[] = $pet->id;
-                }
-
-                $list[$item->id] = [
-                    'ten_pet' => $pet->ten_pet,
-                    'gia_pet' => $pet->gia_pet,
-                    'so_luong' => $item->so_luong,
-                    'image' => $pet->image
-                ];
-
-                $total += $pet->gia_pet * $item->so_luong;
-            }
+            $total += $item['gia_pet'] * $item['so_luong'];
         }
 
-        $uniquePetsCount = count($uniquePetIds);
-
-        return view('layouts.clients.cart', compact('list', 'total', 'uniquePetsCount'));
+        return view('layouts.clients.cart', compact('cartItems', 'total'));
     }
+
+
+    public function checkout()
+    {
+        $userId = auth()->id();
+        if (!$userId) {
+            return redirect()->route('login')->with('error', 'Bạn cần đăng nhập rồi mới được thanh toán');
+        }
+
+        $cartKey = 'cart_' . $userId;
+        $cartItems = session()->get($cartKey, []);
+     
+        $subtotal = 0;
+        $total = 0;
+
+        if (!empty($cartItems)) {
+            foreach ($cartItems as $item) {
+                $subtotal += $item['gia_pet'] * $item['so_luong'];
+            }
+            $total = $subtotal;
+        }
+
+        return view('layouts.clients.checkout', compact('cartItems', 'subtotal', 'total'));
+    }
+
+
 
     public function showProfile()
     {
@@ -181,11 +195,11 @@ class PetControllerView extends Controller
         $search = $request->input('search');
         $danhMucs = $danhMuc->getDanhMuc();
         $uniquePetsCount = $this->getUniquePetsCount();
-        $query = $this->pet->getPet()->where('ten_danh_muc','like',"%Chó%"); 
+        $query = $this->pet->getPet()->where('ten_danh_muc', 'like', "%Chó%");
         if ($search) {
             $query->where('ten_pet', 'like', "%{$search}%");
         }
-        $list = $query->get(); 
+        $list = $query->get();
 
         return view('layouts.clients.shop-dog', compact('list', 'danhMucs', 'uniquePetsCount', 'search'));
     }
@@ -194,11 +208,11 @@ class PetControllerView extends Controller
         $search = $request->input('search');
         $danhMucs = $danhMuc->getDanhMuc();
         $uniquePetsCount = $this->getUniquePetsCount();
-        $query = $this->pet->getPet()->where('ten_danh_muc','like',"%Mèo%"); 
+        $query = $this->pet->getPet()->where('ten_danh_muc', 'like', "%Mèo%");
         if ($search) {
             $query->where('ten_pet', 'like', "%{$search}%");
         }
-        $list = $query->get(); 
+        $list = $query->get();
 
         return view('layouts.clients.shop-dog', compact('list', 'danhMucs', 'uniquePetsCount', 'search'));
     }
