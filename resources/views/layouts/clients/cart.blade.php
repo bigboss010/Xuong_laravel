@@ -16,6 +16,11 @@
         {{ session('success') }}
     </div>
 @endif
+@if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
 <div class="site-section">
     <div class="container">
         <div class="row mb-5">
@@ -116,7 +121,7 @@
                                 @if (Auth::user())
                                     <div class="col-md-12">
                                         <button class="btn btn-primary btn-lg py-3 btn-block"><a
-                                                href="{{ route('/.checkout') }}" style="color: white">Proceed To
+                                                href="{{ route('donhangs.create') }}" style="color: white">Proceed To
                                                 Checkout</a></button>
                                     </div>
                                 @elseif(!Auth::user())

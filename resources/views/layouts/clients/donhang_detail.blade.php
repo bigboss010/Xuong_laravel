@@ -71,7 +71,7 @@
                             </td>
                             <td>{{ $pets->ma_pet }}</td>
                             <td>{{ $pets->ten_pet }}</td>
-                            <td>{{ number_format($item->don_gia, 0, ',', '.') }} VNĐ</td>
+                            <td>{{ number_format($item->gia, 0, ',', '.') }} VNĐ</td>
                             <td>{{ $item->so_luong}}</td>
                             <td>{{ number_format($item->thanh_tien, 0, ',', '.') }} VNĐ</td>
                         </tr>

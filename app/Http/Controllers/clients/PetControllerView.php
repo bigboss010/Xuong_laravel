@@ -8,6 +8,7 @@ use App\Models\KhachHang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\OrderRequest;
 use App\Models\BinhLuan;
 use App\Models\DonHang;
 use App\Models\HinhAnhPet;
@@ -164,40 +165,39 @@ class PetControllerView extends Controller
     }
 
 
-    public function checkout()
-    {
-        $userId = auth()->id();
-        if (!$userId) {
-            return redirect()->route('login')->with('error', 'Bạn cần đăng nhập rồi mới được thanh toán');
-        }
+    // public function checkout()
+    // {
+    //     $userId = auth()->id();
+    //     if (!$userId) {
+    //         return redirect()->route('login')->with('error', 'Bạn cần đăng nhập rồi mới được thanh toán');
+    //     }
 
-        $cartKey = 'cart_' . $userId;
-        $cartItems = session()->get($cartKey, []);
+    //     $cartKey = 'cart_' . $userId;
+    //     $cartItems = session()->get($cartKey, []);
      
-        $subtotal = 0;
-        $total = 0;
+    //     $subtotal = 0;
+    //     $total = 0;
 
-        if (!empty($cartItems)) {
-            foreach ($cartItems as $item) {
-                $subtotal += $item['gia_pet'] * $item['so_luong'];
-            }
-            $total = $subtotal;
-        }
+    //     if (!empty($cartItems)) {
+    //         foreach ($cartItems as $item) {
+    //             $subtotal += $item['gia_pet'] * $item['so_luong'];
+    //         }
+    //         $total = $subtotal;
+    //     }
 
-        return view('layouts.clients.checkout', compact('cartItems', 'subtotal', 'total'));
-    }
-
+    //     return view('layouts.clients.checkout', compact('cartItems', 'subtotal', 'total'));
+    // }
 
 
     public function showProfile()
     {
         return view('layouts.clients.profile');
     }
-    public function showDonHang()
-    {
-        $donHangs = Auth::user()->donHang;
-        return view('layouts.clients.donhang', compact('donHangs'));
-    }
+    // public function showDonHang()
+    // {
+    //     $donHangs = Auth::user()->donHang;
+    //     return view('layouts.clients.donhang', compact('donHangs'));
+    // }
 
     public function showDetailDonHang($id){
         $donHangDetail = DonHang::query()->findOrFail($id);
