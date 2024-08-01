@@ -8,6 +8,7 @@ use App\Models\ChucVu;
 use App\Models\KhachHang;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -96,8 +97,13 @@ class UserController extends Controller
     {
         if ($request->isMethod('PUT')) {
             $data = $request->except('_token', '_method');
-            $this->users->updateUser($data, $id);
-            return redirect()->route('admin.users.index')->with('success','Sửa thành công!');
+            User::where('id', Auth::user()->id)->update([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'phoneNumber' => $data['phoneNumber'],
+                'address' => $data['address']
+            ]);
+            return redirect()->back()->with('success','Sửa thành công!');
         }
     }
     public function delete(UserRequest $request)

@@ -12,7 +12,7 @@
         </div>
     </div>
     @if (session('success'))
-        <div class="alert alert-success">
+        <div class=" text-center alert alert-success">
             {{ session('success') }}
         </div>
     @endif
@@ -47,7 +47,7 @@
             <div class="d-flex justify-content-center">
                 <div class="d-flex align-items-center">
                     <div class="mr-3">
-                        <a href="#" class="btn btn-warning">Cập nhật thông tin</a>
+                        <a href="{{route('/.profileEdit', Auth::user()->id)}}" class="btn btn-warning">Cập nhật thông tin</a>
                     </div>
                     <div>
                         <a href="#" class="btn btn-secondary">Đổi mật khẩu</a>

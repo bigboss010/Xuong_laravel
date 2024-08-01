@@ -92,6 +92,8 @@ Route::group([
     Route::delete('/delete-pet-cart', [PetControllerView::class, 'deletePetCart'])->name('delete.pet.cart');
 
     Route::get('/profile', [PetControllerView::class, 'showProfile'])->name('profile');
+    Route::get('/profile/edit/{id}', [PetControllerView::class, 'profileEdit'])->name('profileEdit');
+    Route::get('/profile/update/{id}', [PetControllerView::class, 'profileUpdate'])->name('profileUpdate');
     Route::get('/donhang', [PetControllerView::class, 'showDonHang'])->name('donhang');
     Route::get('/donhang/detail/{id}', [PetControllerView::class, 'showDetailDonHang'])->name('showDetailDonHang');
     Route::put('/donhang/update/{id}', [PetControllerView::class, 'updateDonHang'])->name('updateDonHang');

@@ -194,6 +194,11 @@ class PetControllerView extends Controller
     {
         return view('layouts.clients.profile');
     }
+    public function profileEdit(Request $request)
+    {
+        return view('layouts.clients.profileEdit');
+    }
+   
     public function showDonHang()
     {
         $donHangs = Auth::user()->donHang;
