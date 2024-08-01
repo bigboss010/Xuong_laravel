@@ -120,8 +120,6 @@ class PetControllerView extends Controller
         return redirect()->back()->with('success', 'Thêm pet vào giỏ hàng thành công');
     }
 
-
-
     public function showCart()
     {
         $userId = auth()->id();
@@ -161,10 +159,15 @@ class PetControllerView extends Controller
     {
         return view('layouts.clients.profile');
     }
-    public function showDonHang(DonHang $donHang)
+    public function showDonHang()
     {
-        $donHang = $donHang->getDH()->where('user_id', Auth::user()->id)->get();
-        return view('layouts.clients.donhang', compact('donHang'));
+        $donHangs = Auth::user()->donHang;
+        return view('layouts.clients.donhang', compact('donHangs'));
+    }
+
+    public function showDetailDonHang($id){
+        $donHangDetail = DonHang::query()->findOrFail($id);
+        return view('layouts.clients.donhang_detail', compact('donHangDetail'));
     }
 
     public function shopDog(Request $request, DanhMuc $danhMuc)
@@ -207,4 +210,6 @@ class PetControllerView extends Controller
         $comment->thoi_gian = $thoi_gian;
         $comment->save();
     }
+
+   
 }

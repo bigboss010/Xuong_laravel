@@ -10,6 +10,22 @@ class ChiTietDonHang extends Model
 {
     use HasFactory;
 
+    public $fillable = [
+        'don_hang_id ',
+        'pet_id',
+        'thanh_tien',
+        'don_gia',
+        'so_luong'
+    ];
+
+    public function donHang(){
+        return $this->belongsTo(DonHang::class);
+    }
+
+    public function pet(){
+        return $this->belongsTo(Pet::class);
+    }
+
     public function getList()  {
         $list = DB::table('chi_tiet_don_hangs')
         ->join('pets', 'pets.id','=','chi_tiet_don_hangs.pet_id')
