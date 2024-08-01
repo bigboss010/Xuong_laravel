@@ -13,6 +13,7 @@ use App\Models\DonHang;
 use App\Models\HinhAnhPet;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Stmt\TryCatch;
 
 class PetControllerView extends Controller
 {
@@ -196,13 +197,32 @@ class PetControllerView extends Controller
     public function showDonHang()
     {
         $donHangs = Auth::user()->donHang;
-        return view('layouts.clients.donhang', compact('donHangs'));
+        $trangThaiDH = DonHang::TRANG_THAI_DON_HANG;
+        return view('layouts.clients.donhang', compact('donHangs', 'trangThaiDH'));
     }
 
     public function showDetailDonHang($id){
         $donHangDetail = DonHang::query()->findOrFail($id);
-        return view('layouts.clients.donhang_detail', compact('donHangDetail'));
+        $trangThaiDH = DonHang::TRANG_THAI_DON_HANG;
+        $trangThaiTT = DonHang::TRANG_THAI_THANH_TOAN;
+        return view('layouts.clients.donhang_detail', compact('donHangDetail', 'trangThaiDH', 'trangThaiTT'));
     }
+
+    public function updateDonHang(Request $request, $id){
+        $donHang = DonHang::query()->findOrFail($id);
+
+        try{
+            if($request->has('huy_don_hang')){
+                $donHang->update(['trang_thai_id' => DonHang::HUY_DON_HANG]);
+            }elseif($request->has('da_giao_hang')){
+                $donHang->update(['trang_thai_id' => DonHang::DA_GIAO_HANG]);
+            }
+            DB::commit();
+        }catch(\Exception $e){
+            DB::rollBack();
+        }
+        return redirect()->back();
+       }
 
     public function shopDog(Request $request, DanhMuc $danhMuc)
     {
@@ -245,5 +265,4 @@ class PetControllerView extends Controller
         $comment->save();
     }
 
-   
 }

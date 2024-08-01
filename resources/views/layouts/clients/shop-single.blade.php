@@ -72,6 +72,7 @@
                                 <div id="comments-section">
 
                                 </div>
+                                <div id="pagination-links"></div>
                                 @if (Auth::user())
                                     <form id="comment-form">
                                         @csrf
@@ -111,12 +112,12 @@
         $(document).ready(function() {
             load_comment();
 
-            function load_comment() {
+            function load_comment(page = 1) {
                 var pet_id = $('.pet_id').val();
                 var _token = $('input[name="_token"]').val();
 
                 $.ajax({
-                    url: "/binh-luan",
+                    url: "/binh-luan?page=" + page,
                     type: 'POST',
                     data: {
                         pet_id: pet_id,
@@ -153,6 +154,12 @@
                     }
                 });
             });
+
+            $(document).on('click', '.pagination a', function(event) {
+            event.preventDefault();
+            var page = $(this).attr('href').split('page=')[1];
+            load_comment(page);
+    });
         });
     </script>
 @endsection

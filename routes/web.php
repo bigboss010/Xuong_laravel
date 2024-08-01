@@ -94,6 +94,7 @@ Route::group([
     Route::get('/profile', [PetControllerView::class, 'showProfile'])->name('profile');
     Route::get('/donhang', [PetControllerView::class, 'showDonHang'])->name('donhang');
     Route::get('/donhang/detail/{id}', [PetControllerView::class, 'showDetailDonHang'])->name('showDetailDonHang');
+    Route::put('/donhang/update/{id}', [PetControllerView::class, 'updateDonHang'])->name('updateDonHang');
     Route::post('/binh-luan', [BinhLuanController::class, 'load_comment'])->name('load_comment');
     Route::post('/send-binh-luan', [PetControllerView::class, 'send_comment'])->name('send_comment');
     Route::get('/shop-dog', [PetControllerView::class, 'shopDog'])->name('dog');

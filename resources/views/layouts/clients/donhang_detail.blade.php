@@ -39,9 +39,9 @@
             <h4>Thông tin hóa đơn</h4>
             <p>
                 Mã đơn hàng: {{ $donHangDetail->ma_don_hang }}<br>
-                Ngày đặt: {{ $donHangDetail->ngay_dat }}<br>
-                Trạng thái: {{ $donHangDetail->ten_trang_thai }}<br>
-                Phương thức thanh toán: {{ $donHangDetail->ten_phuong_thuc }}<br>
+                Ngày đặt: {{ (New DateTime($donHangDetail->ngay_dat))->format('d/m/Y') }}<br>
+                Trạng thái đơn hàng: {{ $trangThaiDH[$donHangDetail->trang_thai_id] }}<br>
+                Trạng thái thanh toán: {{ $trangThaiTT[$donHangDetail->phuong_thuc_thanh_toan_id] }}<br>
             </p>
         </div>
     </div>
@@ -71,7 +71,7 @@
                             </td>
                             <td>{{ $pets->ma_pet }}</td>
                             <td>{{ $pets->ten_pet }}</td>
-                            <td>{{ number_format($item->don_gia, 0, ',', '.') }} VNĐ</td>
+                            <td>{{ number_format($item->gia, 0, ',', '.') }} VNĐ</td>
                             <td>{{ $item->so_luong}}</td>
                             <td>{{ number_format($item->thanh_tien, 0, ',', '.') }} VNĐ</td>
                         </tr>

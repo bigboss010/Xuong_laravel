@@ -30,10 +30,14 @@ class DonHangController extends Controller
     public function index()
     {
         $title = "Danh sách đơn hàng";
-        $list=$this->don_hang->getDH()->where('don_hangs.deleted', 0)->paginate(5);;
+        $list=$this->don_hang->getDH()->where('don_hangs.deleted', 0)->paginate(5);
+        $trangThaiDH = DonHang::TRANG_THAI_DON_HANG;
+        $trangThaiTT = DonHang::TRANG_THAI_THANH_TOAN;
         return view('admins.donhang.index',[
-            'title' => $title,
-            'list' => $list
+            'title'       => $title,
+            'list'        => $list,
+            'trangThaiDH' => $trangThaiDH,
+            'trangThaiTT' => $trangThaiTT
         ]);
     }
     public function trash()
@@ -121,11 +125,24 @@ class DonHangController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        if($request->isMethod('PUT')){
-            $data = $request->except('_token','_method');
-            $this->don_hang->updateDonHang($data,$id);
-            return redirect()->route('admin.don_hangs.index')->with('success','Sửa thành công!');
-        }
+       $donHang = DonHang::query()->findOrFail($id);
+       $currentTT = $donHang->trang_thai_id;
+       $newTT = $request->input('trang_thai_id'); 
+       $trangThais = array_keys(DonHang::TRANG_THAI_DON_HANG);
+
+       // Kiểm tra nếu đơn hàng đã hủy thì không được thay đổi nữa
+       if($currentTT === DonHang::HUY_DON_HANG){
+        return redirect()->route('admin.don_hangs.index')->with('errors', 'Đơn hàng đã bị hủy. Không thể thay đổi trạng thái!');
+       }
+
+       // Kiểm tra nếu trạng thái mới không nằm sau trang thái hiện tại
+       if(array_search($newTT, $trangThais) < array_search($currentTT, $trangThais)){
+        return redirect()->route('admin.don_hangs.index')->with('errors', 'Không thể cập nhật ngược lại trạng thái!');
+       }
+       $donHang->trang_thai_id = $newTT;
+       $donHang->save();
+       return redirect()->route('admin.don_hangs.index')->with('success', 'Cập nhật trạng thái thành công!');
+
     }
 
     public function delete(DonHangRequest $request)
