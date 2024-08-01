@@ -28,7 +28,7 @@ class DanhMucController extends Controller
 
     public function trash()
     {
-        $list = $this->danhMucs->getDanhMuc()->where('deleted', 1)->paginate(5);
+        $list = $this->danhMucs->getListDM()->where('deleted', 1)->paginate(5);
         $title ="Thùng rác";
         return view('admins.danh_mucs.trash',compact('list','title'));
     }

@@ -8,6 +8,10 @@ use App\Models\KhachHang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\BinhLuan;
+use App\Models\DonHang;
+use App\Models\HinhAnhPet;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class PetControllerView extends Controller
@@ -189,6 +193,16 @@ class PetControllerView extends Controller
     {
         return view('layouts.clients.profile');
     }
+    public function showDonHang()
+    {
+        $donHangs = Auth::user()->donHang;
+        return view('layouts.clients.donhang', compact('donHangs'));
+    }
+
+    public function showDetailDonHang($id){
+        $donHangDetail = DonHang::query()->findOrFail($id);
+        return view('layouts.clients.donhang_detail', compact('donHangDetail'));
+    }
 
     public function shopDog(Request $request, DanhMuc $danhMuc)
     {
@@ -216,4 +230,20 @@ class PetControllerView extends Controller
 
         return view('layouts.clients.shop-dog', compact('list', 'danhMucs', 'uniquePetsCount', 'search'));
     }
+
+    public function send_comment(Request $request)
+    {  
+        $user_id = $request->user_id;
+        $pet_id = $request->pet_id;
+        $noi_dung = $request->noi_dung;
+        $thoi_gian = Carbon::now();
+        $comment = New BinhLuan();  
+        $comment->noi_dung = $noi_dung;
+        $comment->user_id = $user_id;
+        $comment->pet_id = $pet_id;
+        $comment->thoi_gian = $thoi_gian;
+        $comment->save();
+    }
+
+   
 }

@@ -17,12 +17,17 @@ class ChiTietDonHang extends Model
         'so_luong',
     ];
 
-    public function donhang()
-    {
-        return $this->belongsTo(donhang::class);
-    }
+    
     public function sanpham()
     {
+        return $this->belongsTo(Pet::class);
+    }
+
+    public function donHang(){
+        return $this->belongsTo(DonHang::class);
+    }
+
+    public function pet(){
         return $this->belongsTo(Pet::class);
     }
 

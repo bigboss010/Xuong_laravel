@@ -112,11 +112,21 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <button class="btn btn-primary btn-lg py-3 btn-block">
-                                    <a href="{{ route('/.checkout') }}" style="color: white">Proceed To Checkout</a>
-                                </button>
+                            <div class="row">
+                                @if (Auth::user())
+                                    <div class="col-md-12">
+                                        <button class="btn btn-primary btn-lg py-3 btn-block"><a
+                                                href="{{ route('/.checkout') }}" style="color: white">Proceed To
+                                                Checkout</a></button>
+                                    </div>
+                                @elseif(!Auth::user())
+                                    <div class="col-md-12">
+                                        <button class="btn btn-primary btn-lg py-3 btn-block"><a
+                                                href="#" id="checkout" onclick="showAlert3()" style="color: white">Proceed To
+                                                Checkout</a></button>
+                                    </div>
+                                @endif
+
                             </div>
                         </div>
                     </div>
@@ -126,3 +136,18 @@
     </div>
 </div>
 @endsection
+
+<script src="{{ asset('assets/node_modules/sweetalert2/dist/sweetalert2.all.js') }}"></script>
+<script>
+    function showAlert3() {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Thông báo',
+              text: 'Vui lòng đăng nhập để vào mục này!',
+              icon: 'error',
+              confirmButtonText: 'OK'
+            });
+        }
+</script>
+@yield('scripts')
+

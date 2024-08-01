@@ -10,12 +10,10 @@ use Illuminate\Support\Facades\DB;
 class DonHang extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $table='don_hangs';
+    // protected $table='don_hangs';
     protected $fillable = [
-        'deleted',
-        'deleted_at',
-        'ma_don_hang ',
-        'user_id ',
+        'ma_don_hang',
+        'user_id',
         'ten_nguoi_nhan',
         'email_nguoi_nhan',
         'so_dien_thoai_nguoi_nhan',
@@ -23,9 +21,19 @@ class DonHang extends Model
         'ngay_dat',
         'tong_tien',
         'ghi_chu',
-        'phuong_thuc_thanh_toan_id ',
-        'trang_thai_id ',
-    ]; // Ensure 'deleted' is fillable
+        'phuong_thuc_thanh_toan_id',
+        'trang_thai_id',
+        'deleted',
+        'deleted'
+    ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function chiTietDonHang(){
+        return $this->hasMany(ChiTietDonHang::class);
+    }
 
     public function khachHang()
     {
@@ -39,11 +47,6 @@ class DonHang extends Model
     {
         return $this->belongsTo(PhuongThucThanhToan::class, 'phuong_thuc_thanh_toan_id');
     }
-    public function chiTietDonHang()
-    {
-        return $this->hasMany(ChiTietDonHang::class);
-    }
-
     public function trangThai()
     {
         return $this->belongsTo(TrangThaiDonHang::class, 'trang_thai_id');

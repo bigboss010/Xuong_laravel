@@ -31,30 +31,31 @@
                                 @if (Auth::user())
                                     @if (Auth::user()->chuc_vu_id == 1)
                                         <a class="dropdown-item" href="{{ route('admin.index') }}">
-                                            <i class="fas fa-home fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            <i class="fas fa-user-shield fa-sm fa-fw mr-2 text-gray-400"></i>
                                             Admin
                                         </a>
                                     @endif
                                 @endif
                                 @if (Auth::user())
                                     <a class="dropdown-item" href="{{ route('/.profile') }}">
-                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Thông tin tài khoản
+                                        <i class="fas fa-user-circle fa-sm fa-fw mr-2 text-gray-400"></i>                                 
+                                        Tài khoản của tôi
                                     </a>
-                                @elseif(!Auth::user())
-                                    <a class="dropdown-item" id="!profile" href="#">
-                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Thông tin tài khoản
+                                @endif
+                                @if (Auth::user())
+                                    <a class="dropdown-item" href="{{ route('/.donhang') }}">
+                                        <i class="icon icon-shopping_cart fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Đơn hàng
                                     </a>
                                 @endif
                                 @if (Auth::user())
                                     <a class="dropdown-item" onclick="showAlert()" id="logout" href="#">
-                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Đăng xuất
                                     </a>
                                 @elseif(!Auth::user())
                                     <a class="dropdown-item" href="{{ route('login') }}">
-                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        <i class="fas fa-sign-in-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Đăng nhập
                                     </a>
                                 @endif
@@ -80,14 +81,14 @@
 
 <script src="{{ asset('assets/node_modules/sweetalert2/dist/sweetalert2.all.js')}}"></script>
 <script>
-      document.getElementById('!profile').addEventListener('click', function() {
-          Swal.fire({
-              title: 'Thông báo',
-              text: 'Vui lòng đăng nhập để vào mục này!',
-              icon: 'error',
-              confirmButtonText: 'OK'
-          });
-      });
+    //   document.getElementById('!profile').addEventListener('click', function() {
+    //       Swal.fire({
+    //           title: 'Thông báo',
+    //           text: 'Vui lòng đăng nhập để vào mục này!',
+    //           icon: 'error',
+    //           confirmButtonText: 'OK'
+    //       });
+    //   });
 
       function showAlert() {
             event.preventDefault();
