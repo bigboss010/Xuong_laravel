@@ -45,15 +45,14 @@
                     <label for="trang_thai" class="form-lable">Trạng thái:</label>
                     <div class="col-sm-10 mb-3 d-flex gap-2">
                         <div class="form-check mr-3">
-                            <input type="radio" class="form-check-input" id="trang_thai"
-                                value="1" name="trang_thai" checked>
+                            <input type="radio" class="form-check-input" id="trang_thai" value="1" name="trang_thai"
+                                checked>
                             <label for="trang_thai" class="form-check-lable">
                                 Hiển thị
                             </label>
                         </div>
                         <div class="form-check">
-                            <input type="radio" class="form-check-input" id="trang_thai"
-                                value="0" name="trang_thai">
+                            <input type="radio" class="form-check-input" id="trang_thai" value="0" name="trang_thai">
                             <label for="trang_thai" class="form-check-lable">
                                 Ẩn
                             </label>
@@ -68,7 +67,8 @@
                 <br>
                 <button type="submit" class="btn btn-outline-success mr-2">Thêm mới</button>
 
-                <a href="{{ route('admin.binh-luan.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
+                <a href="{{ route('admin.binh-luan.index') }}"><button type="button" class="btn btn-info">Danh
+                        sách</button></a>
             </form>
         </div>
     </div>

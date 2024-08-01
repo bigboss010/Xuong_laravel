@@ -37,7 +37,7 @@
 
 
                 <br>
-                <button type="submit" class="btn btn-outline-success mr-2">Sửa</button>
+                <button type="submit" class="btn btn-outline-warning mr-2">Sửa</button>
 
                 <a href="{{ route('admin.danh-muc.index') }}"><button type="button" class="btn btn-info">Danh sách</button></a>
             </form>

@@ -6,7 +6,11 @@ use App\Models\Pet;
 use App\Models\DanhMuc;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\BinhLuan;
+use App\Models\DonHang;
 use App\Models\HinhAnhPet;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class PetControllerView extends Controller
 {
@@ -56,8 +60,6 @@ class PetControllerView extends Controller
         return redirect()->back()->with('success', 'Thêm pet vào giỏ hàng thành công');
     }
 
-
-
     public function showCart()
     {
         $list = session()->get('cart', []);
@@ -73,6 +75,11 @@ class PetControllerView extends Controller
     {
         return view('layouts.clients.profile');
     }
+    public function showDonHang(DonHang $donHang)
+    {
+        $donHang = $donHang->getDH()->where('user_id', Auth::user()->id)->get();
+        return view('layouts.clients.donhang', compact('donHang'));
+    }
 
     public function deletePetCart(Request $request)
     {
@@ -84,5 +91,19 @@ class PetControllerView extends Controller
             }
         }
         session()->flash('success', 'Xóa pet khỏi giỏ hàng thành công.');
+    }
+
+    public function send_comment(Request $request)
+    {  
+        $user_id = $request->user_id;
+        $pet_id = $request->pet_id;
+        $noi_dung = $request->noi_dung;
+        $thoi_gian = Carbon::now();
+        $comment = New BinhLuan();  
+        $comment->noi_dung = $noi_dung;
+        $comment->user_id = $user_id;
+        $comment->pet_id = $pet_id;
+        $comment->thoi_gian = $thoi_gian;
+        $comment->save();
     }
 }

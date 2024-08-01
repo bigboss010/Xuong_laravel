@@ -96,7 +96,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{$listDanhMucs->links("pagination::bootstrap-5")}}
+                {{$list->links("pagination::bootstrap-5")}}
                 @else
                     <div class="d-flex justify-content-center align-items-center">
                         <p>Không có khách hàng nào được tìm thấy.</p>

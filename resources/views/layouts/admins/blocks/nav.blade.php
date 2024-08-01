@@ -182,10 +182,10 @@
                 </a>
                 <a class="dropdown-item" href="{{ route('admin.profile.index')}}">
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Thông tin tài khoản
+                   Tài khoản của tôi
                 </a>
                 <a class="dropdown-item" href="{{ route('logout')}}" onclick="showAlert()" id="logout">
-                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                     Đăng xuất
                 </a>
             </div>

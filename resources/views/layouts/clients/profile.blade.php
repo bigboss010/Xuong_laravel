@@ -26,7 +26,7 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th class="product-thumbnail">Họ và tên</th>
+                                    <th class="product-name">Họ và tên</th>
                                     <th class="product-name">Email</th>
                                     <th class="product-name">Số điện thoại</th>
                                     <th class="product-name">Địa chỉ</th>
@@ -34,19 +34,10 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    {{-- <td class="product-thumbnail">
-                                        <img src="{{ Storage::url($details['image']) }}" alt="Image" class="img-fluid">
-                                    </td> --}}
-                                    <td class="product-name">
-                                        <h2 class="h5 text-black">{{ Auth::user()->name }}</h2>
-                                    </td>
+                                    <td class="h5 text-black">{{ Auth::user()->name }}</td>
                                     <td class="h5 text-black">{{ Auth::user()->email }}</td>
-                                    <td class="h5 text-black">
-                                        {{ Auth::user()->phoneNumber == null ? 'Chưa cập nhật' : Auth::user()->phoneNumber }}
-                                    </td>
-                                    <td class="h5 text-black">
-                                        {{ Auth::user()->address == null ? 'Chưa cập nhật' : Auth::user()->address == null }}
-                                    </td>
+                                    <td class="h5 text-black">{{ Auth::user()->phoneNumber == null ? 'Chưa cập nhật' : Auth::user()->phoneNumber }}</td>
+                                    <td class="h5 text-black">{{ Auth::user()->address == null ? 'Chưa cập nhật' : Auth::user()->address == null }}</td>
                                 </tr>
                             </tbody>
                         </table>

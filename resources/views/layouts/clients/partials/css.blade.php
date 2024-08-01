@@ -8,3 +8,4 @@
 <link rel="stylesheet" href="{{asset('assets/client/css/owl.theme.default.min.css')}}">
 <link rel="stylesheet" href="{{asset('assets/client/css/aos.css')}}">
 <link rel="stylesheet" href="{{asset('assets/client/css/style.css')}}">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">

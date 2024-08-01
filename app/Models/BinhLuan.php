@@ -10,6 +10,13 @@ class BinhLuan extends Model
 {
     use HasFactory;
 
+    public $fillable = [
+        'user_id ',
+        'pet_id ',
+        'noi_dung',
+        'thoi_gian'
+    ];
+
     public function getBinhluan()
     {
         $binhLuans = DB::table('binh_luans as bl')
@@ -30,10 +37,11 @@ class BinhLuan extends Model
         return $binhLuans;
     }
 
-    public function createBL($data)
-    {
-        DB::table('binh_luans')->insert($data);
-    }
+    public function createBL(array $data)
+{
+    return BinhLuan::create($data);
+}
+
 
     public function updateBL($data, $id)
     {
