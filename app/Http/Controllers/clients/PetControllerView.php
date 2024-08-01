@@ -96,7 +96,7 @@ class PetControllerView extends Controller
     $pet = Pet::findOrFail($id);
     $cartKey = 'cart_' . $userId;
     $cart = session()->get($cartKey, []);
-    dd($cart[$id]);
+    // dd($cart[$id]);
 
     if (isset($cart[$id])) {
         $cart[$id]['so_luong'] += $so_luong;
@@ -115,7 +115,6 @@ class PetControllerView extends Controller
             ->update(['so_luong' => $existingCartItem->so_luong + $so_luong]);
     } else {
         DB::table('gio_hangs')->insert([
-            'id' => $id,
             'user_id' => $userId,
             'so_luong' => $so_luong
         ]);
