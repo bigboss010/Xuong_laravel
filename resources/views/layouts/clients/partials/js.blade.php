@@ -17,7 +17,7 @@
             var ele = $(this);
             if (confirm("Bạn chắc chắn muốn xóa pet này chứ?")) {
                 $.ajax({
-                    url: '{{ route('/.delete.pet.cart') }}', // Use named route
+                    url: '{{ route('/.delete.pet.cart') }}', 
                     method: "DELETE",
                     data: {
                         _token: '{{ csrf_token() }}',
@@ -25,10 +25,10 @@
                     },
                     success: function (response) {
                         if (response.success) {
-                            ele.closest("tr").remove(); // Remove the row from the table
-                            alert(response.success); // Show success message
+                            ele.closest("tr").remove(); 
+                            alert(response.success); 
                         } else {
-                            alert(response.error); // Show error message
+                            alert(response.error); 
                         }
                     },
                     error: function (xhr) {
