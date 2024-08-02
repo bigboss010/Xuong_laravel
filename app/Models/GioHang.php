@@ -9,7 +9,11 @@ use Illuminate\Support\Facades\DB;
 class GioHang extends Model
 {
     use HasFactory;
-
+    protected $table = 'gio_hangs';
+    protected $fillable =[
+        'user_id',
+        'so_luong',
+    ];
     public function getGioHang()
     {
         $gioHangs = DB::table('gio_hangs as gh')

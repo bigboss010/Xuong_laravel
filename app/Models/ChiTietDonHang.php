@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\DB;
 class ChiTietDonHang extends Model
 {
     use HasFactory;
+    protected $table = 'chi_tiet_don_hangs';
     protected $fillable =[
         'don_hang_id',
-        'pet_id ',
+        'pet_id',
         'thanh_tien',
         'gia',
         'so_luong',
@@ -24,7 +25,7 @@ class ChiTietDonHang extends Model
     }
 
     public function donHang(){
-        return $this->belongsTo(DonHang::class);
+        return $this->belongsTo(DonHang::class,'don_hang_id');
     }
 
     public function pet(){
