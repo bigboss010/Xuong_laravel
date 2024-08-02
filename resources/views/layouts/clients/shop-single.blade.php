@@ -40,7 +40,7 @@
                         </div>
                     </div>
 
-                    <a href="#" id="add-to-cart" class="buy-now btn btn-sm btn-primary">Add To Cart</a>
+                    <a href="#" id="add-to-cart" class="buy-now btn btn-sm btn-primary">Thêm vào giỏ</a>
 
                 </div>
             </div>
@@ -96,7 +96,7 @@
     </div>
    
     @include('layouts.clients.components.featured-product', ['list' => $featuredProducts])
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         document.getElementById('add-to-cart').addEventListener('click', function(event) {
             event.preventDefault();
@@ -157,5 +157,6 @@
             load_comment(page);
     });
         });
+        
     </script>
 @endsection

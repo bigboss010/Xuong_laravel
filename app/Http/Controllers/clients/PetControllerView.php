@@ -253,6 +253,11 @@ class PetControllerView extends Controller
         return view('layouts.clients.shop-dog', compact('list', 'danhMucs', 'uniquePetsCount', 'search'));
     }
 
+    public function thank()  {
+        return view('layouts.clients.thank');
+        
+    }
+
     public function send_comment(Request $request)
     {  
         $user_id = $request->user_id;

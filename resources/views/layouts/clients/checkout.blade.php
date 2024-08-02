@@ -98,13 +98,13 @@
 
                         <div class="row mb-5">
                             <div class="col-md-12">
-                                <h2 class="h3 mb-3 text-black">Your Order</h2>
+                                <h2 class="h3 mb-3 text-black">Hóa đơn của bạn</h2>
                                 <div class="p-3 p-lg-5 border">
                                     <table class="table site-block-order-table mb-5">
 
                                         <thead>
-                                            <th>Product</th>
-                                            <th>Total</th>
+                                            <th>Thú cưng</th>
+                                            <th>Tổng tiền</th>
                                         </thead>
                                         <tbody>
                                             @if (!empty($cartItems))
@@ -119,8 +119,7 @@
                                                 @endforeach
                                                 <tr>
 
-                                                    <td class="text-black font-weight: normal;"><strong>Cart
-                                                            Subtotal</strong></td>
+                                                    <td class="text-black font-weight: normal;"><strong>Tổng phụ giỏ hàng</strong></td>
                                                     <td class="text-black">{{ number_format($subtotal, 0, ',', '.') }} VNĐ
                                                         {{-- <input type="hidden" name="tong_tien" value="{{$total}}"> --}}
                                                     </td>
@@ -148,16 +147,13 @@
 
                                         <div class="collapse" id="collapsebank" name="phuong_thuc_thanh_toan_id" value="1">
                                             <div class="py-2" name="phuong_thuc_thanh_toan_id" value="1">
-                                                <p class="mb-0" name="phuong_thuc_thanh_toan_id" value="1">Make your payment directly into our bank account. Please
-                                                    use your Order ID as the payment reference. Your order won’t be shipped
-                                                    until the funds have cleared in our account.</p>
+                                                <p class="mb-0" name="phuong_thuc_thanh_toan_id" value="1">khi bé giao đến tận tay của chủ thì mới nhận tiền.</p>
                                                     <input type="hidden" name="phuong_thuc_thanh_toan_id" value="1">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-lg py-3 btn-block">Place
-                                            Order</button>
+                                        <button type="submit" class="btn btn-primary btn-lg py-3 btn-block">Đặt đơn</button>
                                     </div>
                                 </div>
                             </div>

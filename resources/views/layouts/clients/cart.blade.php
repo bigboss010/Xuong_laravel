@@ -35,7 +35,7 @@
                                 <th class="product-price">Giá</th>
                                 <th class="product-quantity">Số lượng</th>
                                 <th class="product-total">Tổng tiền</th>
-                                <th class="product-remove">Remove</th>
+                                <th class="product-remove">Xóa</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -68,7 +68,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="6" class="text-center">Your cart is empty!</td>
+                                <td colspan="6" class="text-center">Giỏ hàng trống!</td>
                             </tr>
                         @endif
                         
@@ -83,19 +83,19 @@
                 <div class="row mb-5">
                     <div class="col-md-6">
                         <button class="btn btn-outline-primary btn-sm btn-block"><a
-                                href="{{ route('/.shop') }}">Continue Shopping</a></button>
+                                href="{{ route('/.shop') }}">Tiếp tục mua sắm</a></button>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <label class="text-black h4" for="coupon">Coupon</label>
-                        <p>Enter your coupon code if you have one.</p>
+                        <label class="text-black h4" for="coupon">Mã giảm giá</label>
+                        <p>Điền mã giảm giá ở đây nếu có.</p>
                     </div>
                     <div class="col-md-8 mb-3 mb-md-0">
                         <input type="text" class="form-control py-3" id="coupon" placeholder="Coupon Code">
                     </div>
                     <div class="col-md-4">
-                        <button class="btn btn-primary btn-sm">Apply Coupon</button>
+                        <button class="btn btn-primary btn-sm">Xác nhận</button>
                     </div>
                 </div>
             </div>
@@ -121,14 +121,12 @@
                                 @if (Auth::user())
                                     <div class="col-md-12">
                                         <button class="btn btn-primary btn-lg py-3 btn-block"><a
-                                                href="{{ route('donhangs.create') }}" style="color: white">Proceed To
-                                                Checkout</a></button>
+                                                href="{{ route('donhangs.create') }}" style="color: white">Thanh toán</a></button>
                                     </div>
                                 @elseif(!Auth::user())
                                     <div class="col-md-12">
                                         <button class="btn btn-primary btn-lg py-3 btn-block"><a
-                                                href="#" id="checkout" onclick="showAlert3()" style="color: white">Proceed To
-                                                Checkout</a></button>
+                                                href="#" id="checkout" onclick="showAlert3()" style="color: white">Thanh toán</a></button>
                                     </div>
                                 @endif
 

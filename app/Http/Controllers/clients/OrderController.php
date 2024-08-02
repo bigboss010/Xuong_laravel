@@ -79,7 +79,7 @@ class OrderController extends Controller
             }
             DB::commit();
             session()->put($cartKey, []);
-            return redirect()->route('donhangs.index')->with('success', 'Đơn hàng đã được tạo thành công');
+            return redirect()->route('/.thank')->with('success', 'Đơn hàng đã được tạo thành công');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->route('/.cart')->with('error', 'Có lỗi khi tạo đơn hàng: ' . $e->getMessage());
