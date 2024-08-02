@@ -59,7 +59,7 @@ class PetControllerView extends Controller
                 return view('layouts.clients.index', compact('danhMucs', 'uniquePetsCount', 'search'));
             }
         } else {
-            $list = $query->get();
+            $list = $query->get()->where('trang_thai', 1);
             return view('layouts.clients.index', compact('list', 'danhMucs', 'uniquePetsCount'));
         }
     }
@@ -69,7 +69,7 @@ class PetControllerView extends Controller
         $search = $request->input('search');
         $danhMucs = $danhMuc->getDanhMuc();
         $uniquePetsCount = $this->getUniquePetsCount();
-        $query = $this->pet->getPet();
+        $query = $this->pet->getPet()->where('trang_thai', 1);
         if ($search) {
             $query->where('ten_pet', 'like', "%{$search}%");
         }

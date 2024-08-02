@@ -37,7 +37,7 @@
                                     <td class="h5 text-black">{{ Auth::user()->name }}</td>
                                     <td class="h5 text-black">{{ Auth::user()->email }}</td>
                                     <td class="h5 text-black">{{ Auth::user()->phoneNumber == null ? 'Chưa cập nhật' : Auth::user()->phoneNumber }}</td>
-                                    <td class="h5 text-black">{{ Auth::user()->address == null ? 'Chưa cập nhật' : Auth::user()->address == null }}</td>
+                                    <td class="h5 text-black">{{ Auth::user()->address == null ? 'Chưa cập nhật' : Auth::user()->address }}</td>
                                 </tr>
                             </tbody>
                         </table>

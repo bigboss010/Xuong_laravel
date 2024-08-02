@@ -7,7 +7,7 @@
                 </div>
                 <div class="col-md-6 col-lg-4">
                     <ul class="list-unstyled">
-                        <li><a href="#">cửa hàng</a></li>
+                        <li><a href="{{route('/.shop')}}">Cửa hàng</a></li>
                         <li><a href="#">Giỏ hàng</a></li>
                         <li><a href="#">Thông tin</a></li>
                     </ul>

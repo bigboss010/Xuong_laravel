@@ -87,13 +87,13 @@
                                             <i class="far fa-eye"></i>
                                         </span>
                                     </a>
-                                    <a href="{{ route('admin.users.edit', $value->id) }}"
+                                    {{-- <a href="{{ route('admin.users.edit', $value->id) }}"
                                         class="btn btn-warning">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-exclamation-triangle"></i>
                                         </span>
                                       
-                                    </a>
+                                    </a> --}}
 
                                     <form action="{{ route('admin.khachhang.delete') }}" method="POST" style="display: inline;">
                                         @csrf

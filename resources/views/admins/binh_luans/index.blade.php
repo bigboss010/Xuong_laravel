@@ -10,12 +10,12 @@
             <h1 class="h3 text-gray-800">{{ $title }}</h1>
         </div>
 
-        <a href="{{ route('admin.binh-luan.create') }}" class="btn btn-primary btn-icon-split">
+        {{-- <a href="{{ route('admin.binh-luan.create') }}" class="btn btn-primary btn-icon-split">
             <span class="icon text-white-50">
                 <i class="fas fa-arrow-right"></i>
             </span>
             <span class="text">Thêm mới</span>
-        </a> 
+        </a>  --}}
     </div>
     @if (session('errors'))
         <div class="text-center alert alert-danger mb-3">
@@ -71,13 +71,13 @@
                                     <td>{{ (new DateTime($binhLuan->updated_at))->format('d/m/Y H:i:s') }}</td>
 
                                     <td>
-                                        <a href="{{ route('admin.binh-luan.edit', $binhLuan->id) }}"
+                                        {{-- <a href="{{ route('admin.binh-luan.edit', $binhLuan->id) }}"
                                             class="btn btn-warning">
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-exclamation-triangle"></i>
                                             </span>
                                             <span class="text">Sửa</span>
-                                        </a>
+                                        </a> --}}
 
                                         <form action="{{ route('admin.binh-luan.destroy', $binhLuan->id) }}" method="POST"
                                             style="display: inline;">
@@ -88,7 +88,6 @@
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-trash"></i>
                                                 </span>
-                                                <span class="text">Xóa</span>
                                             </button>
                                         </form>
                                     </td>
