@@ -40,7 +40,7 @@
                         </div>
                     </div>
 
-                    <a href="#" id="add-to-cart" class="buy-now btn btn-sm btn-primary">Add To Cart</a>
+                    <a href="#" id="add-to-cart" class="buy-now btn btn-sm btn-primary">Thêm vào giỏ</a>
 
                 </div>
             </div>
@@ -157,5 +157,6 @@
             load_comment(page);
     });
         });
+        
     </script>
 @endsection

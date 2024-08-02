@@ -88,6 +88,7 @@ Route::group([
         'middleware' => 'checkUser'
     ], function () {
         Route::get('/shop-cart', [PetControllerView::class, 'showCart'])->name('cart');
+        Route::get('/thank', [PetControllerView::class, 'thank'])->name('thank');
     });
     Route::delete('/delete-pet-cart', [PetControllerView::class, 'deletePetCart'])->name('delete.pet.cart');
 
