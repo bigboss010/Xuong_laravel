@@ -14,6 +14,7 @@ use App\Http\Controllers\Admins\PhuongThucThanhToanController;
 use App\Http\Controllers\Admins\ChiTietDonHangController;
 use App\Http\Controllers\Admins\DashBoardController;
 use App\Http\Controllers\Admins\ProfileController;
+use App\Http\Controllers\Admins\ThongKeController;
 use App\Http\Controllers\AuthenController;
 use App\Http\Controllers\clients\OrderController;
 use App\Http\Controllers\clients\PetControllerView;
@@ -52,6 +53,9 @@ Route::get('admins/danh-mucs/trash', [DanhMucController::class, 'trash']);
 Route::post('admins/pets/delete', [PetController::class, 'delete'])->name('admin.pets.delete');
 Route::post('admins/pets/restore', [PetController::class, 'restore'])->name('admin.pets.restore');
 Route::get('admins/pets/trash', [PetController::class, 'trash']);
+Route::get('admins/thongke', [ThongKeController::class, 'thongke']);
+Route::post('/filter-by-date', [ThongKeController::class, 'filter_by_date']);
+Route::post('/dashboard-filter', [ThongKeController::class, 'dashboard_filter']);
 
 Route::group([
     'prefix' => 'admin',
@@ -71,6 +75,9 @@ Route::group([
     Route::resource('chi-tiet-gio-hang', CTGioHangController::class);
     Route::resource('binh-luan', BinhLuanController::class);
     Route::resource('profile', ProfileController::class);
+  
+
+   
 });
 
 Route::group([

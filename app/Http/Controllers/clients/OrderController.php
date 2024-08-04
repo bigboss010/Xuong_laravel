@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\OrderRequest;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -75,6 +76,12 @@ class OrderController extends Controller
                     'gia' => $item['gia_pet'],
                     'so_luong' => $item['so_luong'],
                     
+                ]);
+                $donHang->thongKeDonHang()->create([
+                    'don_hang_id' => $donHangId,
+                    'ngay_dat' => now(),
+                    'thanh_tien' => $thanhTien,
+                    'so_luong' => $item['so_luong'],
                 ]);
             }
             DB::commit();
