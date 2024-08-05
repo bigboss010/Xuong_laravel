@@ -46,7 +46,7 @@
         <div class="row">
             @foreach ($danhMucs->take(2) as $item)
             <div class="col-sm-12 col-md-6 col-lg-6 mb-4 mb-lg-0 d-flex flex-column align-items-center" data-aos="fade" data-aos-delay="">
-                <a class="block-2-item d-flex flex-column align-items-center" href="{{ route('/.shop') }}">
+                <a class="block-2-item d-flex flex-column align-items-center" href="{{ route('/.shopDanhMuc', $item->id) }}">
                     <figure class="image mb-3">
                         <img src="{{ Storage::url($item->hinh_anh) }}" alt="" class="img-fluid category-image">
                     </figure>

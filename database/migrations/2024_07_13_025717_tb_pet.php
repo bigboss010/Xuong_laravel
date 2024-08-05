@@ -29,6 +29,8 @@ return new class extends Migration
             $table->tinyInteger('is_new')->default(1);
             $table->tinyInteger('is_hot')->default(1);
             $table->tinyInteger('is_home')->default(1);
+            $table->tinyInteger('deleted')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

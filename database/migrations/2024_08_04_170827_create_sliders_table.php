@@ -10,8 +10,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('chi_tiet_don_hangs', function (Blueprint $table) {
-            $table->foreign('don_hang_id')->references('id')->on('gio_hangs')->onDelete('cascade');
+        Schema::create('sliders', function (Blueprint $table) {
+            $table->id();
+            $table->string('alt');
+            $table->string('hinh_anh')->nullable();
+            $table->tinyInteger('deleted')->default(0);
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 
@@ -20,8 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('chi_tiet_don_hangs', function (Blueprint $table) {
-            $table->dropForeign(['don_hang_id']);
-        });
+        Schema::dropIfExists('sliders');
     }
 };

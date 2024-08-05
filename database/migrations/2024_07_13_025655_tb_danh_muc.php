@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('hinh_anh',255);
             $table->string('ten_danh_muc',255);
             $table->text('mo_ta')->nullable();;
+            $table->tinyInteger('deleted')->default(0);
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

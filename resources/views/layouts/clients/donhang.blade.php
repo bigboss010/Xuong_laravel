@@ -34,37 +34,44 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($donHangs as $item)
-                            <tr>
-                                <td class="h5 text-black">{{ $item->ma_don_hang }}</td>
-                                <td class="h5 text-black">{{ (new DateTime($item->ngay_dat))->format('d/m/Y') }}</td>
-                                <td class="h5 text-black">{{ number_format($item->tong_tien) }} VNĐ</td>
-                                <td class="h5 text-black">{{ $trangThaiDH[$item->trang_thai_id] }}</td>
-                                <td class="h5 text-black">
-                                    <a href="{{ route('/.showDetailDonHang', $item->id) }}" class="btn btn-primary">
-                                        <i class="far fa-eye"></i>
-                                    </a>
+                        @if (count($donHangs) > 0)
+                            @foreach ($donHangs as $item)
+                                <tr>
+                                    <td class="h5 text-black">{{ $item->ma_don_hang }}</td>
+                                    <td class="h5 text-black">{{ (new DateTime($item->ngay_dat))->format('d/m/Y') }}</td>
+                                    <td class="h5 text-black">{{ number_format($item->tong_tien) }} VNĐ</td>
+                                    <td class="h5 text-black">{{ $trangThaiDH[$item->trang_thai_id] }}</td>
+                                    <td class="h5 text-black">
+                                        <a href="{{ route('/.showDetailDonHang', $item->id) }}" class="btn btn-primary">
+                                            <i class="far fa-eye"></i>
+                                        </a>
 
-                                    <form action="{{route('/.updateDonHang', $item->id)}}" method="POST" class="d-inline">
-                                        @csrf
-                                        @method('PUT')
-                                        @if ($item->trang_thai_id == 1)
-                                            <input type="hidden" name="huy_don_hang" value="6">
-                                            <button type="submit" class="btn btn-danger"
-                                                onclick="return confirm('Bạn có muốn hủy đơn hàng không?')">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        @elseif($item->trang_thai_id == 4)
-                                            <input type="hidden" name="da_giao_hang" value="5">
-                                            <button type="submit" class="btn btn-success"
-                                                onclick="return confirm('Xác nhận đã nhận hàng')">
-                                                <i class="far fa-check-circle"></i>
-                                            </button>
-                                        @endif
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
+                                        <form action="{{ route('/.updateDonHang', $item->id) }}" method="POST"
+                                            class="d-inline">
+                                            @csrf
+                                            @method('PUT')
+                                            @if ($item->trang_thai_id == 1)
+                                                <input type="hidden" name="huy_don_hang" value="6">
+                                                <button type="submit" class="btn btn-danger"
+                                                    onclick="return confirm('Bạn có muốn hủy đơn hàng không?')">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            @elseif($item->trang_thai_id == 4)
+                                                <input type="hidden" name="da_giao_hang" value="5">
+                                                <button type="submit" class="btn btn-success"
+                                                    onclick="return confirm('Xác nhận đã nhận hàng')">
+                                                    <i class="far fa-check-circle"></i>
+                                                </button>
+                                            @endif
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @else
+                        <tr>
+                            <td colspan="6" class="text-center"><h5>Đơn hàng trống!</h5></td>
+                        </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>

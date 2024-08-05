@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -12,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('binh_luans', function (Blueprint $table) {
+        Schema::create('bai_viets', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('pet_id');
+            $table->unsignedBigInteger('danh_muc_id');
+            $table->string('tieu_de');
+            $table->string('hinh_anh')->nullable();
+            $table->string('mo_ta');
             $table->text('noi_dung');
-            $table->timestamp('thoi_gian')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->boolean('trang_thai');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('pet_id')->references('id')->on('pets')->onDelete('cascade');
             $table->tinyInteger('deleted')->default(0);
+            $table->foreign('danh_muc_id')->references('id')->on('danh_muc_bai_viets')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('binh_luans');
+        Schema::dropIfExists('bai_viets');
     }
 };

@@ -8,35 +8,3 @@
 <script src="{{ asset('assets/client/js/main.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 
-@section('scripts')
-<script type="text/javascript">
-    $(document).ready(function() {
-        $(".delete-product").click(function(e) {
-            e.preventDefault();
-
-            var ele = $(this);
-            if (confirm("Bạn chắc chắn muốn xóa pet này chứ?")) {
-                $.ajax({
-                    url: '{{ route('/.delete.pet.cart') }}', // Use named route
-                    method: "DELETE",
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        id: ele.parents("tr").attr("rowId")
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            ele.closest("tr").remove(); // Remove the row from the table
-                            alert(response.success); // Show success message
-                        } else {
-                            alert(response.error); // Show error message
-                        }
-                    },
-                    error: function (xhr) {
-                        alert('An error occurred while deleting the item.');
-                    }
-                });
-            }
-        });
-    });
-</script>
-@endsection

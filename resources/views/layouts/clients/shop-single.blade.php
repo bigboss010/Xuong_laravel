@@ -31,11 +31,11 @@
                     <div class="mb-5">
                         <div class="input-group mb-3" style="max-width: 120px;">
                             <div class="input-group-prepend">
-                                <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                                <button class="btn btn-outline-primary down" type="button">&minus;</button>
                             </div>
-                            <input type="number" id="so_luong" class="form-control text-center" value="1" min="1" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                            <input type="text" id="so_luong" class="form-control text-center" value="1" min="1">
                             <div class="input-group-append">
-                                <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                                <button class="btn btn-outline-primary up" type="button">&plus;</button>
                             </div>
                         </div>
                     </div>
@@ -98,6 +98,46 @@
     @include('layouts.clients.components.featured-product', ['list' => $featuredProducts])
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        // Xử lý tăng giảm số lượng
+         document.addEventListener('DOMContentLoaded', function () {
+        const input = document.getElementById('so_luong');
+        const btnMinus = document.querySelector('.down');
+        const btnPlus = document.querySelector('.up');
+
+        btnMinus.addEventListener('click', function () {
+            let currentValue = parseInt(input.value);
+            if (isNaN(currentValue) || currentValue <= 1) {
+                input.value = 1;
+            } else {
+                input.value = currentValue - 1;
+            }
+        });
+
+        btnPlus.addEventListener('click', function () {
+            let currentValue = parseInt(input.value);
+            if (isNaN(currentValue)) {
+                input.value = 1;
+            } else {
+                input.value = currentValue + 1;
+            }
+        });
+
+        input.addEventListener('input', function () {
+            let currentValue = parseInt(input.value);
+            if (isNaN(currentValue)) {
+                alert('Vui lòng nhập một số nguyên hợp lệ lớn hơn 0');
+                input.value = 1;
+            }
+        });
+
+         // Ngăn chặn nhập ký tự không hợp lệ
+         input.addEventListener('keypress', function (e) {
+            if (!/[0-9]/.test(e.key)) {
+                e.preventDefault();
+            }
+        });
+    });
+        // Thêm vào giỏ hàng
         document.getElementById('add-to-cart').addEventListener('click', function(event) {
             event.preventDefault();
             var soLuong = document.getElementById('so_luong').value;
@@ -105,6 +145,7 @@
             window.location.href = url;
         });
 
+        // Bình luận
         $(document).ready(function() {
             load_comment();
 
@@ -151,6 +192,7 @@
                 });
             });
 
+            // Phân trang chưa chạy
             $(document).on('click', '.pagination a', function(event) {
             event.preventDefault();
             var page = $(this).attr('href').split('page=')[1];

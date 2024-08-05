@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BinhLuanRequest;
 use App\Models\BinhLuan;
 use App\Models\KhachHang;
 use App\Models\Pet;
@@ -26,7 +27,7 @@ class BinhLuanController extends Controller
     public function index()
     {
         $title = 'Danh sách bình luận';
-        $binhLuans = $this->binhLuans->getBinhluan();
+        $binhLuans = $this->binhLuans->getBL()->where('bl.deleted', 0)->paginate(5);
         return view('admins.binh_luans.index', compact('title', 'binhLuans'));
     }
 
@@ -109,7 +110,7 @@ class BinhLuanController extends Controller
     {
         $binhLuan = $this->binhLuans->find($id);
         if (!$binhLuan) {
-            return redirect()->route('binh-luan.index')->with('errors', 'Bình luận này không tồn tại!');
+            return redirect()->route('admin.binh-luan.index')->with('errors', 'Bình luận này không tồn tại!');
         }
         $binhLuan->delete();
         return redirect()->route('admin.binh-luan.index')->with('success', 'Xóa thành công!');
@@ -157,5 +158,28 @@ class BinhLuanController extends Controller
             </ul>';
         }
         return response()->json($output);
+    }
+
+    public function trash()
+    {
+        $list = $this->binhLuans->getBL()->where('bl.deleted', 1)->paginate(5);
+        $title ="Thùng rác";
+        return view('admins.binh_luans.trash',compact('list','title'));
+    }
+ public function delete(BinhLuanRequest $request)
+    {
+        $list = BinhLuan::findOrFail($request->id);
+        $list->deleted = 1;
+        $list->save();
+        $list->delete();
+        return redirect()->route('admin.binh-luan.index')->with('success','Xóa thành công!');
+    }
+    public function restore(BinhLuanRequest $request)
+    {
+        $list = BinhLuan::withTrashed()->findOrFail($request->id);
+        $list->deleted = 0;
+        $list->save();
+        $list->restore();
+        return redirect()->route('admin.binh-luan.index')->with('success', 'Khôi phục thành công!');
     }
 }

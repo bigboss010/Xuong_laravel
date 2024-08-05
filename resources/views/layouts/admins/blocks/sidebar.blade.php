@@ -62,6 +62,7 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{route('admin.slider.index')}}">Slider</a>
                 <a class="collapse-item" href="{{route('admin.chuc_vus.index')}}">Chức vụ</a>
                 <a class="collapse-item" href="{{route('admin.trang_thai_don_hangs.index')}}">Trạng thái đơn hàng</a>
                 <a class="collapse-item" href="{{route('admin.phuong_thuc_thanh_toans.index')}}">Phương thức thanh toán</a>

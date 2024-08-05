@@ -39,21 +39,33 @@
                             <form id="registerForm" action="{{ route('postRegister') }}" method="POST" class="user">
                                 @csrf
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                        placeholder="Name..." name="name">
+                                    <input type="text" class="form-control form-control-user" @error('name') is-invalid @enderror id="exampleFirstName"
+                                        placeholder="Name..." value="{{ old('name') }}" name="name">
+                                    @error('name')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email..." name="email">
+                                    <input type="email" class="form-control form-control-user" @error('email') is-invalid @enderror id="exampleInputEmail"
+                                        placeholder="Email..." value="{{ old('email') }}" name="email">
+                                        @error('email')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user" id="password"
+                                        <input type="password" class="form-control form-control-user" @error('password') is-invalid @enderror id="password"
                                             placeholder="Password..." name="password">
+                                            @error('password')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user" id="rePassword"
-                                            placeholder="Repeat Password">
+                                        <input type="password" class="form-control form-control-user" @error('password') is-invalid @enderror id="rePassword"
+                                            placeholder="Repeat Password" name="password_confirmation">
+                                            @error('password')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-user btn-block">

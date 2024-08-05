@@ -1,21 +1,38 @@
 @extends('layouts.clients.master')
 
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    .carousel-item {
+        height: 500px; /* Set a fixed height for the carousel */
+    }
+    .carousel-item .image-container {
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+</style>
+
+
 @section('content')
-    <div class="site-blocks-cover" style="background-image: url(assets/client/images/banner.jpg);" data-aos="fade">
-        <div class="container">
-            <div class="row align-items-start align-items-md-center justify-content-end">
-                <div class="col-md-5 text-center text-md-left pt-5 pt-md-0">
-                    <h1 class="mb-2">Các bé đang đợi bạn hốt về</h1>
-                    <div class="intro-text text-center text-md-left">
-                        <p class="mb-4">Háy hốt ngay những bé trong cửa hàng của chúng tôi  </p>
-                        <p>
-                            <a href="{{route('/.shop')}}" class="btn btn-sm btn-primary">Shop Now</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
+<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        @foreach($sliders as $key => $image)
+        <div class="carousel-item @if($key == 0) active @endif">
+            <img src="{{ Storage::url($image->hinh_anh) }}" class="d-block w-100" alt="Slider Image">
         </div>
+        @endforeach
     </div>
+    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
 
     <div class="site-section site-section-sm site-blocks-1">
         <div class="container">
@@ -51,9 +68,9 @@
         </div>
     </div>
 
-    @include('layouts.clients.components.categories',['danhMucs'=>$danhMucs])
+    @include('layouts.clients.components.categories', ['danhMucs' => $danhMucs])
 
-     @include('layouts.clients.components.featured-product',['list'=>$list ])  {{-- ,'count' => 10 --}}
+    @include('layouts.clients.components.featured-product', ['list' => $list]) {{-- ,'count' => 10 --}}
 
     <div class="site-section block-8">
         <div class="container">
@@ -64,16 +81,18 @@
             </div>
             <div class="row align-items-center">
                 <div class="col-md-12 col-lg-7 mb-5">
-                    <a href="#"><img src="{{asset('assets/client/images/sale')}}.jpg" alt="Image placeholder"
+                    <a href="#"><img src="{{ asset('assets/client/images/sale') }}.jpg" alt="Image placeholder"
                             class="img-fluid rounded"></a>
                 </div>
                 <div class="col-md-12 col-lg-5 text-center pl-md-5">
                     <h2><a href="#">50% các bé có trên shop</a></h2>
-                   
+
                     <p>Sự kiện này sẽ bắt đầu vào đầu tháng 9 nhớ ghé thăm để nhận siêu ưu đãi cực khủng này !!!</p>
-                    <p><a href="{{route('/.shop')}}" class="btn btn-primary btn-sm">Shop Now</a></p>
+                    <p><a href="{{ route('/.shop') }}" class="btn btn-primary btn-sm">Shop Now</a></p>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+

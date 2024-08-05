@@ -16,9 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('gio_hang_id');
             $table->unsignedBigInteger('pet_id');
             $table->integer('so_luong');
-            $table->timestamps();
             $table->foreign('gio_hang_id')->references('id')->on('gio_hangs')->onDelete('cascade');
             $table->foreign('pet_id')->references('id')->on('pets')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

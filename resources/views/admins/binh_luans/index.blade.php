@@ -10,12 +10,14 @@
             <h1 class="h3 text-gray-800">{{ $title }}</h1>
         </div>
 
-        {{-- <a href="{{ route('admin.binh-luan.create') }}" class="btn btn-primary btn-icon-split">
-            <span class="icon text-white-50">
-                <i class="fas fa-arrow-right"></i>
-            </span>
-            <span class="text">Thêm mới</span>
-        </a>  --}}
+         <div class="div">
+            <a href="{{ url('admins/binh-luans/trash') }}" class="btn btn-secondary btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-trash"></i>
+                </span>
+                <span class="text">Thùng rác</span>
+            </a>
+        </div>
     </div>
     @if (session('errors'))
         <div class="text-center alert alert-danger mb-3">
@@ -38,10 +40,10 @@
                                 <th>Họ và tên</th>
                                 <th>Tên pet</th>
                                 <th>Nội dung</th>
-                                {{-- <th>Thời gian</th> --}}
+                                <th>Thời gian</th>
                                 <th>Trạng thái</th>
-                                <th>Created_at</th>
-                                <th>Updated_at</th>
+                                {{-- <th>Created_at</th>
+                                <th>Updated_at</th> --}}
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -51,10 +53,10 @@
                                 <th>Họ và tên</th>
                                 <th>Tên pet</th>
                                 <th>Nội dung</th>
-                                {{-- <th>Thời gian</th> --}}
+                                <th>Thời gian</th>
                                 <th>Trạng thái</th>
-                                <th>Created_at</th>
-                                <th>Updated_at</th>
+                                {{-- <th>Created_at</th>
+                                <th>Updated_at</th> --}}
                                 <th>Action</th>
                             </tr>
                         </tfoot>
@@ -65,10 +67,10 @@
                                     <td>{{ $binhLuan->name }}</td>
                                     <td>{{ $binhLuan->ten_pet }}</td>
                                     <td>{{ $binhLuan->noi_dung }}</td>
-                                    {{-- <td>{{ (new DateTime($binhLuan->thoi_gian))->format('d/m/Y') }}</td> --}}
-                                    <td>{{ $binhLuan->trang_thai == 1 ? "Hiện" : "Ẩn" }}</td>
-                                    <td>{{ (new DateTime($binhLuan->created_at))->format('d/m/Y H:i:s') }}</td>
-                                    <td>{{ (new DateTime($binhLuan->updated_at))->format('d/m/Y H:i:s') }}</td>
+                                    <td>{{ (new DateTime($binhLuan->thoi_gian))->format('d/m/Y H:i:s') }}</td>
+                                    <td class="{{ ($binhLuan->trang_thai == 1) ? 'text-success' : 'text-danger'}}">{{ $binhLuan->trang_thai == 1 ? "Hiển thị" : "Ẩn" }}</td>
+                                    {{-- <td>{{ (new DateTime($binhLuan->created_at))->format('d/m/Y H:i:s') }}</td>
+                                    <td>{{ (new DateTime($binhLuan->updated_at))->format('d/m/Y H:i:s') }}</td> --}}
 
                                     <td>
                                         {{-- <a href="{{ route('admin.binh-luan.edit', $binhLuan->id) }}"
@@ -79,7 +81,18 @@
                                             <span class="text">Sửa</span>
                                         </a> --}}
 
-                                        <form action="{{ route('admin.binh-luan.destroy', $binhLuan->id) }}" method="POST"
+                                        <form action="{{ route('admin.binh-luans.delete') }}" method="POST"
+                                            style="display: inline;">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{$binhLuan->id }}">
+                                            <button type="submit" class="btn btn-danger"
+                                                onclick="return confirm('Bạn có chắc chắn muốn xóa không?!??')">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-trash"></i>
+                                                </span>
+                                            </button>
+                                        </form>
+                                        {{-- <form action="{{ route('admin.binh-luan.destroy', $binhLuan->id) }}" method="POST"
                                             style="display: inline;">
                                             @csrf
                                             @method('DELETE')
@@ -89,7 +102,7 @@
                                                     <i class="fas fa-trash"></i>
                                                 </span>
                                             </button>
-                                        </form>
+                                        </form> --}}
                                     </td>
                                 </tr>
                             @endforeach
@@ -100,6 +113,7 @@
                         <p>Không có bình luận nào được tìm thấy.</p>
                     </div>
                 @endif
+                {{ $binhLuans->links('pagination::bootstrap-5')}}
             </div>
         </div>
     </div>
