@@ -47,38 +47,43 @@ class PetControllerView extends Controller
 
     public function index(Request $request, DanhMuc $danhMuc)
     {
+        $danhMucs = $danhMuc->getDanhMuc();
+        $uniquePetsCount = $this->getUniquePetsCount();
+        $query = $this->pet->getPet();
+        $sliders = Slider::query()->get();
+        $list = $query->where('trang_thai', 1)->get();
+        return view('layouts.clients.index', compact('list', 'danhMucs', 'uniquePetsCount', 'sliders'));
+    
+    }
+
+    public function shop(Request $request, DanhMuc $danhMuc)
+    {
+        $danhMucs = $danhMuc->getDanhMuc();
+        $uniquePetsCount = $this->getUniquePetsCount();
+        $query = $this->pet->getPet();
+        $sliders = Slider::query()->get();
+        $list = $query->where('trang_thai', 1)->get();
+        return view('layouts.clients.shop', compact('list', 'danhMucs', 'uniquePetsCount', 'sliders'));
+    
+    }
+    public function shopSearch(Request $request, DanhMuc $danhMuc)
+    {
         $search = $request->input('search');
         $danhMucs = $danhMuc->getDanhMuc();
         $uniquePetsCount = $this->getUniquePetsCount();
         $query = $this->pet->getPet();
         $sliders = Slider::query()->get();
+       
         if ($search) {
-            $query->where('ten_pet', 'like', "%{$search}%");
-            $searchResults = $query->get();
-            if ($searchResults->isNotEmpty()) {
-                return redirect()->route('/.shop', ['search' => $search]);
-            } else {
-                return view('layouts.clients.index', compact('danhMucs', 'uniquePetsCount', 'search'));
-            }
+            $list =  $query->where('danh_mucs.ten_danh_muc', 'like', '%'.$search.'%')
+            ->orwhere('pets.ten_pet', 'like', '%'.$search.'%')->get();
+            return view('layouts.clients.shop', compact('danhMucs', 'uniquePetsCount', 'list', 'sliders'));
         } else {
-            $list = $query->get()->where('trang_thai', 1);
-            return view('layouts.clients.index', compact('list', 'danhMucs', 'uniquePetsCount', 'sliders'));
+            $list = $query->where('trang_thai', 1)->get();
+            return view('layouts.clients.shop', compact('list', 'danhMucs', 'uniquePetsCount', 'sliders'));
         }
     }
 
-    public function shop(Request $request, DanhMuc $danhMuc)
-    {
-        $search = $request->input('search');
-        $danhMucs = $danhMuc->getDanhMuc();
-        $uniquePetsCount = $this->getUniquePetsCount();
-        $query = $this->pet->getPet()->where('trang_thai', 1);
-        if ($search) {
-            $query->where('ten_pet', 'like', "%{$search}%");
-        }
-        $list = $query->get();
-
-        return view('layouts.clients.shop', compact('list', 'danhMucs', 'uniquePetsCount', 'search'));
-    }
     public function shopDanhMuc(Request $request, DanhMuc $danhMuc, $id)
     {
         $search = $request->input('search');
@@ -97,10 +102,10 @@ class PetControllerView extends Controller
     public function shopSingle(string $id)
     {
         $list = $this->pet->find($id);
+        $listImage = HinhAnhPet::where('pet_id', $id)->get();
         $featuredProducts = $this->pet->take(6)->get(); // Truy xuất danh sách sản phẩm nổi bật
         $uniquePetsCount = $this->getUniquePetsCount();
-
-        return view('layouts.clients.shop-single', compact('list', 'featuredProducts', 'uniquePetsCount'));
+        return view('layouts.clients.shop-single', compact('list', 'featuredProducts', 'uniquePetsCount', 'listImage'));
     }
 
     public function addPetToCart(string $id, int $so_luong = 1)
@@ -345,5 +350,4 @@ class PetControllerView extends Controller
         $comment->thoi_gian = $thoi_gian;
         $comment->save();
     }
-
 }

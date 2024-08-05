@@ -1,5 +1,9 @@
 @extends('layouts.clients.master')
 
+<style>
+   
+</style>
+
 @section('content')
     <div class="bg-light py-3">
         <div class="container">
@@ -13,7 +17,7 @@
         </div>
     </div>
     @if (session('success'))
-        <div class=" text-center alert alert-success">
+        <div class="text-center alert alert-success">
             {{ session('success') }}
         </div>
     @endif
@@ -21,7 +25,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <img src="{{ Storage::url($list->image) }}" alt="Image" class="img-fluid">
+                    <img src="{{ Storage::url($list->image) }}" alt="Image" width="600px" class="img-fluid mb-4">
+                     <!-- Additional Images Section -->
+                     <div class="row">
+                        @foreach($listImage as $image)
+                            <div class="col-md-4 mb-2">
+                                <img src="{{ Storage::url($image->link_anh) }}" alt="Additional Image" class="img-fluid additional-image h-100">
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <h2 class="text-black">{{ $list->ten_pet }}</h2>
@@ -39,11 +51,16 @@
                             </div>
                         </div>
                     </div>
-
+                    @if (Auth::user())
                     <a href="#" id="add-to-cart" class="buy-now btn btn-sm btn-primary">Thêm vào giỏ</a>
+                    @else
+                    <a href="#" class="buy-now btn btn-sm btn-primary">Vui lòng đăng nhập để đặt hàng!</a>
+                    @endif
+                    
 
                 </div>
             </div>
+
 
             <div class="row mt-5">
                 <div class="col-md-12">
@@ -188,11 +205,15 @@
                     success: function(data) {
                         load_comment();
                         $('.noi_dung').val('');
+                    }, 
+                    error: function(xhr){
+                        alert("Lỗi");
+                        console.log(xhr);
+                        
                     }
                 });
             });
 
-            // Phân trang chưa chạy
             $(document).on('click', '.pagination a', function(event) {
             event.preventDefault();
             var page = $(this).attr('href').split('page=')[1];

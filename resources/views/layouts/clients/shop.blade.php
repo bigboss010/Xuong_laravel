@@ -1,72 +1,5 @@
 @extends('layouts.clients.master')
 
-@section('css')
-    <style>
-        .block-4-image {
-            padding-top: 100%;
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        .product-card {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 100%;
-            /* Set a fixed height if needed */
-            text-align: center;
-            width: 100%;
-            /* Ensure it takes full width */
-        }
-
-        .product-card .block-4-text {
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            text-align: center;
-            flex-grow: 1;
-            /* Ensure it takes available space */
-        }
-
-        .product-card h3,
-        .product-card p {
-            margin: 0;
-            padding: 0.5rem 0;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            width: 100%;
-            /* Ensure it takes full width */
-        }
-
-        .product-card h3 {
-            max-width: 100%;
-            /* Ensure it takes full width */
-        }
-
-        .product-card p {
-            max-width: 100%;
-            /* Ensure it takes full width */
-        }
-
-        .product-card h3,
-        .product-card p {
-            margin: 0;
-            padding: 0.5rem 0;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            /* Number of lines to show */
-            -webkit-box-orient: vertical;
-            width: 100%;
-            /* Ensure it takes full width */
-        }
-    </style>
-@endsection
 
 @section('content')
     <div class="bg-light py-3">
@@ -119,7 +52,7 @@
                                     <div class="block-4 text-center border product-card">
                                         <div class="block-4-image">
                                             <img src="{{ Storage::url($item->image) }}" alt="Image placeholder"
-                                                class="img-fluid product-image">
+                                                class="img-fluid additional-image w-100">
                                         </div>
                                         <div class="block-4-text p-4">
                                             <h3 class="text-truncate">

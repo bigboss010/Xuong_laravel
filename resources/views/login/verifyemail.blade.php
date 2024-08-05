@@ -1,9 +1,11 @@
 @component('mail::message')
-# Xác nhận địa chỉ email của bạn
+# Xác nhận địa chỉ email của bạn <br>
 
-Xin chào {{ $user->name }},
+Xin chào {{ $user->name }}, <br>
 
-Cảm ơn bạn đã đăng ký tài khoản tại cửa hàng của chúng tôi. Vui lòng nhấp vào nút bên dưới để xác nhận địa chỉ email của bạn.
+Cảm ơn bạn đã đăng ký tài khoản tại cửa hàng của chúng tôi. <br>
+
+Vui lòng nhấp vào nút bên dưới để xác nhận địa chỉ email của bạn.
 
 @component('mail::button', ['url' => $verificationUrl])
 Xác nhận email

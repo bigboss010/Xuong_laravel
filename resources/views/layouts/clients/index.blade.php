@@ -12,6 +12,7 @@
         background-position: center;
         background-repeat: no-repeat;
     }
+    
 </style>
 
 
@@ -70,7 +71,7 @@
 
     @include('layouts.clients.components.categories', ['danhMucs' => $danhMucs])
 
-    @include('layouts.clients.components.featured-product', ['list' => $list]) {{-- ,'count' => 10 --}}
+    @include('layouts.clients.components.featured-product', ( $list) ? (['list' => $list]) : '') {{-- ,'count' => 10 --}}
 
     <div class="site-section block-8">
         <div class="container">

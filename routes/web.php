@@ -93,6 +93,7 @@ Route::group([
 ], function () {
     Route::get('/', [PetControllerView::class, 'index'])->name('index');
     Route::get('/shop', [PetControllerView::class, 'shop'])->name('shop');
+    Route::post('/shop-search', [PetControllerView::class, 'shopSearch'])->name('shopSearch');
     Route::get('/shop-single/{id}', [PetControllerView::class, 'shopSingle'])->name('shop-single');
     Route::get('/add-to-cart/{id}/{so_luong}', [PetControllerView::class, 'addPetToCart'])->name('addPetToCart');
     Route::post('/update-cart', [PetControllerView::class, 'updateCart'])->name('cart.update');

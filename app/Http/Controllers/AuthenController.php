@@ -103,9 +103,10 @@ class AuthenController extends Controller
             User::where('email', $record->email)->update(['email_verified_at' => Carbon::now()]);
             DB::table('password_reset_tokens')->where('token', $token)->delete();
             return redirect()->route('login')->with('success', 'Email của bạn đã được xác nhận!');
+        }else{
+            return redirect()->route('login')->with('msgErrors', 'Xác nhận không hợp lệ hoặc đã hết hạn!');
         }
 
-        return redirect()->route('login')->with('error', 'Token xác nhận không hợp lệ hoặc đã hết hạn!');
     }
     
 }
