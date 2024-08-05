@@ -15,6 +15,7 @@ use App\Http\Controllers\Admins\ChiTietDonHangController;
 use App\Http\Controllers\Admins\DashBoardController;
 use App\Http\Controllers\Admins\ProfileController;
 use App\Http\Controllers\Admins\SliderController;
+use App\Http\Controllers\Admins\ThongKeController;
 use App\Http\Controllers\AuthenController;
 use App\Http\Controllers\clients\OrderController;
 use App\Http\Controllers\clients\PetControllerView;
@@ -58,6 +59,9 @@ Route::get('admins/binh-luans/trash', [BinhLuanController::class, 'trash']);
 Route::post('admins/sliders/delete', [SliderController::class, 'delete'])->name('admin.sliders.delete');
 Route::post('admins/sliders/restore', [SliderController::class, 'restore'])->name('admin.sliders.restore');
 Route::get('admins/sliders/trash', [SliderController::class, 'trash']);
+Route::get('admins/thongke', [ThongKeController::class, 'thongke']);
+Route::post('/filter-by-date', [ThongKeController::class, 'filter_by_date']);
+Route::post('/dashboard-filter', [ThongKeController::class, 'dashboard_filter']);
 
 Route::group([
     'prefix' => 'admin',
@@ -78,6 +82,9 @@ Route::group([
     Route::resource('binh-luan', BinhLuanController::class);
     Route::resource('profile', ProfileController::class);
     Route::resource('slider', SliderController::class);
+  
+
+   
 });
 
 Route::group([

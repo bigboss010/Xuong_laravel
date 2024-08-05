@@ -126,6 +126,11 @@
             <i class="fas fa-fw fa-user"></i>
             <span>Tài khoản</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{url('admins/thongke')}}">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Thống kê</span></a>
+    </li>
 
     {{-- <!-- Nav Item - Charts -->
     <li class="nav-item">
