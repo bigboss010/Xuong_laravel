@@ -23,8 +23,8 @@ return new class extends Migration
             $table->timestamp('ngay_dat')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->decimal('tong_tien', 15, 2);
             $table->text('ghi_chu')->nullable();
-            $table->unsignedBigInteger('phuong_thuc_thanh_toan_id');
-            $table->unsignedBigInteger('trang_thai_id');
+            $table->unsignedBigInteger('phuong_thuc_thanh_toan_id')->default(1);
+            $table->unsignedBigInteger('trang_thai_id')->default(1);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->tinyInteger('deleted')->default(0);
             $table->timestamps();

@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('chi_tiet_don_hangs', function (Blueprint $table) {
-            // $table->integer('so_luong')->after('pet_id');
+            $table->integer('so_luong')->after('pet_id');
             $table->double('gia', 10,2)->after('pet_id');
-            $table->double('thanh_tien', 10,2)->after('pet_id');
+            $table->double('thanh_tien', 15,2)->after('pet_id');
         });
     }
 
@@ -24,7 +24,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('chi_tiet_don_hangs', function (Blueprint $table) {
-            // $table -> dropColumn('so_luong');
+            $table -> dropColumn('so_luong');
             $table -> dropColumn('gia');
             $table -> dropColumn('thanh_tien');
         });

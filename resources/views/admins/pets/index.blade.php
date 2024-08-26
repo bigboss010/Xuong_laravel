@@ -11,6 +11,12 @@
         </div>
 
        <div class="div">
+        <a href="{{ route('admin.pet.exportFile') }}" class="btn btn-success btn-icon-split">
+            <span class="icon text-white-50">
+                <i class="fas fa-file-download"></i>
+            </span>
+            <span class="text">Download file Excel</span>
+        </a>
         <a href="{{ route('admin.pet.create') }}" class="btn btn-primary btn-icon-split">
             <span class="icon text-white-50">
                 <i class="fas fa-arrow-right"></i>

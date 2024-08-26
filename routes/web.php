@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+// login, logout, register
 Route::get('/login', [AuthenController::class, 'login'])->name('login');
 Route::post('/login', [AuthenController::class, 'postLogin'])->name('postLogin');
 Route::get('/logout', [AuthenController::class, 'logout'])->name('logout');
@@ -40,6 +40,8 @@ Route::get('/register', [AuthenController::class, 'register'])->name('register')
 Route::get('/verify/email/{token}', [AuthenController::class, 'verifyAccount'])->name('verify.email');
 Route::post('/postRegister', [AuthenController::class, 'postRegister'])->name('postRegister');
 
+
+// softDELETE + thong ke trong admin
 Route::get('admins/khachhang/trash', [UserController::class, 'trash']);
 Route::post('admins/khachhang/delete', [UserController::class, 'delete'])->name('admin.khachhang.delete');
 Route::post('admins/khachhang/restore', [UserController::class, 'restore'])->name('admin.khachhang.restore');
@@ -62,6 +64,14 @@ Route::get('admins/sliders/trash', [SliderController::class, 'trash']);
 Route::get('admins/thongke', [ThongKeController::class, 'thongke']);
 Route::post('/filter-by-date', [ThongKeController::class, 'filter_by_date']);
 Route::post('/dashboard-filter', [ThongKeController::class, 'dashboard_filter']);
+
+// import, export file Users
+Route::get('admins/users/exportUser', [UserController::class, 'exportFile'])->name('admin.khachhang.exportFile');
+Route::post('admins/users/importUser', [UserController::class, 'importFile'])->name('admin.khachhang.importFile');
+
+// import, export file Pet
+Route::get('admins/pets/exportPet', [PetController::class, 'exportFile'])->name('admin.pet.exportFile');
+
 
 Route::group([
     'prefix' => 'admin',

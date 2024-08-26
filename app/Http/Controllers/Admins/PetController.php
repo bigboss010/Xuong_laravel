@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admins;
 
+use App\Exports\PetExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PetRequest;
 use App\Models\DanhMuc;
@@ -9,6 +10,7 @@ use App\Models\HinhAnhPet;
 use App\Models\Pet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PetController extends Controller
 {
@@ -222,5 +224,9 @@ class PetController extends Controller
         $list->save();
         $list->restore();
         return redirect()->route('admin.pet.index')->with('success', 'Khôi phục thành công!');
+    }
+
+    public function exportFile(){
+        return Excel::download(new PetExport, 'Danh sách Pet.xlsx');
     }
 }

@@ -19,6 +19,29 @@
         </div>
 
         <div class="div">
+            {{-- <a href="{{ route('admin.khachhang.importFile') }}" class="btn btn-success btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-file-upload"></i>
+                </span>
+                <span class="text">Upload file Excel</span>
+            </a> --}}
+            <form action="{{ route('admin.khachhang.importFile') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="file" name="file">
+                <button type="submit" class="btn btn-success  btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-file-upload"></i>
+                    </span>
+                <span class="text">Upload file Excel</span>
+                </button>
+            </form>
+            <br>
+            <a href="{{ route('admin.khachhang.exportFile') }}" class="btn btn-success btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-file-download"></i>
+                </span>
+                <span class="text">Download file Excel</span>
+            </a>
             <a href="{{ route('admin.users.create') }}" class="btn btn-primary btn-icon-split">
                 <span class="icon text-white-50">
                     <i class="fas fa-arrow-right"></i>
@@ -77,7 +100,7 @@
                                 <td>{{ $index + 1 }} </td>
                                 <td>{{ $value->name }} </td>
                                 <td>{{ $value->email }} </td>
-                                <td>{{ (new DateTime($value->email_verified_at))->format('d/m/y') }} </td>
+                                <td>{{ ($value->email_verified_at) ? (new DateTime($value->email_verified_at))->format('d/m/y') : 'Chưa xác thực'  }} </td>
                                 {{-- <td>{{ bcrypt($value->password) }} </td> --}}
                                 <td>{{ $value->ten_chuc_vu }} </td>
 

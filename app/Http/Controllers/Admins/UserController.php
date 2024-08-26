@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers\Admins;
 
+use App\Exports\UserExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use App\Imports\UserImport;
 use App\Models\ChucVu;
 use App\Models\KhachHang;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -135,5 +138,18 @@ class UserController extends Controller
         $this->users->deleteUser($id);
         return redirect()->route('admin.users.index')->with('success','Xóa thành công!');
         
+    }
+
+    public function exportFile(){
+        return Excel::download(new UserExport, 'Danh sách User.xlsx');
+    }
+    public function importFile(Request $req){
+       if($req->isMethod('POST')){
+        $req->validate([
+            'file' => 'required|mimes:xlsx',
+        ]);
+        Excel::import(new UserImport, $req->file('file'));
+        return redirect()->route('admin.users.index')->with('success','Thêm người dùng thành công');
+       }
     }
 }
